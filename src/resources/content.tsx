@@ -5,7 +5,7 @@ const person: Person = {
   firstName: "Bola",
   lastName: "Banjo",
   name: `Bola Banjo`,
-  role: "Software Engineer",
+  role: "Mechanical & Software Engineer",
   avatar: "/images/avatar.jpg",
   email: "omogbolahanng@gmail.com",
   location: "African/Nigeria", // Expecting the IANA time zone identifier, e.g., 'Europe/Vienna'
@@ -32,9 +32,9 @@ const social: Social = [
     link: "https://www.linkedin.com/company/once-ui/",
   },
   {
-    name: "Threads",
-    icon: "threads",
-    link: "https://www.threads.com/@once_ui",
+    name: "x",
+    icon: "x",
+    link: "https://www.x.com/bolaabanjo",
   },
   {
     name: "Email",
@@ -49,12 +49,12 @@ const home: Home = {
   label: "Home",
   title: `${person.name}'s Portfolio`,
   description: `Portfolio website showcasing my work as a ${person.role}`,
-  headline: <>Building bridges between design and code</>,
+  headline: <>Welcome To My Personal Archive.</>,
   featured: {
     display: true,
     title: (
       <Row gap="12" vertical="center">
-        <strong className="ml-4">Once UI</strong>{" "}
+        <strong className="ml-4">Gitstack</strong>{" "}
         <Line background="brand-alpha-strong" vert height="20" />
         <Text marginRight="4" onBackground="brand-medium">
           Featured work
@@ -65,7 +65,7 @@ const home: Home = {
   },
   subline: (
     <>
-      I'm Selene, a design engineer at{" "}
+      I'm Bola, a software engineer at{" "}
       <Logo
         dark
         icon="/trademarks/wordmark-dark.svg"
