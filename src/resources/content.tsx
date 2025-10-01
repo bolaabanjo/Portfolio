@@ -163,7 +163,7 @@ const about: About = {
       {
         title: "Figma",
         description: (
-          <>Able to prototype in Figma with Once UI with unnatural speed.</>
+          <>Designing concepts from scratch and prototyping.</>
         ),
         tags: [
           {
@@ -223,8 +223,8 @@ const about: About = {
 const blog: Blog = {
   path: "/blog",
   label: "Blog",
-  title: "Writing about engineering, design, AI, business and tech...",
-  description: `Read what ${person.name} has been up to recently`,
+  title: "Writing about Engineering, Design, AI, Business and Tech...",
+  description: `Read what ${person.name} is thinking lately`,
   // Create new blog posts by adding a new .mdx file to app/blog/posts
   // All posts will be listed on the /blog route
 };
