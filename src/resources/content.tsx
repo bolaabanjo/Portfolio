@@ -65,14 +65,7 @@ const home: Home = {
   },
   subline: (
     <>
-      I'm Bola, a software engineer at{" "}
-      <Logo
-        dark
-        icon="/trademarks/wordmark-dark.svg"
-        style={{ display: "inline-flex", top: "0.25em", marginLeft: "-0.25em" }}
-      />
-      where I anything that solves a problem
-      <br /> and enhance user experiences. I mostly build my own projects.
+      
     </>
   ),
 };
@@ -98,9 +91,8 @@ const about: About = {
     title: "Introduction",
     description: (
       <>
-        Selene is a Jakarta-based design engineer with a passion for transforming complex challenges
-        into simple, elegant design solutions. Her work spans digital interfaces, interactive
-        experiences, and the convergence of design and technology.
+        I’m an Engineer, Systems Designer, and a deep-tech fan driven by one mission: to build. 
+        My work cuts across Artificial Intelligence, Software Engineering, Quantum Energy, Cybersecurity, Product Design, and Mechanical Engineering.
       </>
     ),
   },
@@ -155,12 +147,12 @@ const about: About = {
     title: "Studies",
     institutions: [
       {
-        name: "University of Jakarta",
-        description: <>Studied software engineering.</>,
+        name: "Olabisi Onabanjo University",
+        description: <>Studied Mechanical Engineering.</>,
       },
       {
-        name: "Build the Future",
-        description: <>Studied online marketing and personal branding.</>,
+        name: "MIT OCW",
+        description: <>Studied Computer Science and Software Engineering.</>,
       },
     ],
   },
@@ -198,7 +190,7 @@ const about: About = {
       {
         title: "Next.js",
         description: (
-          <>Building next gen apps with Next.js + Once UI + Supabase.</>
+          <>Building exciting personal projects with Next.js.</>
         ),
         tags: [
           {
