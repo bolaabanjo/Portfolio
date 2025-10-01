@@ -6,7 +6,7 @@ const person: Person = {
   lastName: "Banjo",
   name: `Bola Banjo`,
   role: "Mechanical & Software Engineer",
-  avatar: "/images/avatar.jpg",
+  avatar: "/images/square.png",
   email: "omogbolahanng@gmail.com",
   location: "Africa/Lagos", // Expecting the IANA time zone identifier, e.g., 'Europe/Vienna'
   languages: ["English"], // optional: Leave the array empty if you don't want to display languages
@@ -32,7 +32,7 @@ const social: Social = [
     link: "https://www.linkedin.com/in/bolaabanjo/",
   },
   {
-    name: "x",
+    name: "X (Formally Twitter)",
     icon: "twitter",
     link: "https://www.x.com/bolaabanjo",
   },
@@ -47,7 +47,7 @@ const home: Home = {
   path: "/",
   image: "/images/og/home.jpg",
   label: "Home",
-  title: `${person.name}'s Portfolio`,
+  title: `${person.name}`,
   description: `Personal website showcasing my work as a ${person.role}`,
   headline: <>Welcome To My Personal Archive.</>,
   featured: {
@@ -71,7 +71,7 @@ const home: Home = {
         icon="/trademarks/wordmark-dark.svg"
         style={{ display: "inline-flex", top: "0.25em", marginLeft: "-0.25em" }}
       />
-      , where I anything that solves a problem
+      where I anything that solves a problem
       <br /> and enhance user experiences. I mostly build my own projects.
     </>
   ),
