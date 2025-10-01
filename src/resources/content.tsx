@@ -15,7 +15,7 @@ const person: Person = {
 const newsletter: Newsletter = {
   display: true,
   title: <>Subscribe to {person.firstName}'s Newsletter</>,
-  description: <>My weekly newsletter about creativity and engineering</>,
+  description: <>My weekly newsletter about engineering and technology.</>,
 };
 
 const social: Social = [
@@ -33,7 +33,7 @@ const social: Social = [
   },
   {
     name: "x",
-    icon: "x",
+    icon: "twitter",
     link: "https://www.x.com/bolaabanjo",
   },
   {
