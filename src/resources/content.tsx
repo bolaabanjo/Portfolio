@@ -101,17 +101,17 @@ const about: About = {
     title: "Work Experience",
     experiences: [
       {
-        company: "FLY",
-        timeframe: "2022 - Present",
-        role: "Senior Design Engineer",
+        company: "FohnAI",
+        timeframe: "2025 - Present",
+        role: "Founder/ System Engineer",
         achievements: [
           <>
-            Redesigned the UI/UX for the FLY platform, resulting in a 20% increase in user
-            engagement and 30% faster load times.
+            Collaborating with engineers, designers, and researchers 
+            to push the boundaries of AI security technology.
           </>,
           <>
-            Spearheaded the integration of AI tools into design workflows, enabling designers to
-            iterate 50% faster.
+            Continuously iterating on product features based 
+            on data-driven insights and user feedback
           </>,
         ],
         images: [
@@ -125,20 +125,27 @@ const about: About = {
         ],
       },
       {
-        company: "Creativ3",
-        timeframe: "2018 - 2022",
-        role: "Lead Designer",
+        company: "ExecuJet Aviation Group",
+        timeframe: "2023 - 2024",
+        role: "Aircraft Engineer",
         achievements: [
           <>
-            Developed a design system that unified the brand across multiple platforms, improving
-            design consistency by 40%.
+            Worked on private jet maintenance and system diagnostics, ensuring optimal 
+            aircraft performance.
           </>,
           <>
-            Led a cross-functional team to launch a new product line, contributing to a 15% increase
-            in overall company revenue.
+            Gained hands-on experience with high-tech avionics, mechanical 
+            systems, and safety protocols.
           </>,
         ],
-        images: [],
+        images: [
+          {
+            src: "/images/projects/project-01/work.png",
+            alt: "Bola Banjo working on an Aircraft",
+            width: 16,
+            height: 9,
+          },
+        ],
       },
     ],
   },
