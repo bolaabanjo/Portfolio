@@ -8,7 +8,7 @@ const person: Person = {
   role: "Mechanical & Software Engineer",
   avatar: "/images/avatar.jpg",
   email: "omogbolahanng@gmail.com",
-  location: "African/Nigeria", // Expecting the IANA time zone identifier, e.g., 'Europe/Vienna'
+  location: "Africa/Lagos", // Expecting the IANA time zone identifier, e.g., 'Europe/Vienna'
   languages: ["English"], // optional: Leave the array empty if you don't want to display languages
 };
 
@@ -29,7 +29,7 @@ const social: Social = [
   {
     name: "LinkedIn",
     icon: "linkedin",
-    link: "https://www.linkedin.com/company/once-ui/",
+    link: "https://www.linkedin.com/in/bolaabanjo/",
   },
   {
     name: "x",
@@ -48,7 +48,7 @@ const home: Home = {
   image: "/images/og/home.jpg",
   label: "Home",
   title: `${person.name}'s Portfolio`,
-  description: `Portfolio website showcasing my work as a ${person.role}`,
+  description: `Personal website showcasing my work as a ${person.role}`,
   headline: <>Welcome To My Personal Archive.</>,
   featured: {
     display: true,
@@ -71,8 +71,8 @@ const home: Home = {
         icon="/trademarks/wordmark-dark.svg"
         style={{ display: "inline-flex", top: "0.25em", marginLeft: "-0.25em" }}
       />
-      , where I craft intuitive
-      <br /> user experiences. After hours, I build my own projects.
+      , where I anything that solves a problem
+      <br /> and enhance user experiences. I mostly build my own projects.
     </>
   ),
 };
@@ -91,7 +91,7 @@ const about: About = {
   },
   calendar: {
     display: true,
-    link: "https://cal.com",
+    link: "https://cal.com/bolaabanjo/chat",
   },
   intro: {
     display: true,
@@ -231,7 +231,7 @@ const about: About = {
 const blog: Blog = {
   path: "/blog",
   label: "Blog",
-  title: "Writing about design and tech...",
+  title: "Writing about engineering, design, AI, business and tech...",
   description: `Read what ${person.name} has been up to recently`,
   // Create new blog posts by adding a new .mdx file to app/blog/posts
   // All posts will be listed on the /blog route

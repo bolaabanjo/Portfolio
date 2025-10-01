@@ -33,7 +33,6 @@ export default async function RootLayout({
 }>) {
   return (
     <Flex
-      suppressHydrationWarning
       as="html"
       lang="en"
       fillWidth
@@ -105,7 +104,7 @@ export default async function RootLayout({
       </head>
       <Providers>
         <Column
-          as="body"
+          as="main"
           background="page"
           fillWidth
           style={{ minHeight: "100vh" }}
