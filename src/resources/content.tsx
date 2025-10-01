@@ -34,7 +34,7 @@ const social: Social = [
   {
     name: "X (Formally Twitter)",
     icon: "twitter",
-    link: "https://www.x.com/bolaabanjo",
+    link: "https://x.com/bolaabanjo",
   },
   {
     name: "Email",
@@ -321,7 +321,7 @@ const gallery: Gallery = {
     },
     {
       src: "/images/gallery/iga.jpg",
-      alt: "image",
+      alt: "Bola Banjo Engineer",
       orientation: "vertical",
     },
     {
