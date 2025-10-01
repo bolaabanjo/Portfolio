@@ -125,6 +125,46 @@ const about: About = {
         ],
       },
       {
+        company: "The Fohn Creative",
+        timeframe: "2025 - Present",
+        role: "Founder/ Design Engineer",
+        achievements: [
+          <>
+            Overseeing high-profile design and security 
+            architecture projects for enterprises and startups.
+          </>,
+          <>
+            Building and designing functioning solution for SMEs and startups
+            to enhance brand perception and positioning.
+          </>,
+        ],
+        images: [],
+      },
+      {
+        company: "FohnAI",
+        timeframe: "2025 - Present",
+        role: "Founder/ System Engineer",
+        achievements: [
+          <>
+            Collaborating with engineers, designers, and researchers 
+            to push the boundaries of AI security technology.
+          </>,
+          <>
+            Continuously iterating on product features based 
+            on data-driven insights and user feedback
+          </>,
+        ],
+        images: [
+          // optional: leave the array empty if you don't want to display images
+          {
+            src: "/images/projects/project-01/cover-01.jpg",
+            alt: "Once UI Project",
+            width: 16,
+            height: 9,
+          },
+        ],
+      },
+      {
         company: "ExecuJet Aviation Group",
         timeframe: "2023 - 2024",
         role: "Aircraft Engineer",
