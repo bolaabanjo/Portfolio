@@ -101,24 +101,24 @@ const about: About = {
     title: "Work Experience",
     experiences: [
       {
-        company: "FohnAI",
+        company: "IGA",
         timeframe: "2025 - Present",
-        role: "Founder/ System Engineer",
+        role: "Maritime Engineer",
         achievements: [
           <>
-            Collaborating with engineers, designers, and researchers 
-            to push the boundaries of AI security technology.
+            Collaborating with engineers to improve and optimize
+            the performance of a native ship before they sail.
           </>,
           <>
-            Continuously iterating on product features based 
-            on data-driven insights and user feedback
+            Contibution to the ultrasonic testing of a ship to 
+            repair damages made and get it up and running.
           </>,
         ],
         images: [
           // optional: leave the array empty if you don't want to display images
           {
-            src: "/images/projects/project-01/cover-01.jpg",
-            alt: "Once UI Project",
+            src: "/images/projects/project-01/ship.jpg",
+            alt: "Bola Banjo on a ship deck",
             width: 16,
             height: 9,
           },
@@ -126,7 +126,7 @@ const about: About = {
       },
       {
         company: "The Fohn Creative",
-        timeframe: "2025 - Present",
+        timeframe: "2024 - 2025",
         role: "Founder/ Design Engineer",
         achievements: [
           <>
@@ -157,7 +157,13 @@ const about: About = {
         images: [
           // optional: leave the array empty if you don't want to display images
           {
-            src: "/images/projects/project-01/cover-01.jpg",
+            src: "/images/projects/project-01/shot4.png",
+            alt: "Once UI Project",
+            width: 16,
+            height: 9,
+          },
+          {
+            src: "/images/projects/project-01/shot3.png",
             alt: "Once UI Project",
             width: 16,
             height: 9,
@@ -221,13 +227,13 @@ const about: About = {
         // optional: leave the array empty if you don't want to display images
         images: [
           {
-            src: "/images/projects/project-01/cover-02.jpg",
+            src: "/images/projects/project-01/shot1.png",
             alt: "Project image",
             width: 16,
             height: 9,
           },
           {
-            src: "/images/projects/project-01/cover-03.jpg",
+            src: "/images/projects/project-01/shot2.png",
             alt: "Project image",
             width: 16,
             height: 9,
@@ -241,8 +247,8 @@ const about: About = {
         ),
         tags: [
           {
-            name: "JavaScript",
-            icon: "javascript",
+            name: "TypeScript",
+            icon: "typescript",
           },
           {
             name: "Next.js",
@@ -256,8 +262,8 @@ const about: About = {
         // optional: leave the array empty if you don't want to display images
         images: [
           {
-            src: "/images/projects/project-01/cover-04.jpg",
-            alt: "Project image",
+            src: "/images/projects/project-01/stack.png",
+            alt: "gitstack sign up page",
             width: 16,
             height: 9,
           },
