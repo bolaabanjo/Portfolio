@@ -300,7 +300,7 @@ const gallery: Gallery = {
   // These are placeholder images, replace with your own
   images: [
     {
-      src: "/images/gallery/horizontal-1.jpg",
+      src: "/images/gallery/square.png",
       alt: "image",
       orientation: "horizontal",
     },
