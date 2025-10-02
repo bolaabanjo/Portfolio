@@ -310,9 +310,9 @@ const gallery: Gallery = {
       orientation: "vertical",
     },
     {
-      src: "/images/gallery/horizontal-3.jpg",
+      src: "/images/gallery/img5.jpg",
       alt: "image",
-      orientation: "horizontal",
+      orientation: "vertical",
     },
     {
       src: "/images/gallery/img1.jpg",
