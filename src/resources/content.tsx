@@ -27,9 +27,6 @@ const social: Social = [
     link: "https://github.com/bolaabanjo",
   },
   {
-    name: "Discord",
-  },
-  {
     name: "LinkedIn",
     icon: "linkedin",
     link: "https://www.linkedin.com/in/bolaabanjo/",
