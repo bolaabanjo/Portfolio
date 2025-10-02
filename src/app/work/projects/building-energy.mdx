@@ -1,0 +1,115 @@
+---
+title: "My Notes on Open Source: Building Gitstack"
+publishedAt: "2025-10-01"
+summary: "An open-source reimagining of Git platforms — building Gitstack from the ground up as a next-generation Git system designed for a new era of development, collaboration, and intelligence."
+images:
+  - "/images/projects/project-01/gs.png"
+team:
+  - name: "Bola Banjo"
+    role: "Founder & Engineer"
+    avatar: "/images/square.png"
+    linkedIn: "https://www.linkedin.com/in/bolaabanjo"
+link: "https://github.com/bolaabanjo/gitstack"
+---
+
+## Overview
+
+Gitstack is my attempt to rethink how developers interact with Git — not as just another hosting platform, but as a foundational layer for the next era of software development. It’s an open-source project that reimagines version control, collaboration, automation, and intelligence from the ground up.  
+
+At its core, Gitstack is more than “a GitHub alternative.” It’s a **platform-first rethink** of how repositories, workflows, and developer tools should work in an age defined by automation, edge computing, and AI. I’m building it in public — documenting the engineering journey, the architectural decisions, and the deeper principles driving it.  
+
+This isn’t a polished product launch. It’s an evolving log of how I think, build, and iterate on something that could one day sit at the heart of how software is created and deployed.
+
+## Why Gitstack Exists
+
+Every major Git platform today — GitHub, GitLab, Bitbucket — was built in an era when code collaboration was mostly human-to-human. Repositories were static containers, pull requests were manual rituals, and automation was a nice-to-have.  
+
+But the software landscape has changed. We’re now dealing with:
+
+- AI agents writing and refactoring code.  
+- Continuous integration systems deploying hundreds of times per day.  
+- Edge and IoT systems needing distributed versioning.  
+- Companies treating Git not just as storage, but as infrastructure.  
+
+And yet, the Git platforms we rely on still look and behave almost exactly as they did a decade ago. Gitstack exists because I believe **the future of version control needs to be re-architected** — to be faster, more intelligent, more programmable, and deeply extensible.
+
+This isn’t about competing with GitHub on features. It’s about **rethinking the baseline** — how repositories behave, how CLIs authenticate, how collaboration scales, and how intelligence integrates into the development loop.
+
+## The Core Idea Behind Gitstack
+
+The central thesis behind Gitstack is simple: **make Git programmable and ambient**.
+
+Right now, Git is powerful but rigid — a brilliant tool wrapped in outdated patterns. Gitstack’s goal is to evolve Git from a tool into a **platform layer**, something closer to an operating system for code. That means:
+
+- **Programmable Repos** – repositories that can run hooks, bots, and automations natively without external services.  
+- **Ambient Intelligence** – built-in AI understanding of your codebase, PRs, and commit history, enabling smart suggestions and reviews.  
+- **Seamless Authentication** – a reimagined CLI auth flow that removes friction, designed for both human developers and autonomous agents.  
+- **Unified Workflows** – a single environment for code, issues, discussions, docs, and CI/CD — without the glue code.  
+
+It’s a platform where your repo isn’t just a container — it’s alive, context-aware, and programmable.
+
+## The Architecture (So Far)
+
+The current version of Gitstack is being built as a **layered system**:
+
+1. **Core Git Engine** – Built on top of libgit2 and a custom sync layer, ensuring compatibility with existing Git workflows while allowing deeper hooks into the engine.  
+2. **Auth & Identity Layer** – A flexible authentication system designed to support human devs, service accounts, and even machine agents. Think OAuth meets SSH keys but composable and API-driven.  
+3. **Server Layer** – A Rust-based backend that handles repository management, permissioning, hooks, and webhooks at scale.  
+4. **Web UI** – A modern, minimal interface focused on speed, clarity, and extensibility — with first-class support for keyboard-driven workflows.  
+5. **CLI** – A developer-first CLI that does more than just `push` and `pull`. It’s designed to manage entire workflows — from project bootstrapping to deployments — directly from the terminal.  
+
+And crucially, Gitstack is **modular**. Each part — from the core to the UI — is designed as a standalone component that can evolve independently, forked, or extended by the community.
+
+## CLI Authentication — Reimagined
+
+One of the most important decisions we made early was to **rethink CLI authentication**. Most platforms bolt it on as an afterthought. Gitstack treats it as a first-class citizen.
+
+Instead of juggling SSH keys, personal access tokens, and OAuth device flows separately, Gitstack introduces a **unified auth model**. It supports:
+
+- **Human Sign-in** – a frictionless OAuth-like flow where you log in once and stay authenticated across all repos.  
+- **Agent Credentials** – scoped keys designed for bots, CI systems, and autonomous tools.  
+- **Context-Aware Tokens** – ephemeral credentials that expire automatically, improving security without adding friction.
+
+It’s a small change that unlocks massive potential — especially as autonomous systems become more common contributors in software projects.
+
+## Open Source by Design
+
+Gitstack is not just open source — it’s being built *because* of open source. I want this project to evolve in public, shaped by contributions, feedback, and ideas from developers worldwide.
+
+Open source isn’t just a license choice here. It’s a core part of the platform’s DNA. Every part of Gitstack — from its core engine to its UI — is designed to be:
+
+- **Forkable** – so anyone can customize it for their workflows or self-host it.  
+- **Composable** – so you can extend or replace parts without breaking the whole.  
+- **Transparent** – so every architectural decision, trade-off, and experiment is documented and visible.
+
+This is not about building a walled garden. It’s about building an ecosystem.
+
+## What’s Possible With Gitstack
+
+If Gitstack succeeds at what I envision, the possibilities stretch far beyond “just another Git platform.”
+
+- **AI-Native Workflows** – AI agents that can create branches, propose PRs, or review commits autonomously.  
+- **Distributed Versioning** – repos that sync across edge devices or satellites without relying on centralized servers.  
+- **Programmable Pipelines** – workflows written as code that live *inside* the repo, not glued together by third-party services.  
+- **Org-Scale Insights** – built-in analytics and code intelligence across thousands of repos, teams, and services.  
+
+It could become the foundational layer for the future of software — one where code is written, improved, and deployed collaboratively between humans and machines.
+
+## Gitstack and the Future
+
+Gitstack is still early. It’s raw, unpolished, and full of rough edges. But that’s the point. This is not a product launch. It’s a **journey**, and I want developers to join me at the very beginning.
+
+I believe we’re at the edge of a major shift in how code is written and maintained. As AI becomes a co-author, as infrastructure becomes programmable, and as software touches every layer of civilization, the tools we use to build software must evolve too.  
+
+Gitstack is my contribution to that shift — an open-source platform built not just for the present, but for the software of the next 20 years.
+
+## A Call to Builders
+
+If any of this resonates with you — if you’ve ever felt frustrated by the limits of current Git platforms, or dreamed of a programmable, AI-native version control system — then Gitstack is your project too.
+
+Contribute. Fork it. Break it. Improve it. Build something wild with it. This isn’t about me building a product and you consuming it. It’s about us shaping what the future of development looks like.
+
+Because if software is the language of the future, then Git is its memory — and it’s time we rewrote how that memory works.
+
+---
+
