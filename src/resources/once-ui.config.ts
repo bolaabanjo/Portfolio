@@ -164,7 +164,7 @@ const mailchimp: MailchimpConfig = {
       display: true,
       opacity: 20,
       size: "2",
-      color: "brand-on-background-weak",
+      color: "brand-on-background-strong",
     },
     grid: {
       display: false,
