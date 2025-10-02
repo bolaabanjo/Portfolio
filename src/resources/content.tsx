@@ -332,7 +332,7 @@ const gallery: Gallery = {
     {
       src: "/images/gallery/img4.jpg",
       alt: "image",
-      orientation: "horizontal",
+      orientation: "vertical",
     },
     {
       src: "/images/gallery/img2.jpg",
