@@ -157,7 +157,7 @@ const mailchimp: MailchimpConfig = {
       width: 50,
       height: 50,
       tilt: 0,
-      colorStart: "accent-background-strong",
+      colorStart: "accent-background-weak",
       colorEnd: "static-transparent",
     },
     dots: {
