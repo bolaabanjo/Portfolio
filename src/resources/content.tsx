@@ -65,7 +65,7 @@ const home: Home = {
   },
   subline: (
     <>
-      I&apos;m Bola, but everyone I know calls me Roy. I&apos;m a Mechanical Software Engineer, Design Engineer, AI Engineer.
+      I&apos;m Bola, but everyone I know calls me Roy. I&apos;m a Mechanical Software Engineer, Design Engineer and an AI Engineer.
     </>
   ),
 };
