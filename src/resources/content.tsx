@@ -301,22 +301,22 @@ const gallery: Gallery = {
   images: [
     {
       src: "/images/gallery/square.png",
-      alt: "image",
+      alt: "Bola Banjo, Bola Roy Banjo",
       orientation: "horizontal",
     },
     {
       src: "/images/gallery/laptop.jpg",
-      alt: "image",
+      alt: "Bola Banjo, Bola Roy Banjo",
       orientation: "vertical",
     },
     {
       src: "/images/gallery/img5.jpg",
-      alt: "image",
+      alt: "Bola Banjo, Bola Roy Banjo",
       orientation: "vertical",
     },
     {
       src: "/images/gallery/img1.jpg",
-      alt: "image",
+      alt: "Bola Banjo, Bola Roy Banjo",
       orientation: "vertical",
     },
     {
@@ -326,12 +326,12 @@ const gallery: Gallery = {
     },
     {
       src: "/images/gallery/img3.jpg",
-      alt: "image",
+      alt: "Bola Banjo, Bola Roy Banjo",
       orientation: "horizontal",
     },
     {
       src: "/images/gallery/img2.JPG",
-      alt: "image",
+      alt: "Bola Banjo, Bola Roy Banjo",
       orientation: "vertical",
     },
   ],
