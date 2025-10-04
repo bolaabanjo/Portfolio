@@ -7,8 +7,6 @@ tag: "Technical Essay"
 
 ---
 
-## Introduction
-
 Every few months, Tech Twitter wakes up and remembers violence exists. It usually starts with a throwaway tweet like:
 
 > “Every dev says they’re learning backend, but 99% are just following another CRUD tutorial.”
@@ -35,7 +33,7 @@ If that sounds too simple, that’s the point. It’s supposed to be. CRUD is th
 
 Here’s a trivial example in Python with a fictional user service:
 
-<CodeBlock compact marginBottom="16" codes={[{
+```python
 # Create
 def create_user(db, name, email):
     db.execute("INSERT INTO users (name, email) VALUES (?, ?)", (name, email))
@@ -51,7 +49,7 @@ def update_user_email(db, user_id, new_email):
 # Delete
 def delete_user(db, user_id):
     db.execute("DELETE FROM users WHERE id = ?", (user_id,))
-}]} />
+```
 
 This is CRUD in its rawest form. And yes, it looks boring until you realize every billion-dollar platform on earth is built on this same foundation.
 
@@ -68,7 +66,7 @@ Here’s the thing tho: **backend *at scale* is still CRUD**, just in more compl
 
 Here’s a simple event-sourced version of the same example:
 
-<CodeBlock compact marginBottom="16" codes={[{
+```python
 def create_user_event_stream(stream, name, email):
     event = {"type": "USER_CREATED", "data": {"name": name, "email": email}}
     stream.append(event)
@@ -76,7 +74,7 @@ def create_user_event_stream(stream, name, email):
 def apply_event_to_state(event, state):
     if event["type"] == "USER_CREATED":
         state["users"].append(event["data"])
-}]} />
+```
 
 The syntax changed, the paradigm shifted, but underneath, we’re still **creating** a user and **reading** state. Evolving with the system’s needs.
 
@@ -99,13 +97,13 @@ A caching layer like Redis? It’s CRUD on volatile memory.
 
 Take this example — a scheduled cleanup task:
 
-<CodeBlock compact marginBottom="16" codes={[{
+```python
 from datetime import datetime, timedelta
 
 def delete_expired_sessions(db):
     cutoff = datetime.now() - timedelta(days=30)
     db.execute("DELETE FROM sessions WHERE last_active < ?", (cutoff,))
-}]} />
+```
 
 Even scheduled jobs (which many devs think of as “not CRUD”) end up performing CRUD operations under the hood.
 
@@ -149,9 +147,9 @@ Here’s the part most tutorials never teach you: **anyone can do CRUD, but not 
 
 At a small scale:
 
-<CodeBlock compact marginBottom="16" codes={[{
+```python
 user = db.get_user(42)
-}]} />
+```
 
 At a planetary scale:
 
