@@ -1,0 +1,172 @@
+---
+
+title: "CRUD Is Not Basic or It Is the Backend?"
+publishedAt: "2025-10-04"
+summary: "After a week of heated debates on X (Twitter) about CRUD, I decided to sit down and write everything I’ve learned about it."
+tag: "Technical Essay"
+
+---
+
+## Introduction
+
+Every few months, Tech Twitter wakes up and remembers violence exists. It usually starts with a throwaway tweet like:
+
+> “Every dev says they’re learning backend, but 99% are just following another CRUD tutorial.”
+
+And then, as always, chaos follows.
+This week, the topic was CRUD. Some say *“backend is literally just CRUD”*. Others argue *“backend is more than CRUD”*. And then someone inevitably replies with the cosmic truth: *“all of computing is just input → process → output.”*
+
+After watching the discourse spiral again this week, I decided to write this as someone who’s built systems, broken them, scaled them, and learned the hard way that CRUD is not just a tutorial-level concept. It’s the bedrock of backend engineering.
+
+Follow me.
+
+---
+
+## What CRUD Really Means
+
+CRUD stands for **Create, Read, Update, Delete**, four simple operations that define how we interact with data.
+
+* **Create:** Add new data.
+* **Read:** Retrieve data.
+* **Update:** Modify existing data.
+* **Delete:** Remove data.
+
+If that sounds too simple, that’s the point. It’s supposed to be. CRUD is the interface between humans, code, and state — it’s how our systems *remember*.
+
+Here’s a trivial example in Python with a fictional user service:
+
+<CodeBlock compact marginBottom="16" codes={[{
+# Create
+def create_user(db, name, email):
+    db.execute("INSERT INTO users (name, email) VALUES (?, ?)", (name, email))
+
+# Read
+def get_user(db, user_id):
+    return db.execute("SELECT * FROM users WHERE id = ?", (user_id,)).fetchone()
+
+# Update
+def update_user_email(db, user_id, new_email):
+    db.execute("UPDATE users SET email = ? WHERE id = ?", (new_email, user_id))
+
+# Delete
+def delete_user(db, user_id):
+    db.execute("DELETE FROM users WHERE id = ?", (user_id,))
+}]} />
+
+This is CRUD in its rawest form. And yes, it looks boring until you realize every billion-dollar platform on earth is built on this same foundation.
+
+---
+
+## CRUD Evolves.
+
+One of the most common mistakes junior devs make is thinking CRUD is “the beginner stuff” you do before you build “real” backend systems. I made the same mistake too, even until this week.
+Here’s the thing tho: **backend *at scale* is still CRUD**, just in more complex forms.
+
+* A CQRS (Command Query Responsibility Segregation) system? Still CRUD, but separated into reads and writes.
+* Event sourcing? CRUD, but with immutable logs instead of direct updates.
+* A distributed microservices architecture? CRUD split across services, coordinated through APIs.
+
+Here’s a simple event-sourced version of the same example:
+
+<CodeBlock compact marginBottom="16" codes={[{
+def create_user_event_stream(stream, name, email):
+    event = {"type": "USER_CREATED", "data": {"name": name, "email": email}}
+    stream.append(event)
+
+def apply_event_to_state(event, state):
+    if event["type"] == "USER_CREATED":
+        state["users"].append(event["data"])
+}]} />
+
+The syntax changed, the paradigm shifted, but underneath, we’re still **creating** a user and **reading** state. Evolving with the system’s needs.
+
+---
+
+## CRUD Is Everywhere, Even Where You Don’t See It
+
+As I read from a blog post. The entire web (from banking systems to streaming platforms) is one massive CRUD machine.
+
+* Every tweet you post? `Create`.
+* Scrolling your feed? `Read`.
+* Editing a comment? `Update`.
+* Deleting a photo? `Delete`.
+
+Even when we move beyond REST APIs (into WebSockets, message queues, distributed systems) CRUD lurks beneath the abstraction.
+
+A cron job that cleans up expired sessions? It’s *deleting* data.
+A Kafka consumer that enriches events? It’s *reading*, *transforming*, and possibly *creating* new state.
+A caching layer like Redis? It’s CRUD on volatile memory.
+
+Take this example — a scheduled cleanup task:
+
+<CodeBlock compact marginBottom="16" codes={[{
+from datetime import datetime, timedelta
+
+def delete_expired_sessions(db):
+    cutoff = datetime.now() - timedelta(days=30)
+    db.execute("DELETE FROM sessions WHERE last_active < ?", (cutoff,))
+}]} />
+
+Even scheduled jobs (which many devs think of as “not CRUD”) end up performing CRUD operations under the hood.
+
+---
+
+## Why CRUD Gets Dismissed
+
+The reason CRUD gets dismissed is psychological. Once we wrap CRUD in layers of abstraction (distributed databases, caching layers, orchestration, sharding, eventual consistency) it *feels* more advanced.
+
+But all those layers exist *because* of CRUD. They exist to **optimize how we create, read, update, and delete state.**
+
+Backend engineering is about mastering how to **manage CRUD at scale**:
+
+* How do you handle **concurrent updates** on the same record?
+* How do you design systems that **read efficiently** across millions of records?
+* How do you **delete data safely** in a GDPR-compliant way?
+* How do you ensure **atomicity** when multiple CRUD operations must happen together?
+
+---
+
+## Beyond CRUD
+
+To be honest: backend is more than just CRUD. It involves architecture, distributed systems, security, scaling, caching, streaming, orchestration, and those are all vital.
+
+But none of them replace CRUD. They are **strategies to do CRUD better.**
+
+* **Architecture** decides *where* CRUD happens.
+* **Scaling** decides *how much* CRUD can happen concurrently.
+* **Caching** makes *reads* faster.
+* **Transactions** make *updates* safe.
+* **CQRS** separates *reads* from *writes*.
+* **Event sourcing** records *changes* instead of overwriting state.
+
+The foundation never changes, we just build taller and smarter structures on top of it.
+
+---
+
+## The Real Skill: Doing CRUD Well
+
+Here’s the part most tutorials never teach you: **anyone can do CRUD, but not everyone can do CRUD *well*.**
+
+At a small scale:
+
+<CodeBlock compact marginBottom="16" codes={[{
+user = db.get_user(42)
+}]} />
+
+At a planetary scale:
+
+* That query might be hitting a sharded, distributed database.
+* The data might be cached across regions with eventual consistency.
+* Reads might be routed through replicas to balance load.
+* Writes might be staged to event logs to prevent downtime.
+
+It’s still CRUD but it’s CRUD **engineered**.
+
+This is why senior engineers don’t laugh at CRUD. They obsess over it. Because when CRUD breaks at scale, *everything breaks*.
+
+---
+
+**Author:** Bola Banjo
+**Twitter:** [@bolaabanjo](https://x.com/bolaabanjo)
+
+---
