@@ -38,7 +38,7 @@ My code uses a regular expression ` /\r\n/g `:
 
 It then replaces all instances of `\r\n` with just `\n`. This effectively standardizes all Windows-style line endings to the more common Unix-style line ending. After this operation, regardless of the original source, all multi-character line endings become single-character line endings.
 
-### 2. Standardizing Tabs ```(`.replace(/\t/g, " ")`)```
+### 2. Standardizing Tabs 
 
 The second `replace` operation tackles another common whitespace culprit: tab characters.
 
