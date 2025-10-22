@@ -7,7 +7,7 @@ const person: Person = {
   name: `Bola Banjo`,
   role: "Mechanical & Software Engineer",
   avatar: "/images/square.png",
-  email: "omogbolahanng@gmail.com",
+  email: "hey@bolabanjo.xyz",
   location: "Africa/Lagos", // Expecting the IANA time zone identifier, e.g., 'Europe/Vienna'
   languages: ["English"], // optional: Leave the array empty if you don't want to display languages
 };
@@ -65,7 +65,7 @@ const home: Home = {
   },
   subline: (
     <>
-      I&apos;m Bola, but everyone I know calls me Roy. I&apos;m a Mechanical & Software Engineer, Design Engineer and an AI Engineer.
+      I&apos;m Bola, I&apos;m a Mechanical & Software Engineer, Design Engineer and an AI Engineer.
     </>
   ),
 };
@@ -91,7 +91,7 @@ const about: About = {
     title: "Introduction",
     description: (
       <>
-        I’m an Engineer, Systems Designer, and a deep-tech fan driven by one mission: to build. 
+        I’m an Engineer, Systems Designer, and a deep-tech fan driven by one mission: to build. I'm from Lagos, Nigeria, and I'm the CEO of FohnAI.
         My work cuts across Artificial Intelligence, Software Engineering, Quantum Energy, Cybersecurity, Product Design, and Mechanical Engineering.
       </>
     ),
