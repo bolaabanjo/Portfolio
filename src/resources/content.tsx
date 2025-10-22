@@ -91,7 +91,7 @@ const about: About = {
     title: "Introduction",
     description: (
       <>
-        I’m an Engineer, Systems Designer, and a deep-tech fan driven by one mission: to build. I'm from Lagos, Nigeria, and I'm the CEO of FohnAI.
+        I&apos;m an Engineer, Systems Designer, and a deep-tech fan driven by one mission: to build. I&apos;m from Lagos, Nigeria, and I&apos;m the CEO of FohnAI.
         My work cuts across Artificial Intelligence, Software Engineering, Quantum Energy, Cybersecurity, Product Design, and Mechanical Engineering.
       </>
     ),
