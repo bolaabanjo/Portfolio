@@ -6,7 +6,7 @@ const person: Person = {
   lastName: "Banjo",
   name: `Bola Banjo`,
   role: "Mechanical & Software Engineer",
-  avatar: "/images/me.jpg",
+  avatar: "/images/square.png",
   email: "hey@bolabanjo.xyz",
   location: "Africa/Lagos", // Expecting the IANA time zone identifier, e.g., 'Europe/Vienna'
   languages: ["English"], // optional: Leave the array empty if you don't want to display languages
@@ -91,21 +91,13 @@ const about: About = {
     title: "Introduction",
     description: (
       <>
-        My name is Bola Roy Banjo, though I&apos;m p. As an engineer, systems designer, and a deep-tech enthusiast, my journey is propelled by a singular mission: to build. My expertise fluidly intersects Artificial Intelligence, Quantum Energy, Cybersecurity, Product Design, and Mechanical Engineering—disciplines I wield as interconnected tools to solve real-world problems at scale. I write code to architect systems that fuse intelligence, elegance, and permanence. My philosophy is clear: design should evoke art, and engineering should embody innovation.
+        My name is Bola Roy Banjo. As an engineer, systems designer, and a deep-tech enthusiast, my journey is propelled by a singular mission: to build. My expertise fluidly intersects Artificial Intelligence, Quantum Energy, Cybersecurity, Product Design, and Mechanical Engineering. Disciplines I wield as interconnected tools to solve real-world problems at scale. I write code to architect systems that fuse intelligence, elegance, and permanence. My philosophy is clear: design should evoke art, and engineering should embody innovation.
 
-        As CEO of **FohnAI**, an AI R&D company, My core mission is to protect the future of intelligent infrastructure, We need Intelligent systems now, more than ever. We developed **Cencori**, a multi-tenant AI infrastructure platform designed to help teams build, deploy, and scale AI-driven applications, for enterprises, and governments. I also lead **Wisc**, a career operating system for tech professionals—the essential interface for personal and professional evolution.
+        As CEO of FohnAI, an AI R&D company, My core mission is to protect the future of intelligent infrastructure, We need Intelligent systems now, more than ever. We developed Cencori, a multi-tenant AI infrastructure platform designed to help teams build, deploy, and scale AI-driven applications, for enterprises, and governments. I also lead Wisc, a career operating system for tech professionals, the essential interface for personal and professional evolution.
 
-        My drive for fundamental innovation led me to develop the **QuanTonic Reactor**, a quantum thermal-to-electric energy system designed to make energy abundance permanent. I create comprehensive full-stack systems, from hardware and software to user interface and strategic vision. I&apos;ve sacrificed comfort to pursue what others deem impossible outcomes, viewing this not as ambition, but as inevitability.
+        My drive for fundamental innovation led me to develop the QuanTonic Reactor, a quantum thermal-to-electric energy system designed to make energy abundance permanent. I create comprehensive full-stack systems, from hardware and software to user interface and strategic vision. I&apos;ve sacrificed comfort to pursue what others deem impossible outcomes, viewing this not as ambition, but as inevitability.
 
-        Beyond my ventures, I cultivate domains of mastery, approaching systems with an intense curiosity:
-
-*   **Engineering Everything:** From mechanical systems to robotics, fluid dynamics, and hardware prototyping, I immerse myself in CAD, simulation, and schematics.
-*   **Artificial Intelligence & Cognitive Architecture:** My focus includes LLMs, AGI safety, autonomous agents, neuro-symbolic fusion, and multi-modal AI—the birth of synthetic minds.
-*   **Quantum & Energy Systems:** I&apos;m building reactors that integrate thermal, quantum, and optical physics to realize intelligent and infinite energy.
-*   **Product Design & Human-Centered Systems:** I design with a Dieter Rams-inspired ethos: form must captivate, function must submit.
-*   **Cybersecurity & Digital Sovereignty:** I build AI-native defense architectures that anticipate and neutralize deception proactively.
-*   **The Arts:** I craft soundscapes, write scripts, design clothing, and direct visual ideas, believing technology and art are twin rebellions.
-*   **Business, Politics, Economics, Power:** As a businessman, I study markets, I have no choice.
+        Beyond my ventures, I cultivate domains of mastery, approaching systems with an intense curiosity. From mechanical systems to robotics, fluid dynamics, and hardware prototyping, I immerse myself in CAD, simulation, and schematics. Focus includes LLMs, AGI safety, autonomous agents, neuro-symbolic fusion, and multi-modal AI—the birth of synthetic minds. I&apos;m building reactors that integrate thermal, quantum, and optical physics to realize intelligent and infinite energy, designing with a Dieter Rams-inspired ethos: form must captivate, function must submit. Built an AI-native defense architectures that anticipate and neutralize deception proactively. I craft soundscapes, write scripts, design clothing, and direct visual ideas, believing technology and art are twin rebellions. And as a businessman, I study markets, I have no choice.
 
         Curiosity is my default state.
       </>
@@ -172,14 +164,14 @@ const about: About = {
         images: [
           // optional: leave the array empty if you don't want to display images
           {
-            src: "/images/projects/project-01/shot4.png",
-            alt: "Once UI Project",
+            src: "/images/projects/project-01/m.png",
+            alt: "Bola Banjo Project",
             width: 16,
             height: 9,
           },
           {
-            src: "/images/projects/project-01/shot3.png",
-            alt: "Once UI Project",
+            src: "/images/projects/project-01/fohn.png",
+            alt: "Bola Banjo Project",
             width: 16,
             height: 9,
           },
@@ -231,70 +223,83 @@ const about: About = {
       {
         title: "Figma",
         description: (
-          <>Designing concepts from scratch and prototyping.</>
+          <>Designing concepts from scratch and prototyping with Figma.</>
         ),
-        tags: [
-          {
-            name: "Figma",
-            icon: "figma",
-          },
-        ],
-        // optional: leave the array empty if you don't want to display images
-        images: [
-          {
-            src: "/images/projects/project-01/m.png",
-            alt: "Project image",
-            width: 16,
-            height: 9,
-          },
-          {
-            src: "/images/projects/project-01/fohn.png",
-            alt: "Project image",
-            width: 16,
-            height: 9,
-          },
-        ],
       },
       {
         title: "Next.js",
         description: (
-          <>Building exciting personal projects with Next.js.</>
+          <>Building fast, full-stack web applications using Next.js.</>
         ),
-        tags: [
-          {
-            name: "TypeScript",
-            icon: "typescript",
-          },
-          {
-            name: "Next.js",
-            icon: "nextjs",
-          },
-          {
-            name: "Supabase",
-            icon: "supabase",
-          },
-          {
-            name: "Python",
-            icon: "python",
-          },
-          {
-            name: "GitHub",
-            icon: "github",
-          },
-        ],
-        // optional: leave the array empty if you don't want to display images
-        images: [
-    //      {
-      //      src: "/images/projects/project-01/stack.png",
-        //    alt: "gitstack sign up page",
-          //  width: 16,
-          //  height: 9,
-         // },
-        ],
-      },  
+      },
+      {
+        title: "TypeScript",
+        description: (
+          <>Developing reliable and scalable codebases with TypeScript.</>
+        ),
+      },
+      {
+        title: "Python",
+        description: (
+          <>Building automation scripts, data analysis, and web apps with Python.</>
+        ),
+      },
+      {
+        title: "Git",
+        description: (
+          <>Version control and collaborative workflows using Git.</>
+        ),
+      },
+      {
+        title: "GitHub",
+        description: (
+          <>Project management, code collaboration, and CI/CD with GitHub.</>
+        ),
+      },
+      {
+        title: "Node.js",
+        description: (
+          <>Developing backend services and APIs using Node.js.</>
+        ),
+      },
+      {
+        title: "Express",
+        description: (
+          <>Creating RESTful APIs and web services using Express.js.</>
+        ),
+      },
+      {
+        title: "CAD",
+        description: (
+          <>3D modeling and design for engineering using various CAD tools.</>
+        ),
+      },
+      {
+        title: "Fusion 360",
+        description: (
+          <>Parametric 3D modeling and simulations with Fusion 360.</>
+        ),
+      },
+      {
+        title: "Blender",
+        description: (
+          <>3D modeling, rendering, and animation with Blender.</>
+        ),
+      },
+      {
+        title: "MATLAB",
+        description: (
+          <>Numerical computing, data visualization, and algorithm development using MATLAB.</>
+        ),
+      },
+      {
+        title: "ChatGPT",
+        description: (
+          <>Leveraging AI tools like ChatGPT, claude, Gemini, DeepSeek for productivity and automation.</>
+        ),
+      },
     ],
   },
-};
 
 const blog: Blog = {
   path: "/blog",
