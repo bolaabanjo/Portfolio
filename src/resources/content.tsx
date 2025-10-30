@@ -6,7 +6,7 @@ const person: Person = {
   lastName: "Banjo",
   name: `Bola Banjo`,
   role: "Mechanical & Software Engineer",
-  avatar: "/images/square.png",
+  avatar: "/images/me.jpg",
   email: "hey@bolabanjo.xyz",
   location: "Africa/Lagos", // Expecting the IANA time zone identifier, e.g., 'Europe/Vienna'
   languages: ["English"], // optional: Leave the array empty if you don't want to display languages
@@ -164,14 +164,14 @@ const about: About = {
         images: [
           // optional: leave the array empty if you don't want to display images
           {
-            src: "/images/projects/project-01/m.png",
-            alt: "Bola Banjo Project",
+            src: "/images/projects/project-01/shot4.png",
+            alt: "Once UI Project",
             width: 16,
             height: 9,
           },
           {
-            src: "/images/projects/project-01/fohn.png",
-            alt: "Bola Banjo Project",
+            src: "/images/projects/project-01/shot3.png",
+            alt: "Once UI Project",
             width: 16,
             height: 9,
           },
@@ -223,83 +223,82 @@ const about: About = {
       {
         title: "Figma",
         description: (
-          <>Designing concepts from scratch and prototyping with Figma.</>
+          <>Designing concepts from scratch and prototyping.</>
         ),
+        images: [
+        ],
       },
       {
         title: "Next.js",
         description: (
-          <>Building fast, full-stack web applications using Next.js.</>
+          <>Building exciting personal projects with Next.js.</>
         ),
+        images: [
+        ],
       },
       {
-        title: "TypeScript",
-        description: (
-          <>Developing reliable and scalable codebases with TypeScript.</>
-        ),
+        title: "UI / UX Design",
+        description: <>Crafting visually appealing and user-friendly interface and user experiences.</>,
       },
       {
-        title: "Python",
-        description: (
-          <>Building automation scripts, data analysis, and web apps with Python.</>
-        ),
+        title: "Product & System Creation",
+        description: <>Developing scalable products and robust system architectures from idea to deployment.</>,
       },
       {
-        title: "Git",
-        description: (
-          <>Version control and collaborative workflows using Git.</>
-        ),
+        title: "Prompt Engineering",
+        description: <>Designing and optimizing prompts for generative AI and LLM systems.</>,
       },
       {
-        title: "GitHub",
-        description: (
-          <>Project management, code collaboration, and CI/CD with GitHub.</>
-        ),
+        title: "Backend Architecture",
+        description: <>Building scalable server-side applications, APIs, and database systems.</>,
       },
       {
-        title: "Node.js",
-        description: (
-          <>Developing backend services and APIs using Node.js.</>
-        ),
+        title: "Software Engineering",
+        description: <>Designing, developing, and maintaining software solutions across platforms.</>,
       },
       {
-        title: "Express",
-        description: (
-          <>Creating RESTful APIs and web services using Express.js.</>
-        ),
+        title: "Design Engineering",
+        description: <>Applying engineering principles to design innovative hardware and software solutions.</>,
       },
       {
-        title: "CAD",
-        description: (
-          <>3D modeling and design for engineering using various CAD tools.</>
-        ),
+        title: "AI Engineering",
+        description: <>Building, deploying, and optimizing artificial intelligence systems and models.</>,
       },
       {
-        title: "Fusion 360",
-        description: (
-          <>Parametric 3D modeling and simulations with Fusion 360.</>
-        ),
+        title: "Hardware & Robotics",
+        description: <>Designing and engineering hardware systems, robotics, and embedded solutions.</>,
       },
       {
-        title: "Blender",
-        description: (
-          <>3D modeling, rendering, and animation with Blender.</>
-        ),
+        title: "3D Design",
+        description: <>Creating 3D models and visualizations for engineering and design applications.</>,
       },
       {
-        title: "MATLAB",
-        description: (
-          <>Numerical computing, data visualization, and algorithm development using MATLAB.</>
-        ),
+        title: "Mechanical Engineering",
+        description: <>Applying mechanical principles to design, analyze, and manufacture mechanical systems.</>,
       },
       {
-        title: "ChatGPT",
-        description: (
-          <>Leveraging AI tools like ChatGPT, claude, Gemini, DeepSeek for productivity and automation.</>
-        ),
+        title: "AI & LLMs",
+        description: <>Working extensively with artificial intelligence and large language models for complex applications.</>,
+      },
+      {
+        title: "Energy Systems (Applied Engineering)",
+        description: <>Designing and analyzing sustainable and efficient energy systems and solutions.</>,
+      },
+      {
+        title: "Aerospace Engineering",
+        description: <>Designing and maintaining aircraft and spacecraft systems and technologies.</>,
+      },
+      {
+        title: "Marine Engineering",
+        description: <>Engineering and servicing marine vessels, including propulsion and structural systems.</>,
+      },
+      {
+        title: "Git and GitHub",
+        description: <>Version control, project collaboration, and code management using Git and GitHub.</>,
       },
     ],
   },
+};
 
 const blog: Blog = {
   path: "/blog",
