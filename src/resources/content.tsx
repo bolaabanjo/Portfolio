@@ -164,14 +164,14 @@ const about: About = {
         images: [
           // optional: leave the array empty if you don't want to display images
           {
-            src: "/images/projects/project-01/shot4.png",
-            alt: "Once UI Project",
+            src: "/images/projects/project-01/m.png",
+            alt: "Bola Banjo Project",
             width: 16,
             height: 9,
           },
           {
-            src: "/images/projects/project-01/shot3.png",
-            alt: "Once UI Project",
+            src: "/images/projects/project-01/fohn.png",
+            alt: "Bola Banjo Project",
             width: 16,
             height: 9,
           },
