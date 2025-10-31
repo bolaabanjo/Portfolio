@@ -42,6 +42,52 @@ export default async function RootLayout({
       )}
     >
       <head>
+        <link rel="icon" href="/favicon.ico" sizes="any" />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: `
+              {
+                "@context": "https://schema.org",
+                "@type": "Person",
+                "name": "Bola Banjo",
+                "alternateName": "Bola Roy Banjo",
+                "url": "https://bolabanjo.xyz",
+                "image": "https://bolabanjo.xyz/images/square.png",
+                "description": "Engineer, systems designer, and founder of FohnAI. Focus areas: AI, Engineering, product design, and robotics.",
+                "jobTitle": "Founder · Engineer · Systems Designer",
+                "worksFor": {
+                  "@type": "Organization",
+                  "name": "FohnAI",
+                  "url": "https://fohnai.com"
+                },
+                "birthDate": "2003-12-17",
+                "sameAs": [
+                  "https://x.com/bolaabanjo",
+                  "https://www.linkedin.com/in/bolaabanjo",
+                  "https://github.com/bolaabanjo"
+                ],
+                "knowsAbout": [
+                  "Artificial intelligence",
+                  "Systems design",
+                  "Software Engineering",
+                  "Mechanical Engineering",
+                  "Robotics",
+                  "Product strategy"
+                ],
+                "mainEntityOfPage": {
+                  "@type": "WebPage",
+                  "@id": "https://bolabanjo.xyz"
+                },
+                "contactPoint": {
+                  "@type": "ContactPoint",
+                  "contactType": "business",
+                  "email": "mailto:hey@bolabanjo.xyz"
+                }
+              }
+            `,
+          }}
+        />
         <script
           id="theme-init"
           dangerouslySetInnerHTML={{
