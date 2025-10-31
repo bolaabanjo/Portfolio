@@ -1,0 +1,100 @@
+---
+title: "NotesAI"
+publishedAt: "2025-11-01"
+summary: "Project 2, a Smart Meeting Notes & Action-Item Extractor, automating the conversion of raw meeting audio into speaker-diarized transcripts, and prioritized action items."
+tag: ["AI", "NLP", "Speech-to-Text", "Streamlit", "Python", "Meeting Automation", "Proof of Concept", "Whisper", "pyannote.audio", "spaCy"]
+images:
+  - "/images/projects/project-01/notesai.png"
+---
+
+
+My Smart Meeting Notes & Action-Item Extractor is a Proof-of-Concept (PoC) designed to revolutionize how teams manage meeting outcomes. I built this system to automate the conversion of raw meeting audio into structured, actionable insights: a speaker-diarized transcript, a concise meeting summary, and a prioritized list of action items with proposed owners and due dates. I presented the solution through a user-friendly Streamlit web application, allowing for easy interaction and download of processed artifacts.
+
+## The Challenge
+
+Traditional meeting management is often inefficient. Manual note-taking is time-consuming, prone to errors, and frequently misses critical details or action items. Assigning ownership and tracking deadlines post-meeting can be haphazard, leading to missed tasks and project delays. My core challenge was to leverage advancements in Speech-to-Text (STT) and Natural Language Processing (NLP) to automate this process, thereby enhancing productivity and accountability.
+
+## The Solution: An End-to-End AI Pipeline
+
+I built my solution as a robust, open-source-first pipeline that processes audio data through several stages:
+
+1.  **Transcription:** Utilizing **OpenAI Whisper**, my system accurately converts spoken words into text, providing precise timestamped segments.
+
+2.  **Speaker Diarization:** I integrated **`pyannote.audio`** to identify "who spoke when," segmenting the audio by speaker and associating distinct voices with labels (e.g., Speaker 00, Speaker 01).
+
+3.  **Alignment:** I developed a custom alignment logic to meticulously combine Whisper's timestamped transcript with `pyannote.audio`'s speaker segments, creating a coherent, speaker-tagged dialogue.
+
+4.  **Extraction:** Using **`spaCy`** and rule-based NLP, my system then scans the aligned transcript to:
+
+    *   Generate a **concise 3-5 bullet point meeting summary**.
+
+    *   Identify **action items**, extracting the action phrase, proposing an owner (based on explicit mentions or speaker ID), and suggesting a due date (if present).
+
+5.  **Interactive Web Demo:** I developed a **Streamlit** application to provide an intuitive interface for users to upload audio files, trigger the processing pipeline, visualize the results, and download artifacts (transcript.txt, actions.json, summary.md).
+
+## Technology Stack
+
+*   **Speech-to-Text (STT):** `openai-whisper`
+
+*   **Speaker Diarization:** `pyannote.audio`
+
+*   **NLP Extraction:** `spaCy` (for Named Entity Recognition and rule-based parsing), `regex`
+
+*   **Audio Processing:** `ffmpeg` (system-level) and `ffmpeg-python` (Python binding)
+
+*   **Deep Learning Framework:** `torch`, `torchaudio`, `numpy`
+
+*   **Hugging Face Integration:** `huggingface_hub`, `transformers` (for model access and authentication)
+
+*   **Web Framework:** `streamlit`
+
+## Key Results and Impact (PoC Metrics)
+
+I successfully delivered a fully functional PoC, demonstrating an end-to-end pipeline from raw audio to actionable insights.
+
+*   **End-to-End Functionality:** I built a complete, interactive Streamlit web application capable of processing uploaded MP3/WAV files and displaying comprehensive outputs.
+
+*   **Transcription Accuracy:** While not formally benchmarked against a specific dataset for this PoC, Whisper's "small" model demonstrated high accuracy on sample meeting audio, aligning with industry expectations for its capabilities.
+
+*   **Action Item Extraction:** My rule-based system effectively identified common action phrases and extracted relevant entities (persons, dates), providing a strong foundation for future LLM-enhanced extraction.
+
+*   **Performance:** My system runs efficiently on a modest CPU instance, processing short audio files (e.g., 3-5 minutes) within a reasonable timeframe, suitable for interactive demonstrations.
+
+*   **Deployment Readiness:** I configured the application for easy deployment to cloud platforms like Streamlit Cloud, ensuring public accessibility for demonstration.
+
+## Technical Challenges & Lessons Learned
+
+Developing this PoC presented several real-world AI engineering challenges, providing me with invaluable learning experiences:
+
+*   **Dependency Management Hell:** Integrating multiple deep learning libraries (`openai-whisper`, `pyannote.audio`, `torch`, `torchaudio`, `spaCy`) often led to intricate version conflicts (`numpy` compatibility, `torchcodec` issues) requiring me to carefully pin package versions in `requirements.txt`.
+
+*   **External System Dependencies:** Ensuring `ffmpeg` was correctly installed and accessible in the system's `PATH` for both Whisper and `pyannote.audio` was a recurring hurdle, highlighting the importance of robust environment setup.
+
+*   **Hugging Face Authentication:** `pyannote.audio`'s reliance on gated models on Hugging Face Hub required meticulous agreement to user conditions for multiple sub-models and understanding evolving authentication methods (`use_auth_token` deprecation vs. `HF_TOKEN` environment variable).
+
+*   **Python Module System:** Navigating relative vs. absolute imports within a package structure, especially when executed by frameworks like Streamlit, was crucial for resolving `ImportError` issues.
+
+*   **Audio Format Consistency:** Addressing "tensor size mismatch" errors in `pyannote.audio` by standardizing audio input to WAV format demonstrated a practical workaround for inconsistencies in MP3 decoding.
+
+## Future Enhancements (Stretch Wins)
+
+Building upon this MVP, I envision several high-leverage enhancements:
+
+*   **Advanced NLP with LLMs:** I plan to integrate instruction-tuned open-source LLMs (e.g., quantized LLaMA/GGML via `llama.cpp`) for more sophisticated action item inference (owners, due dates, confidence scores) and abstractive summarization.
+
+*   **Human-in-the-Loop Editor:** I aim to develop a UI component to allow users to review, edit, approve, and assign extracted action items.
+
+*   **Integrations:** I would like to connect with communication platforms (Slack, Google Meet) for automated ingestion and notification.
+
+*   **Contextual RAG:** I plan to link actions to project documentation or suggest assignees from an organizational directory using Retrieval-Augmented Generation (RAG).
+
+*   **Calendar Integration:** I will implement auto-scheduling of suggested due dates in team calendars.
+
+## Conclusion
+
+This PoC successfully demonstrates the feasibility and immediate impact of an AI-powered meeting assistant. It not only delivers a tangible solution for a common business problem but also showcases my comprehensive skill set in full-stack AI development, from speech processing to NLP and user interface design. The project stands as a strong foundation for a production-ready system that teams would genuinely pay for.
+
+---
+
+**Author:** Bola Banjo
+**Twitter:** [@bolaabanjo](https://x.com/bolaabanjo)
