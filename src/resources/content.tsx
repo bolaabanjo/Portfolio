@@ -91,7 +91,7 @@ const about: About = {
     title: "Introduction",
     description: (
       <>
-        My name is Bola Roy Banjo. As an engineer, systems designer, and a deep-tech enthusiast, my journey is propelled by a singular mission: to build. My expertise fluidly intersects Artificial Intelligence, Quantum Energy, Cybersecurity, Product Design, and Mechanical Engineering. Disciplines I wield as interconnected tools to solve real-world problems at scale. I write code to architect systems that fuse intelligence, elegance, and permanence. My philosophy is clear: design should evoke art, and engineering should embody innovation.
+        My name is Bola Roy Banjo, but my friends call me Roy. As an engineer, systems designer, and a deep-tech enthusiast, my journey is propelled by a singular mission: to build. My expertise fluidly intersects Artificial Intelligence, Quantum Energy, Cybersecurity, Product Design, and Mechanical Engineering. Disciplines I wield as interconnected tools to solve real-world problems at scale. I write code to architect systems that fuse intelligence, elegance, and permanence. My philosophy is clear: design should evoke art, and engineering should embody innovation.
 
         As CEO of FohnAI, an AI R&D company, My core mission is to protect the future of intelligent infrastructure, We need Intelligent systems now, more than ever. We developed Cencori, a multi-tenant AI infrastructure platform designed to help teams build, deploy, and scale AI-driven applications, for enterprises, and governments. I also lead Wisc, a career operating system for tech professionals, the essential interface for personal and professional evolution.
 
