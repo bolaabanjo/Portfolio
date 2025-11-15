@@ -41,6 +41,11 @@ const social: Social = [
     icon: "email",
     link: `mailto:${person.email}`,
   },
+  {
+    name: "Threads",
+    icon: "threads",
+    link: `https://threads.com/bolaabanjo`,
+  },
 ];
 
 const home: Home = {
