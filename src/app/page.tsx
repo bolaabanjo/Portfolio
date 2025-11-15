@@ -114,7 +114,7 @@ export default function Home() {
                 Latest from the blog
               </Heading>
             </Row>
-            <Row flex={3} paddingX="20">
+            <Row flex={3} padding="20">
               <Posts range={[1, 2]} columns="2" />
             </Row>
           </Row>
