@@ -1,0 +1,165 @@
+---
+title: "Cencori"
+publishedAt: "2025-12-23"
+summary: "Building AI infrastructure for production. From 'I'll just call OpenAI directly' to a unified platform with security, cost tracking, and multi-provider support."
+images:
+  - "/images/projects/project-01/shotso.png"
+  - "/images/projects/project-01/643shots_so.png"
+team:
+  - name: "Bola Banjo"
+    role: "Founder & Engineer"
+    avatar: "/images/square.png"
+    linkedIn: "https://www.linkedin.com/in/bolaabanjo"
+link: "https://cencori.com"
+---
+
+## The Itch
+
+I was building with AI like everyone else. Drop in the OpenAI SDK, make a request, ship it. Simple.
+
+Until it wasn't.
+
+Three things kept hitting me:
+
+- **Every project had the same boilerplate.** API key management, error handling, retry logic, token counting. Copy-paste, copy-paste, copy-paste.
+- **Costs were invisible.** I'd wake up to a $200 bill and have no idea which feature caused it. No breakdown, no alerts, just... surprise.
+- **Security was an afterthought.** PII flowing through prompts. No audit trail. If a user sent their credit card number to GPT, I'd never know until it was too late.
+
+I kept thinking: someone else must have solved this.
+
+They hadn't. Not the way I needed.
+
+---
+
+## The First Commit
+
+The initial version was embarrassingly simple:
+
+```
+- A Next.js API route that proxied OpenAI calls
+- A Supabase table logging every request
+- 200 lines of code
+```
+
+That's it. No dashboard. No SDK. No security layer. Just a wrapper that let me see what was happening.
+
+I called it **Cencori**. Don't ask about the name — it just felt right.
+
+---
+
+## The Tensions
+
+Building alone means making bets. Here are the ones I made:
+
+### Move Fast vs. Build to Last
+
+I could've shipped faster with shortcuts. Hardcode this, skip that migration, worry about scale later.
+
+Instead, I built multi-tenant from day one. Organizations, projects, environments, API keys with proper scoping. The kind of architecture that looks over-engineered for a solo project.
+
+**I chose foundations over speed.** It slowed me down early. It's paying off now.
+
+### Ship Scrappy vs. Design Intentionally
+
+Everyone says ship ugly, iterate later. There's wisdom there.
+
+But I created a full design system anyway. Called it *Cenpact* (Cencori + Compact). Typography scales down to `text-[10px]`. Spacing systems. Dark mode native. The whole thing.
+
+It felt indulgent. But every time I add a new feature now, it fits. No design debt. No "I'll fix that later."
+
+**I chose coherence over speed.** No regrets.
+
+### Build for Users vs. Build for the Market
+
+I didn't have users when I added compliance features. Audit logs, security scores, content filtering. Enterprise-grade stuff for a product with zero customers.
+
+The conventional wisdom: don't build what you can't sell yet.
+
+My bet: these aren't features. They're the foundation. AI without security isn't enterprise-ready.
+
+**I chose the long game.**
+
+---
+
+## The Inflection Points
+
+**The first real feature that mattered: Cost tracking.**
+
+When I could finally see exactly how much each request cost — broken down by project, by model, by day — everything changed. I'd built my own superpower: visibility into the black box.
+
+**The second: Security guardrails.**
+
+PII detection that actually blocked sensitive data. Prompt injection defense that flagged suspicious inputs. Safety scores on every request. Not because I needed compliance. Because I was paranoid about what I was building.
+
+**The third: Multi-provider support.**
+
+One API. OpenAI, Anthropic, or Gemini. Switch with a parameter, not a rewrite.
+
+That's when it stopped feeling like a side project.
+
+---
+
+## The Stack
+
+| Layer | Choice | Why |
+|-------|--------|-----|
+| Framework | Next.js 15 | Full-stack in one repo. Fast iteration. |
+| Database | Supabase | Postgres + Auth + Real-time. No backend to manage. |
+| Deploy | Vercel | Push to ship. Zero DevOps. |
+| AI | OpenAI, Anthropic, Google | Multi-provider was the whole point. |
+
+Every choice optimized for one thing: **ship faster, alone.**
+
+---
+
+## The Moments of Doubt
+
+There were weeks where I questioned everything.
+
+*Why am I building infrastructure when I could be building products?*
+
+*Is this just a glorified proxy?*
+
+*Will anyone actually pay for this?*
+
+I still don't have all the answers. But I have users. I have requests flowing through. I have a dashboard that tells me more about AI usage than the providers themselves offer.
+
+That's enough to keep going.
+
+---
+
+## Where It's At Now
+
+Cencori today:
+
+- Unified API for OpenAI, Anthropic, Gemini
+- Real-time streaming across all providers
+- Security layer with PII detection and content filtering
+- Analytics dashboard with cost tracking and usage patterns
+- Credits-based billing — prepaid, transparent, no surprises
+- SDK that drops into any Node.js project
+- Internal admin panel for platform-wide metrics
+
+---
+
+## What I'm Still Figuring Out
+
+- **Pricing.** Credits feel right, but finding the markup that works is an ongoing experiment.
+- **Distribution.** Building is the easy part. Getting people to try it is the hard part.
+- **When to stop being alone.** Solo is fast. But there's a ceiling.
+
+---
+
+## The Takeaway
+
+Cencori started because I scratched my own itch. It grew because the itch was real.
+
+If you're building with AI and tired of the same boilerplate, the same invisible costs, the same security gaps — that's what Cencori solves.
+
+Not with magic. With infrastructure that does the boring parts so you can focus on the interesting ones.
+
+Building in the open. Shipping constantly. Figuring it out as I go.
+
+---
+
+**[cencori.com](https://cencori.com)** · **[GitHub](https://github.com/cencori)**
