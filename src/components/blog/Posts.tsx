@@ -1,5 +1,5 @@
 import { getPosts } from "@/utils/utils";
-import { Grid } from "@once-ui-system/core";
+import { Column } from "@once-ui-system/core";
 import Post from "./Post";
 
 interface PostsProps {
@@ -12,10 +12,7 @@ interface PostsProps {
 
 export function Posts({
   range,
-  columns = "1",
-  thumbnail = false,
   exclude = [],
-  direction,
 }: PostsProps) {
   let allBlogs = getPosts(["src", "app", "blog", "posts"]);
 
@@ -33,14 +30,10 @@ export function Posts({
     : sortedBlogs;
 
   return (
-    <>
-      {displayedBlogs.length > 0 && (
-        <Grid columns={columns} s={{ columns: 1 }} fillWidth marginBottom="40" gap="16">
-          {displayedBlogs.map((post) => (
-            <Post key={post.slug} post={post} thumbnail={thumbnail} direction={direction} />
-          ))}
-        </Grid>
-      )}
-    </>
+    <Column fillWidth>
+      {displayedBlogs.map((post) => (
+        <Post key={post.slug} post={post} />
+      ))}
+    </Column>
   );
 }
