@@ -15,7 +15,7 @@ export default function Post({ post }: PostProps) {
     <Link href={`/blog/${post.slug}`} style={{ textDecoration: "none" }}>
       <Row
         fillWidth
-        horizontal="space-between"
+        horizontal="between"
         vertical="center"
         paddingY="16"
         gap="24"
