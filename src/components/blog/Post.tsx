@@ -5,7 +5,13 @@ import { formatDate } from "@/utils/formatDate";
 import Link from "next/link";
 
 interface PostProps {
-  post: any;
+  post: {
+    slug: string;
+    metadata: {
+      title: string;
+      publishedAt: string;
+    };
+  };
   thumbnail?: boolean;
   direction?: "row" | "column";
 }
@@ -17,21 +23,30 @@ export default function Post({ post }: PostProps) {
         fillWidth
         horizontal="between"
         vertical="center"
-        paddingY="16"
-        gap="24"
+        paddingY="12"
+        gap="16"
         style={{
-          borderBottom: "1px solid var(--neutral-alpha-weak)",
+          borderBottom: "1px solid rgba(255, 255, 255, 0.06)",
           cursor: "pointer",
+          transition: "opacity 150ms ease",
         }}
         className="blog-post-row"
       >
-        <Text variant="heading-strong-m" onBackground="neutral-strong">
+        <Text
+          variant="body-default-s"
+          onBackground="neutral-strong"
+          style={{ fontWeight: 500 }}
+        >
           {post.metadata.title}
         </Text>
         <Text
-          variant="body-default-s"
+          variant="label-default-s"
           onBackground="neutral-weak"
-          style={{ whiteSpace: "nowrap" }}
+          style={{
+            whiteSpace: "nowrap",
+            opacity: 0.5,
+            fontSize: "0.75rem",
+          }}
         >
           {formatDate(post.metadata.publishedAt, false)}
         </Text>
