@@ -1,6 +1,5 @@
 "use client";
 
-import { Column, Row, Text } from "@once-ui-system/core";
 import { formatDate } from "@/utils/formatDate";
 import Link from "next/link";
 
@@ -18,39 +17,41 @@ interface PostProps {
 
 export default function Post({ post }: PostProps) {
   return (
-    <Link href={`/blog/${post.slug}`} style={{ textDecoration: "none" }}>
-      <Row
-        fillWidth
-        horizontal="between"
-        vertical="center"
-        paddingY="12"
-        gap="16"
+    <Link href={`/blog/${post.slug}`} style={{ textDecoration: "none", display: "block" }}>
+      <div
         style={{
-          borderBottom: "1px solid rgba(255, 255, 255, 0.06)",
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "baseline",
+          gap: "16px",
+          padding: "16px 0",
+          borderBottom: "1px solid var(--neutral-alpha-weak)",
           cursor: "pointer",
-          transition: "opacity 150ms ease",
         }}
-        className="blog-post-row"
       >
-        <Text
-          variant="body-default-s"
-          onBackground="neutral-strong"
-          style={{ fontWeight: 500 }}
+        <span
+          style={{
+            fontFamily: "Georgia, 'Times New Roman', serif",
+            fontSize: "15px",
+            color: "var(--neutral-on-background-strong)",
+            lineHeight: 1.4,
+          }}
         >
           {post.metadata.title}
-        </Text>
-        <Text
-          variant="label-default-s"
-          onBackground="neutral-weak"
+        </span>
+        <span
           style={{
+            fontFamily: "var(--font-code)",
+            fontSize: "11px",
+            color: "var(--neutral-on-background-weak)",
+            opacity: 0.4,
             whiteSpace: "nowrap",
-            opacity: 0.5,
-            fontSize: "0.75rem",
+            flexShrink: 0,
           }}
         >
           {formatDate(post.metadata.publishedAt, false)}
-        </Text>
-      </Row>
+        </span>
+      </div>
     </Link>
   );
 }
