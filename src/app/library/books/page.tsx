@@ -163,6 +163,7 @@ export default async function Books() {
                       }}
                     >
                       {book.coverUrl && (
+                        // eslint-disable-next-line @next/next/no-img-element
                         <img
                           src={book.coverUrl}
                           alt={`${book.title} cover`}

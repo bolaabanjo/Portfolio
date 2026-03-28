@@ -62,6 +62,7 @@ export async function GET(request: Request) {
         {/* Left: Avatar */}
         <img
           src={baseURL + "/images/gallery/IMG_1596%203.JPG"}
+          alt={person.name}
           style={{
             width: "220px",
             height: "220px",

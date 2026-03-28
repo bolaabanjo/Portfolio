@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 import { SmartLink } from "@once-ui-system/core";
 
 interface ArchiveEntry {
@@ -125,7 +126,7 @@ export function ArchiveIndex({ entries }: ArchiveIndexProps) {
 
         <span style={{ color: "var(--neutral-alpha-medium)", fontSize: "12px" }}>|</span>
 
-        <a
+        <Link
           href="/library/books"
           style={{
             padding: "2px 0",
@@ -141,7 +142,7 @@ export function ArchiveIndex({ entries }: ArchiveIndexProps) {
           }}
         >
           books
-        </a>
+        </Link>
       </div>
 
       {/* Entries */}
