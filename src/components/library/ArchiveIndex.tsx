@@ -122,6 +122,26 @@ export function ArchiveIndex({ entries }: ArchiveIndexProps) {
             setActiveStatus(activeStatus === status ? null : status)
           )
         )}
+
+        <span style={{ color: "var(--neutral-alpha-medium)", fontSize: "12px" }}>|</span>
+
+        <a
+          href="/library/books"
+          style={{
+            padding: "2px 0",
+            border: "none",
+            background: "transparent",
+            color: "var(--neutral-on-background-weak)",
+            cursor: "pointer",
+            fontSize: "13px",
+            fontFamily: "inherit",
+            textDecoration: "none",
+            opacity: 0.5,
+            borderBottom: "1px solid transparent",
+          }}
+        >
+          books
+        </a>
       </div>
 
       {/* Entries */}

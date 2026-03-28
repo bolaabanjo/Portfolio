@@ -250,9 +250,13 @@ export interface Library extends BasePageConfig {
     author: string;
     /** Category (e.g. Energy, AI, Physics) */
     category: string;
+    /** Reading status */
+    status: "reading" | "finished" | "shelved";
     /** Cover image path (optional) */
     cover?: string;
     /** Short note on why it matters (optional) */
     note?: string;
+    /** Link to external resource (optional) */
+    link?: string;
   }>;
 }

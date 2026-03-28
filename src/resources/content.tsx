@@ -388,7 +388,42 @@ const library: Library = {
   label: "Library",
   title: `Library – ${person.name}`,
   description: `Study notes, research, and readings by ${person.name}`,
-  books: [],
+  books: [
+    {
+      title: "Surely You're Joking, Mr. Feynman!",
+      author: "Richard Feynman",
+      category: "Physics",
+      status: "finished",
+      note: "A reminder that curiosity is the only real prerequisite.",
+    },
+    {
+      title: "The Design of Everyday Things",
+      author: "Don Norman",
+      category: "Design",
+      status: "finished",
+      note: "Changed how I think about interfaces — both physical and digital.",
+    },
+    {
+      title: "Gödel, Escher, Bach",
+      author: "Douglas Hofstadter",
+      category: "Mathematics",
+      status: "reading",
+      note: "Strange loops, self-reference, and the nature of consciousness.",
+    },
+    {
+      title: "Structure and Interpretation of Computer Programs",
+      author: "Harold Abelson & Gerald Jay Sussman",
+      category: "Computer Science",
+      status: "reading",
+    },
+    {
+      title: "The Elegant Universe",
+      author: "Brian Greene",
+      category: "Physics",
+      status: "shelved",
+      note: "String theory primer. Will revisit after more quantum mechanics.",
+    },
+  ],
 };
 
 export { person, social, newsletter, home, about, blog, work, gallery, library };

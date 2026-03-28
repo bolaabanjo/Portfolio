@@ -297,10 +297,10 @@ export default async function LibraryEntry({
               h2: ({ children }: { children: React.ReactNode }) => (
                 <h2 style={{
                   fontFamily: "Georgia, 'Times New Roman', serif",
-                  fontSize: "16px",
+                  fontSize: "18px",
                   fontWeight: 500,
                   color: "var(--neutral-on-background-strong)",
-                  margin: "12px 0 4px 0",
+                  margin: "24px 0 6px 0",
                 }}>
                   {children}
                 </h2>
@@ -311,10 +311,61 @@ export default async function LibraryEntry({
                   fontSize: "15px",
                   fontWeight: 500,
                   color: "var(--neutral-on-background-strong)",
-                  margin: "10px 0 4px 0",
+                  margin: "20px 0 6px 0",
                 }}>
                   {children}
                 </h3>
+              ),
+              p: ({ children }: { children: React.ReactNode }) => (
+                <p style={{
+                  fontFamily: "Georgia, 'Times New Roman', serif",
+                  fontSize: "15px",
+                  lineHeight: 1.55,
+                  color: "var(--neutral-on-background-weak)",
+                  margin: "0 0 12px 0",
+                }}>
+                  {children}
+                </p>
+              ),
+              ul: ({ children }: { children: React.ReactNode }) => (
+                <ul style={{
+                  fontFamily: "Georgia, 'Times New Roman', serif",
+                  fontSize: "15px",
+                  lineHeight: 1.5,
+                  color: "var(--neutral-on-background-weak)",
+                  paddingLeft: 24,
+                  margin: "0 0 8px 0",
+                }}>
+                  {children}
+                </ul>
+              ),
+              ol: ({ children }: { children: React.ReactNode }) => (
+                <ol style={{
+                  fontFamily: "Georgia, 'Times New Roman', serif",
+                  fontSize: "15px",
+                  lineHeight: 1.5,
+                  color: "var(--neutral-on-background-weak)",
+                  paddingLeft: 24,
+                  margin: "0 0 8px 0",
+                }}>
+                  {children}
+                </ol>
+              ),
+              li: ({ children }: { children: React.ReactNode }) => (
+                <li style={{ marginBottom: 0 }}>{children}</li>
+              ),
+              pre: ({ children }: { children: React.ReactNode }) => (
+                <pre style={{
+                  fontFamily: "var(--font-code)",
+                  background: "var(--neutral-alpha-weak)",
+                  padding: 16,
+                  overflowX: "auto",
+                  margin: "0 0 12px 0",
+                  fontSize: "13px",
+                  lineHeight: 1.5,
+                }}>
+                  {children}
+                </pre>
               ),
             } as any}
           />
