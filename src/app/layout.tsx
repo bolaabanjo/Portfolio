@@ -17,6 +17,18 @@ import {
 import { Footer, Header, RouteGuard, Providers } from "@/components";
 import { baseURL, effects, fonts, style, dataStyle, home } from "@/resources";
 
+import { Viewport } from "next";
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  viewportFit: "cover",
+  themeColor: [
+    { media: "(prefers-color-scheme: dark)", color: "#0a0a0a" },
+    { media: "(prefers-color-scheme: light)", color: "#ffffff" },
+  ],
+};
+
 export async function generateMetadata() {
   return Meta.generate({
     title: home.title,
@@ -44,8 +56,6 @@ export default async function RootLayout({
     >
       <head>
         <link rel="icon" href="/favicon.ico" sizes="any" />
-        <meta name="theme-color" content="#0a0a0a" media="(prefers-color-scheme: dark)" />
-        <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
         <script
@@ -146,7 +156,15 @@ export default async function RootLayout({
         />
       </head>
 
-      <body style={{ margin: 0, padding: 0, width: "100%", height: "100%" }}>
+      <body style={{
+        margin: 0,
+        padding: 0,
+        width: "100%",
+        height: "100%",
+        paddingTop: "env(safe-area-inset-top)",
+        paddingBottom: "env(safe-area-inset-bottom)",
+        backgroundColor: "var(--page-background)",
+      }}>
         <Providers>
           <Column
             as="main"
