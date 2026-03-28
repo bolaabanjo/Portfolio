@@ -72,6 +72,43 @@ export function ArchiveIndex({ entries }: ArchiveIndexProps) {
 
   return (
     <div style={{ fontFamily: "Georgia, 'Times New Roman', serif" }}>
+      <style>{`
+        .archive-entry-row {
+          display: grid;
+          grid-template-columns: 48px 1fr auto;
+          gap: 16px;
+          align-items: baseline;
+          padding: 18px 0;
+          border-bottom: 1px solid var(--neutral-alpha-weak);
+        }
+        .archive-meta-labels {
+          display: flex;
+          gap: 12px;
+          align-items: baseline;
+          flex-shrink: 0;
+          font-family: var(--font-code);
+          font-size: 11px;
+          color: var(--neutral-on-background-weak);
+          opacity: 0.5;
+          white-space: nowrap;
+        }
+        @media (max-width: 640px) {
+          .archive-entry-row {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+          }
+          .archive-entry-top {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+          }
+          .archive-meta-labels {
+            gap: 8px;
+            font-size: 10px;
+          }
+        }
+      `}</style>
       {/* Search */}
       <input
         type="text"
@@ -166,27 +203,20 @@ export function ArchiveIndex({ entries }: ArchiveIndexProps) {
             href={`/library/${entry.slug}`}
             style={{ margin: 0, textDecoration: "none", display: "block" }}
           >
-            <div
-              style={{
-                display: "grid",
-                gridTemplateColumns: "48px 1fr auto",
-                gap: "16px",
-                alignItems: "baseline",
-                padding: "18px 0",
-                borderBottom: "1px solid var(--neutral-alpha-weak)",
-              }}
-            >
-              {/* ID */}
-              <span
-                style={{
-                  fontFamily: "var(--font-code)",
-                  fontSize: "12px",
-                  color: "var(--neutral-on-background-weak)",
-                  opacity: 0.4,
-                }}
-              >
-                {String(entry.id).padStart(3, "0")}
-              </span>
+            <div className="archive-entry-row">
+              <div className="archive-entry-top">
+                {/* ID */}
+                <span
+                  style={{
+                    fontFamily: "var(--font-code)",
+                    fontSize: "12px",
+                    color: "var(--neutral-on-background-weak)",
+                    opacity: 0.4,
+                  }}
+                >
+                  {String(entry.id).padStart(3, "0")}
+                </span>
+              </div>
 
               {/* Title + summary */}
               <div>
@@ -213,19 +243,7 @@ export function ArchiveIndex({ entries }: ArchiveIndexProps) {
               </div>
 
               {/* Meta labels */}
-              <div
-                style={{
-                  display: "flex",
-                  gap: "12px",
-                  alignItems: "baseline",
-                  flexShrink: 0,
-                  fontFamily: "var(--font-code)",
-                  fontSize: "11px",
-                  color: "var(--neutral-on-background-weak)",
-                  opacity: 0.5,
-                  whiteSpace: "nowrap",
-                }}
-              >
+              <div className="archive-meta-labels">
                 <span>{entry.type}</span>
                 <span>·</span>
                 <span>{entry.category.toLowerCase()}</span>
