@@ -1,0 +1,82 @@
+---
+title: "Repokeet"
+publishedAt: "2026-03-01"
+summary: "Chat with any GitHub repo. Paste a URL, and an AI that actually reads the code answers your questions about it."
+images:
+  - "/images/projects/project-01/repokeet.png"
+team:
+  - name: "Bola Banjo"
+    role: "Founder & Engineer"
+    avatar: "/images/square.png"
+    linkedIn: "https://www.linkedin.com/in/bolaabanjo"
+link: "https://repokeet.bolabanjo.xyz"
+---
+
+## The Problem
+
+You find a repo on GitHub. Maybe it's a library you want to use, an open source project you want to contribute to, or a codebase you just inherited at work. You need to understand it — fast.
+
+So you start clicking through files. Reading folder names. Guessing at architecture. Jumping between `package.json` and `src/` and hoping the README is up to date (it never is).
+
+Understanding a codebase shouldn't feel like archaeology.
+
+---
+
+## The Idea
+
+What if you could just *talk* to a repo? Paste a URL, and have an AI that's actually read the code — the dependencies, the architecture, the patterns — answer your questions about it.
+
+Not a search bar. Not a file browser. A conversation with something that understands the project.
+
+---
+
+## How It Works
+
+1. **Paste a GitHub URL** — any public repo
+2. **Repokeet analyzes the codebase** — file tree, dependencies, source code, existing docs
+3. **Ask anything** — how does auth work? What's the architecture? What does this function do?
+4. **Get real answers** — grounded in the actual code, not hallucinated guesses
+
+The AI reads your `package.json`, your source files, your config — it builds a mental model of the project before answering a single question.
+
+---
+
+## The Stack
+
+| Layer | Choice | Why |
+|-------|--------|-----|
+| Framework | Next.js 16 | App Router, server components, fast iteration |
+| AI | Cencori SDK | Built on my own infrastructure — dogfooding at its finest |
+| Auth & DB | Supabase | GitHub OAuth + chat history persistence |
+| Styling | Tailwind CSS v4 | Rapid UI development |
+| GitHub API | Octokit | Reliable repo data extraction |
+
+---
+
+## The Cencori Connection
+
+Repokeet is the first product built on top of [Cencori](/work/cencori). Every AI request flows through the Cencori platform — cost tracking, security guardrails, and multi-provider support. Building Repokeet was the ultimate dogfooding exercise: using my own infrastructure to ship a real product.
+
+It validated every decision I made with Cencori. The SDK dropped in cleanly. The streaming worked. The cost visibility meant I knew exactly what each conversation cost.
+
+---
+
+## Features
+
+- **Instant repo analysis** — file tree, dependencies, architecture patterns
+- **Conversational interface** — ask questions, dig deeper, explore the codebase through chat
+- **GitHub sign-in** — save chat history and pick up where you left off
+- **Dark/light mode** — because we're not animals
+- **Markdown rendering** — full GFM support with syntax highlighting
+
+---
+
+## What I Learned
+
+Building Repokeet taught me that the hard part isn't the AI — it's the *context*. Getting the right files, in the right order, with the right amount of detail, into a prompt that produces useful answers. Token limits are real. Prioritization matters.
+
+The GitHub API has rate limits that force you to be smart about what you fetch. You can't just download an entire repo and dump it into a prompt. You have to be surgical — grab the file tree, the key config files, the entry points, and let the AI piece together the rest.
+
+---
+
+**[repokeet.bolabanjo.xyz](https://repokeet.bolabanjo.xyz)** · **[GitHub](https://github.com/bolaabanjo/repokeet)**
