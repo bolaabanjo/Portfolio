@@ -312,37 +312,72 @@ const gallery: Gallery = {
   images: [
     {
       src: "/images/gallery/square.png",
-      alt: "Bola Banjo, Bola Roy Banjo",
+      alt: "Bola Banjo — engineer, CEO of Cencori, portrait photo",
       orientation: "horizontal",
     },
     {
       src: "/images/gallery/laptop.jpg",
-      alt: "Bola Banjo, Bola Roy Banjo",
+      alt: "Bola Banjo working on a laptop — software engineer and AI engineer",
       orientation: "vertical",
     },
     {
       src: "/images/gallery/img5.jpg",
-      alt: "Bola Banjo, Bola Roy Banjo",
-      orientation: "vertical",
-    },
-    {
-      src: "/images/gallery/img1.jpg",
-      alt: "Bola Banjo, Bola Roy Banjo",
+      alt: "Bola Banjo — mechanical engineer and systems designer from Lagos, Nigeria",
       orientation: "vertical",
     },
     {
       src: "/images/gallery/iga.jpg",
-      alt: "Bola Banjo Engineer",
+      alt: "Bola Banjo at IGA — maritime engineer working on ship systems",
       orientation: "vertical",
     },
     {
       src: "/images/gallery/img3.jpg",
-      alt: "Bola Banjo, Bola Roy Banjo",
+      alt: "Bola Banjo — engineer, designer, and entrepreneur based in Lagos",
       orientation: "horizontal",
     },
     {
       src: "/images/gallery/img2.JPG",
-      alt: "Bola Banjo, Bola Roy Banjo",
+      alt: "Bola Banjo — software and mechanical engineer, Cencori founder",
+      orientation: "vertical",
+    },
+    {
+      src: "/images/gallery/IMG_1984.jpg",
+      alt: "Bola Banjo presenting Safe KYC Extraction — engineer and speaker",
+      orientation: "vertical",
+    },
+    {
+      src: "/images/gallery/IMG_2028.jpg",
+      alt: "Bola Banjo — CEO of Cencori, AI and software engineer",
+      orientation: "vertical",
+    },
+    {
+      src: "/images/gallery/IMG_2027.jpg",
+      alt: "Bola Banjo — engineer and entrepreneur based in Lagos, Nigeria",
+      orientation: "vertical",
+    },
+    {
+      src: "/images/gallery/IMG_2029.jpg",
+      alt: "Bola Banjo with colleagues — engineers and professionals in Lagos",
+      orientation: "horizontal",
+    },
+    {
+      src: "/images/gallery/IMG_2030.jpg",
+      alt: "Bola Banjo behind the scenes — studio photoshoot, engineer and creative",
+      orientation: "vertical",
+    },
+    {
+      src: "/images/gallery/IMG_2031.jpg",
+      alt: "Bola Banjo with collaborator — engineers and builders in Lagos",
+      orientation: "vertical",
+    },
+    {
+      src: "/images/gallery/IMG_1596 3.JPG",
+      alt: "Bola Banjo — portrait, software engineer and CEO of Cencori",
+      orientation: "vertical",
+    },
+    {
+      src: "/images/gallery/IMG_1199 2.jpg",
+      alt: "Bola Banjo — engineer, designer, and founder based in Lagos, Nigeria",
       orientation: "vertical",
     },
   ],

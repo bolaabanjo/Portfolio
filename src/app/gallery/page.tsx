@@ -13,8 +13,31 @@ export async function generateMetadata() {
 }
 
 export default function Gallery() {
+  const imageSchemaData = {
+    "@context": "https://schema.org",
+    "@type": "ImageGallery",
+    name: gallery.title,
+    description: gallery.description,
+    url: `${baseURL}${gallery.path}`,
+    author: {
+      "@type": "Person",
+      name: person.name,
+      url: baseURL,
+    },
+    image: gallery.images.map((img) => ({
+      "@type": "ImageObject",
+      contentUrl: `${baseURL}${img.src}`,
+      name: img.alt,
+      description: img.alt,
+      author: {
+        "@type": "Person",
+        name: person.name,
+      },
+    })),
+  };
+
   return (
-    <Flex maxWidth="l">
+    <Flex maxWidth="s">
       <Schema
         as="webPage"
         baseURL={baseURL}
@@ -27,6 +50,10 @@ export default function Gallery() {
           url: `${baseURL}${gallery.path}`,
           image: `${baseURL}${person.avatar}`,
         }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(imageSchemaData) }}
       />
       <GalleryView />
     </Flex>

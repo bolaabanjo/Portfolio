@@ -5,7 +5,7 @@ import { gallery } from "@/resources";
 
 export default function GalleryView() {
   return (
-    <MasonryGrid columns={2} s={{ columns: 1 }}>
+    <MasonryGrid columns={3} s={{ columns: 2 }}>
       {gallery.images.map((image, index) => (
         <Media
           enlarge

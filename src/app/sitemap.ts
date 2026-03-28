@@ -1,5 +1,5 @@
 import { getPosts } from "@/utils/utils";
-import { baseURL, routes as routesConfig } from "@/resources";
+import { baseURL, routes as routesConfig, gallery } from "@/resources";
 
 export default async function sitemap() {
   const blogs = getPosts(["src", "app", "blog", "posts"]).map((post) => ({
@@ -19,6 +19,12 @@ export default async function sitemap() {
   const routes = activeRoutes.map((route) => ({
     url: `${baseURL}${route !== "/" ? route : ""}`,
     lastModified: new Date().toISOString().split("T")[0],
+    ...(route === "/gallery" && {
+      images: gallery.images.map((img) => ({
+        url: `${baseURL}${img.src}`,
+        title: img.alt,
+      })),
+    }),
   }));
 
   return [...routes, ...blogs, ...works];
