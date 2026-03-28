@@ -1,5 +1,6 @@
 import { notFound } from "next/navigation";
 import { CustomMDX, ScrollToHash } from "@/components";
+import { ShareSection } from "@/components/blog/ShareSection";
 import {
   Meta,
   Schema,
@@ -64,8 +65,10 @@ export default async function Blog({ params }: { params: Promise<{ slug: string 
       : [];
 
   return (
+    <Row fillWidth horizontal="center">
     <Column
       as="section"
+      fillWidth
       style={{ maxWidth: 680 }}
       gap="l"
       paddingY="12"
@@ -328,7 +331,13 @@ export default async function Blog({ params }: { params: Promise<{ slug: string 
         </div>
       </Column>
 
+      <ShareSection
+        title={post.metadata.title}
+        url={`${baseURL}${blog.path}/${post.slug}`}
+      />
+
       <ScrollToHash />
     </Column>
+    </Row>
   );
 }
