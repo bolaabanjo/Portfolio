@@ -1,6 +1,5 @@
 import { getPosts } from "@/utils/utils";
-import { Column } from "@once-ui-system/core";
-import { ProjectCard } from "@/components";
+import { Column, Row, Text, SmartLink } from "@once-ui-system/core";
 
 interface ProjectsProps {
   range?: [number, number?];
@@ -10,7 +9,6 @@ interface ProjectsProps {
 export function Projects({ range, exclude }: ProjectsProps) {
   let allProjects = getPosts(["src", "app", "work", "projects"]);
 
-  // Exclude by slug (exact match)
   if (exclude && exclude.length > 0) {
     allProjects = allProjects.filter((post) => !exclude.includes(post.slug));
   }
@@ -23,20 +21,62 @@ export function Projects({ range, exclude }: ProjectsProps) {
     ? sortedProjects.slice(range[0] - 1, range[1] ?? sortedProjects.length)
     : sortedProjects;
 
+  // Group projects by year
+  const grouped: Record<string, typeof displayedProjects> = {};
+  for (const post of displayedProjects) {
+    const year = new Date(post.metadata.publishedAt).getFullYear().toString();
+    if (!grouped[year]) grouped[year] = [];
+    grouped[year].push(post);
+  }
+
+  const years = Object.keys(grouped).sort((a, b) => Number(b) - Number(a));
+
   return (
-    <Column fillWidth gap="xl" marginBottom="40" paddingX="l">
-      {displayedProjects.map((post, index) => (
-        <ProjectCard
-          priority={index < 2}
-          key={post.slug}
-          href={`/work/${post.slug}`}
-          images={post.metadata.images}
-          title={post.metadata.title}
-          description={post.metadata.summary}
-          content={post.content}
-          avatars={post.metadata.team?.map((member) => ({ src: member.avatar })) || []}
-          link={post.metadata.link || ""}
-        />
+    <Column fillWidth gap="xl" paddingX="l">
+      {years.map((year) => (
+        <Row key={year} fillWidth gap="xl" s={{ direction: "column" }}>
+          <Text
+            variant="body-default-s"
+            onBackground="neutral-weak"
+            style={{ minWidth: 48, flexShrink: 0, paddingTop: 2 }}
+          >
+            {year}
+          </Text>
+          <Column fillWidth gap="l">
+            {grouped[year].map((post) => (
+              <Column key={post.slug} fillWidth gap="4">
+                <SmartLink
+                  href={`/work/${post.slug}`}
+                  style={{
+                    margin: 0,
+                    width: "fit-content",
+                    textDecoration: "underline",
+                    textUnderlineOffset: "3px",
+                  }}
+                >
+                  <Text variant="heading-strong-m" onBackground="neutral-strong">
+                    {post.metadata.title}
+                  </Text>
+                </SmartLink>
+                <Text variant="body-default-s" onBackground="neutral-weak">
+                  {post.metadata.summary}
+                </Text>
+                {post.metadata.tag && post.metadata.tag.length > 0 && (
+                  <Text
+                    variant="body-default-xs"
+                    onBackground="neutral-weak"
+                    style={{ opacity: 0.6 }}
+                  >
+                    {(Array.isArray(post.metadata.tag)
+                      ? post.metadata.tag
+                      : [post.metadata.tag]
+                    ).join(", ")}
+                  </Text>
+                )}
+              </Column>
+            ))}
+          </Column>
+        </Row>
       ))}
     </Column>
   );

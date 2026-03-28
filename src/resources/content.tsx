@@ -96,15 +96,21 @@ const about: About = {
     title: "Introduction",
     description: (
       <>
-        My name is Bola Roy Banjo, but my friends call me Roy. As an engineer, systems designer, and a deep-tech enthusiast, my journey is propelled by a singular mission: to build. My expertise fluidly intersects Artificial Intelligence, Quantum Energy, Cybersecurity, Product Design, and Mechanical Engineering. Disciplines I wield as interconnected tools to solve real-world problems at scale. I write code to architect systems that fuse intelligence, elegance, and permanence. My philosophy is clear: design should evoke art, and engineering should embody innovation.
+        <p>My name is Bola Roy Banjo, but my friends call me Roy. As an engineer, systems designer, and a deep-tech enthusiast, my journey is propelled by a singular mission: <strong>to build.</strong></p>
 
-        As CEO of FohnAI, an AI R&D company, My core mission is to protect the future of intelligent infrastructure, We need Intelligent systems now, more than ever. We developed Cencori, a multi-tenant AI infrastructure platform designed to help teams build, deploy, and scale AI-driven applications, for enterprises, and governments. I also lead Wisc, a career operating system for tech professionals, the essential interface for personal and professional evolution.
+        <p>My expertise fluidly intersects Artificial Intelligence, Quantum Energy, Product Design, and Mechanical Engineering — disciplines I wield as interconnected tools to solve real-world problems at scale. I write code to architect systems that fuse intelligence, elegance, and permanence. <strong>My philosophy is clear: design should evoke art, and engineering should embody innovation.</strong></p>
 
-        My drive for fundamental innovation led me to develop the QuanTonic Reactor, a quantum thermal-to-electric energy system designed to make energy abundance permanent. I create comprehensive full-stack systems, from hardware and software to user interface and strategic vision. I&apos;ve sacrificed comfort to pursue what others deem impossible outcomes, viewing this not as ambition, but as inevitability.
+        <p>As CEO of <a href="https://cencori.com" style={{ color: "var(--neutral-on-background-strong)", textDecoration: "underline", textUnderlineOffset: "3px" }}>Cencori</a>, an AI infrastructure company, my core mission is to protect the future of intelligent infrastructure. We need intelligent systems now, more than ever. Cencori is a multi-tenant AI infrastructure platform designed to help teams build, deploy, and scale AI-driven applications — for enterprises and governments.</p>
 
-        Beyond my ventures, I cultivate domains of mastery, approaching systems with an intense curiosity. From mechanical systems to robotics, fluid dynamics, and hardware prototyping, I immerse myself in CAD, simulation, and schematics. Focus includes LLMs, AGI safety, autonomous agents, neuro-symbolic fusion, and multi-modal AI—the birth of synthetic minds. I&apos;m building reactors that integrate thermal, quantum, and optical physics to realize intelligent and infinite energy, designing with a Dieter Rams-inspired ethos: form must captivate, function must submit. Built an AI-native defense architectures that anticipate and neutralize deception proactively. I craft soundscapes, write scripts, design clothing, and direct visual ideas, believing technology and art are twin rebellions. And as a businessman, I study markets, I have no choice.
+        <p>My drive for fundamental innovation led me to develop the QuanTonic Reactor, a quantum thermal-to-electric energy system designed to make energy abundance permanent. I create comprehensive full-stack systems, from hardware and software to user interface and strategic vision. I&apos;ve sacrificed comfort to pursue what others deem impossible outcomes, <strong>viewing this not as ambition, but as inevitability.</strong></p>
 
-        Curiosity is my default state.
+        <p>Beyond my ventures, I cultivate domains of mastery, approaching systems with an intense curiosity. From mechanical systems to robotics, fluid dynamics, and hardware prototyping, I immerse myself in CAD, simulation, and schematics. My focus includes LLMs, AGI safety, autonomous agents, neuro-symbolic fusion, and multi-modal AI — the birth of synthetic minds.</p>
+
+        <p>I&apos;m building reactors that integrate thermal, quantum, and optical physics to realize intelligent and infinite energy. Designing with a Dieter Rams-inspired ethos: <strong>form must captivate, function must submit.</strong> I&apos;ve built AI-native defense architectures that anticipate and neutralize deception proactively.</p>
+
+        <p>I craft soundscapes, write scripts, design clothing, and direct visual ideas, believing technology and art are twin rebellions. And as a businessman, I study markets. <strong>I have no choice.</strong></p>
+
+        <p><strong>Curiosity is my default state.</strong></p>
       </>
     ),
   },
@@ -112,6 +118,21 @@ const about: About = {
     display: true, // set to false to hide this section
     title: "Work Experience",
     experiences: [
+      {
+        company: "Cencori",
+        timeframe: "2025 - Present",
+        role: "Founder & CEO",
+        achievements: [
+          <>
+            Building a multi-tenant AI infrastructure platform.
+          </>,
+          <>
+            Continuously iterating on product features based
+            on data-driven insights and user feedback.
+          </>,
+        ],
+        images: [],
+      },
       {
         company: "IGA",
         timeframe: "2025 - Present",
@@ -122,27 +143,19 @@ const about: About = {
             the performance of a native ship before they sail.
           </>,
           <>
-            Contibution to the ultrasonic testing of a ship to 
+            Contribution to the ultrasonic testing of a ship to
             repair damages made and get it up and running.
           </>,
         ],
-        images: [
-          // optional: leave the array empty if you don't want to display images
-          {
-            src: "/images/projects/project-01/ship.png",
-            alt: "Bola Banjo on a ship deck",
-            width: 16,
-            height: 9,
-          },
-        ],
+        images: [],
       },
       {
-        company: "The Fohn Creative",
+        company: "TFC",
         timeframe: "2024 - 2025",
-        role: "Founder/ Design Engineer",
+        role: "Design Engineer",
         achievements: [
           <>
-            Overseeing high-profile design and security 
+            Overseeing high-profile design and security
             architecture projects for enterprises and startups.
           </>,
           <>
@@ -151,36 +164,6 @@ const about: About = {
           </>,
         ],
         images: [],
-      },
-      {
-        company: "FohnAI",
-        timeframe: "2025 - Present",
-        role: "Founder/ System Engineer",
-        achievements: [
-          <>
-            Collaborating with engineers, designers, and researchers 
-            to push the boundaries of AI security technology.
-          </>,
-          <>
-            Continuously iterating on product features based 
-            on data-driven insights and user feedback
-          </>,
-        ],
-        images: [
-          // optional: leave the array empty if you don't want to display images
-          {
-            src: "/images/projects/project-01/m.png",
-            alt: "Bola Banjo Project",
-            width: 16,
-            height: 9,
-          },
-          {
-            src: "/images/projects/project-01/fohn.png",
-            alt: "Bola Banjo Project",
-            width: 16,
-            height: 9,
-          },
-        ],
       },
       {
         company: "ExecuJet Aviation Group",
@@ -214,10 +197,6 @@ const about: About = {
       {
         name: "Olabisi Onabanjo University",
         description: <>Studied Mechanical Engineering.</>,
-      },
-      {
-        name: "MIT OCW",
-        description: <>Studied Computer Science and Software Engineering.</>,
       },
     ],
   },
