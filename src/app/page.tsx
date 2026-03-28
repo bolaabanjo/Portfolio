@@ -109,29 +109,7 @@ export default function Home() {
                 </>
               );
             })()}
-            <div style={{ clear: "both", paddingTop: 24 }}>
-              <Button
-                id="about"
-                data-border="rounded"
-                href={about.path}
-                variant="secondary"
-                size="m"
-                weight="default"
-                arrowIcon
-              >
-                <Row gap="8" vertical="center" paddingRight="4">
-                  {about.avatar.display && (
-                    <Avatar
-                      marginRight="8"
-                      style={{ marginLeft: "-0.75rem" }}
-                      src={person.avatar}
-                      size="m"
-                    />
-                  )}
-                  {about.title}
-                </Row>
-              </Button>
-            </div>
+            <div style={{ clear: "both" }} />
           </div>
         </RevealFx>
       </Column>
