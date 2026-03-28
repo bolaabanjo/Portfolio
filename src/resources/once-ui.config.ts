@@ -188,10 +188,10 @@ const mailchimp: MailchimpConfig = {
 // default schema data
 const schema: SchemaConfig = {
   logo: "",
-  type: "Organization",
-  name: "Gitstack",
+  type: "Person",
+  name: "Bola Banjo",
   description: home.description,
-  email: "hey@gitstack.xyz",
+  email: "hey@bolabanjo.xyz",
 };
 
 // social links

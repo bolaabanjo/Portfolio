@@ -166,7 +166,7 @@ export default async function Books() {
                         // eslint-disable-next-line @next/next/no-img-element
                         <img
                           src={book.coverUrl}
-                          alt={`${book.title} cover`}
+                          alt={`${book.title} by ${book.author} — book cover`}
                           style={{
                             width: "100%",
                             height: "100%",

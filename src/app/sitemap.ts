@@ -12,6 +12,11 @@ export default async function sitemap() {
     lastModified: post.metadata.publishedAt,
   }));
 
+  const libraryEntries = getPosts(["src", "app", "library", "entries"]).map((post) => ({
+    url: `${baseURL}/library/${post.slug}`,
+    lastModified: post.metadata.publishedAt,
+  }));
+
   const activeRoutes = Object.keys(routesConfig).filter(
     (route) => routesConfig[route as keyof typeof routesConfig],
   );
@@ -20,12 +25,16 @@ export default async function sitemap() {
     url: `${baseURL}${route !== "/" ? route : ""}`,
     lastModified: new Date().toISOString().split("T")[0],
     ...(route === "/gallery" && {
-      images: gallery.images.map((img) => ({
-        url: `${baseURL}${img.src}`,
-        title: img.alt,
-      })),
+      images: gallery.images.map((img) => `${baseURL}${img.src}`),
     }),
   }));
 
-  return [...routes, ...blogs, ...works];
+  const additionalPages = [
+    {
+      url: `${baseURL}/library/books`,
+      lastModified: new Date().toISOString().split("T")[0],
+    },
+  ];
+
+  return [...routes, ...additionalPages, ...blogs, ...works, ...libraryEntries];
 }
