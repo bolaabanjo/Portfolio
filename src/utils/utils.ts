@@ -16,15 +16,19 @@ type Metadata = {
   image?: string;
   images: string[];
   tag?: string;
+  category?: string;
   team: Team[];
   link?: string;
+  id?: number;
+  type?: string;
+  status?: string;
 };
 
 import { notFound } from "next/navigation";
 
 function getMDXFiles(dir: string) {
   if (!fs.existsSync(dir)) {
-    notFound();
+    return [];
   }
 
   return fs.readdirSync(dir).filter((file) => path.extname(file) === ".mdx");
@@ -45,8 +49,12 @@ function readMDXFile(filePath: string) {
     image: data.image || "",
     images: data.images || [],
     tag: data.tag || [],
+    category: data.category || "",
     team: data.team || [],
     link: data.link || "",
+    id: data.id || undefined,
+    type: data.type || undefined,
+    status: data.status || undefined,
   };
 
   return { metadata, content };
@@ -66,7 +74,7 @@ function getMDXData(dir: string) {
   });
 }
 
-export function getPosts(customPath = ["", "", "", ""]) {
+export function getPosts(customPath: string[] = ["", "", "", ""]) {
   const postsDir = path.join(process.cwd(), ...customPath);
   return getMDXData(postsDir);
 }

@@ -1,0 +1,33 @@
+---
+id: 3
+title: "Vision-Based Autonomous Drone Navigation"
+type: "research"
+status: "ongoing"
+publishedAt: "2025-04-15"
+summary: "Real-time obstacle avoidance and path planning using monocular vision and lightweight neural networks for autonomous drones."
+category: "Robotics"
+tag: ["Drones", "Computer Vision", "Path Planning", "Robotics"]
+---
+
+## Problem
+
+GPS-denied environments (indoors, urban canyons, dense forests) require drones to navigate using onboard sensors alone. Stereo cameras add weight and cost. Can a single camera be enough?
+
+## Approach
+
+Monocular depth estimation combined with a learned collision predictor. The system processes 640x480 frames at 30fps on a Jetson Nano.
+
+Key components:
+- Lightweight MobileNet-v3 backbone for depth estimation
+- Temporal filtering to reduce depth noise
+- A simple reactive controller that maps depth maps to velocity commands
+
+## Challenges
+
+- Scale ambiguity in monocular depth — solved via ground plane prior
+- Latency budget is tight — every millisecond matters at 5m/s
+- Sim-to-real transfer gap remains the hardest unsolved piece
+
+## Status
+
+Simulation results promising. Real-world testing planned.

@@ -1,4 +1,4 @@
-import { About, Blog, Gallery, Home, Newsletter, Person, Social, Work } from "@/types";
+import { About, Blog, Gallery, Home, Library, Newsletter, Person, Social, Work } from "@/types";
 import { Line, Logo, Row, Text } from "@once-ui-system/core";
 
 const person: Person = {
@@ -383,4 +383,12 @@ const gallery: Gallery = {
   ],
 };
 
-export { person, social, newsletter, home, about, blog, work, gallery };
+const library: Library = {
+  path: "/library",
+  label: "Library",
+  title: `Library – ${person.name}`,
+  description: `Study notes, research, and readings by ${person.name}`,
+  books: [],
+};
+
+export { person, social, newsletter, home, about, blog, work, gallery, library };

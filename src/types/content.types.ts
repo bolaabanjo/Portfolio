@@ -236,3 +236,23 @@ export interface Gallery extends BasePageConfig {
     orientation: string;
   }>;
 }
+
+/**
+ * Library page configuration.
+ * @description Gateway to Study, Research, and Books sections.
+ */
+export interface Library extends BasePageConfig {
+  /** Books the user has read */
+  books: Array<{
+    /** Book title */
+    title: string;
+    /** Book author */
+    author: string;
+    /** Category (e.g. Energy, AI, Physics) */
+    category: string;
+    /** Cover image path (optional) */
+    cover?: string;
+    /** Short note on why it matters (optional) */
+    note?: string;
+  }>;
+}

@@ -1,0 +1,32 @@
+---
+id: 5
+title: "Neural Architecture Search for Edge Devices"
+type: "research"
+status: "active"
+publishedAt: "2025-06-01"
+summary: "Investigating automated neural network design that targets hardware constraints — latency, memory, power — without sacrificing accuracy."
+category: "AI"
+tag: ["Neural Architecture Search", "Edge Computing", "Machine Learning"]
+---
+
+## Motivation
+
+Most state-of-the-art models are designed for data center GPUs. Deploying them on edge devices (phones, IoT, embedded systems) requires fundamentally different architecture decisions.
+
+Neural Architecture Search (NAS) automates this design process, but most NAS methods are compute-prohibitive and hardware-agnostic.
+
+## Approach
+
+Exploring weight-sharing NAS methods with hardware-aware objectives:
+
+- Latency as a first-class optimization target
+- Memory footprint constraints during search
+- Power consumption modeling via lookup tables
+
+## Key Insight
+
+The search space matters more than the search algorithm. A well-designed search space with the right building blocks will outperform a sophisticated algorithm searching over a poorly designed space.
+
+## Status
+
+Early exploration. Building benchmarks for comparison across device families.
