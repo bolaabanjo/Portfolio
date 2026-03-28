@@ -14,7 +14,14 @@ export const ThemeToggle: React.FC = () => {
   }, []);
 
   useEffect(() => {
-    setCurrentTheme(document.documentElement.getAttribute("data-theme") || "light");
+    const resolved = document.documentElement.getAttribute("data-theme") || "light";
+    setCurrentTheme(resolved);
+
+    // Update theme-color meta tags to match site theme (fixes iOS Safari bars)
+    const color = resolved === "dark" ? "#0a0a0a" : "#ffffff";
+    document.querySelectorAll('meta[name="theme-color"]').forEach((meta) => {
+      meta.setAttribute("content", color);
+    });
   }, [theme]);
 
   const icon = currentTheme === "dark" ? "light" : "dark";

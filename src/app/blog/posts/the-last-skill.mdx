@@ -1,0 +1,77 @@
+---
+title: "The Last Skill"
+publishedAt: "2026-03-28"
+summary: "As AI absorbs capability after capability, I find myself asking: what's the one irreducible thing that remains distinctly human in engineering? This is my answer."
+---
+
+There's a thought experiment I keep running in my head, almost obsessively, like a loop I can't break out of. It goes like this: take everything I know how to do as an engineer — writing code, debugging, designing systems, deploying infrastructure, optimizing queries — and hand each skill, one by one, to an AI. At what point do I become obsolete? And more importantly, is there a skill at the bottom of the stack that simply cannot be handed over?
+
+I think there is. And I think most engineers are looking in the wrong place for it.
+
+## The Great Absorption
+
+Let's be honest about what's already happened. AI can write code. Not toy code, not "hello world" — real, production-grade code. It can refactor sprawling legacy systems, generate test suites, scaffold entire applications from a description. Two years ago, I would have told you that debugging complex, multi-service issues was a uniquely human domain. I would have been wrong. I've watched AI trace a bug across three microservices, identify a race condition in a message queue, and suggest a fix — all in under a minute. A task that would have taken me an afternoon of printf-debugging and squinting at logs.
+
+And it's not just code. AI can design system architectures. It can write documentation. It can review pull requests with a thoroughness that most human reviewers, myself included, rarely sustain past the third file in a diff. It can explain complex algorithms in plain language, generate database schemas, write deployment scripts, and even compose reasonably coherent technical blog posts.
+
+Each of these capabilities, individually, used to be a source of professional identity for someone. "I'm the person who understands our deployment pipeline." "I'm the one who can untangle legacy spaghetti." "I'm the debugging specialist." One by one, these identities are being absorbed. Not eliminated — absorbed. The skill still matters. But it's no longer scarce.
+
+## The Wrong Answers
+
+When people talk about what remains uniquely human, they tend to reach for the same handful of answers. Creativity. Empathy. Communication. Leadership. These aren't wrong, exactly, but they're incomplete in a way that borders on evasion.
+
+Creativity? AI generates novel solutions to problems constantly. It recombines patterns in ways that would take a human engineer years of cross-domain experience to stumble upon. It's not creative in the way a poet is creative, but it's creative enough to invalidate the claim that "creativity is our edge" in most engineering contexts.
+
+Empathy? Sure, understanding what a user *actually* needs versus what they say they need is valuable. But AI is getting disturbingly good at this too. Feed it enough user research, support tickets, and behavioral data, and it can synthesize user needs with a clarity that rivals a seasoned product manager.
+
+Communication and leadership are closer to the mark, but they're downstream skills. They matter because of what they enable, not because of what they are. A leader who can't identify the right problem to solve is just a charismatic project manager.
+
+## What's Left
+
+Here's what I've landed on, after months of watching AI do things I used to pride myself on: the last skill is *judgment under ambiguity*.
+
+Not judgment in the sense of evaluating code quality or choosing between two algorithms — AI handles that fine. I mean the deeper, more uncomfortable kind of judgment. The kind that operates when the problem itself is undefined. When the constraints are contradictory. When there is no right answer, only trade-offs with consequences that ripple out in ways no model can fully simulate.
+
+It's the skill that answers questions like:
+
+- Should we build this feature at all, or is it a distraction from what actually matters?
+- This system works, but it encodes assumptions about our users that might be wrong in six months. Do we refactor now or wait?
+- Two teams disagree on the technical direction. Both have valid arguments. Both have data. The data is inconclusive. What do we do?
+- We have a deadline, a quality bar, and a scope. We can meet any two. Which one do we sacrifice, and what are the second-order consequences of that choice?
+
+These are not optimization problems. They're not pattern-matching problems. They are problems that require you to hold multiple incomplete models of reality in your head simultaneously, weigh them against values and priorities that are themselves in flux, and make a call that you can defend but never fully prove was correct.
+
+AI can simulate this. It can list trade-offs, enumerate risks, even recommend a course of action. But it can't *own* the decision. It can't sit in the discomfort of not knowing. It can't feel the weight of a choice that affects real people, real timelines, and real careers. And crucially, it can't update its judgment based on the lived experience of having been wrong before — not in the embodied, visceral way that a human does.
+
+## The Taste Gap
+
+There's a related concept that I think about a lot, which I'll call the *taste gap*. It's the difference between knowing how to build something and knowing what's worth building. Between generating ten solutions and recognizing which one is elegant. Between following best practices and knowing when to break them.
+
+Taste is accumulated judgment. It's the residue left behind after years of building things, shipping things, watching things fail, and sitting with the consequences. It's not teachable in the traditional sense, and it's not extractable by a model trained on public codebases and documentation. It comes from the specific, irreproducible intersection of your experiences, your values, your failures, and your context.
+
+I've seen this play out in my own work. AI can generate a component architecture for me in seconds. But whether that architecture is *right* — whether it serves the user, fits the team's capacity, aligns with where the product is heading, and doesn't create maintenance nightmares six months from now — that's a question only I can answer. And even I can't answer it with certainty. I can only answer it with taste.
+
+## Why This Matters
+
+If I'm right that judgment under ambiguity is the last skill, then the implications for how we develop as engineers are significant.
+
+It means that the hours spent mastering syntax, memorizing API surfaces, and perfecting your ability to write a binary search from scratch are becoming less important — not worthless, but less differentiating. The engineer who can write a perfect red-black tree implementation but can't decide whether a project is worth pursuing is increasingly less valuable than the engineer who writes mediocre code but has an uncanny sense for what matters.
+
+It means that the most important experiences in your career aren't the ones where everything went right. They're the ones where you made a judgment call with incomplete information, lived with the consequences, and updated your mental model accordingly. Every failure, every bad bet, every "we should have done X instead" is depositing something into an account that AI cannot access.
+
+It means that breadth of experience — across domains, industries, roles, and even disciplines outside of engineering — becomes more valuable than depth in any single technical skill. Because judgment under ambiguity is fed by analogies, and analogies come from having seen many different kinds of problems.
+
+And it means that the engineers who will thrive are not the ones who race to adopt every new AI tool, nor the ones who stubbornly refuse to use them. They're the ones who use AI to handle everything it can handle, freeing themselves to focus relentlessly on the things it can't: deciding what to build, why to build it, and when to stop.
+
+## The Irreducible Human
+
+I started this essay with a thought experiment about handing my skills to AI, one by one. Here's how it ends: after everything has been handed over — the coding, the debugging, the architecture, the documentation, the testing — I'm still standing there. Not because I'm holding onto some romantic notion of human superiority, but because someone has to decide what all of this capability should be pointed at. Someone has to look at the infinite space of things that *could* be built and choose the thing that *should* be built. Someone has to own that choice, with all its uncertainty and all its consequences.
+
+That someone is still, stubbornly, irreducibly, a human.
+
+And for now, I'm going to make sure it's me.
+
+---
+
+**Author:** Bola Banjo
+**Twitter:** [@bolaabanjo](https://x.com/bolaabanjo)
