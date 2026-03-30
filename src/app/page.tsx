@@ -38,14 +38,12 @@ export default function Home() {
         }}
       />
 
+      <RevealFx translateY="8" delay={0.2}>
       <Column fillWidth gap="l" paddingX="l">
-        <RevealFx translateY="4">
           <Heading as="h1" variant="display-strong-l">
             {person.name}
           </Heading>
-        </RevealFx>
 
-        <RevealFx translateY="8" delay={0.1}>
           <div>
             <img
               src="/images/gallery/IMG_1596 3.JPG"
@@ -77,52 +75,44 @@ export default function Home() {
                 <>
                   <p style={pStyle}>
                     I&apos;m an engineer from Lagos, Nigeria. My friends call me Roy. I work across
-                    mechanical engineering, software, and AI — and I&apos;m genuinely interested in
-                    all three.
+                    mechanical engineering, software, and AI — not as separate disciplines, but as
+                    different ways of solving the same kinds of problems. I care about systems that
+                    are intelligent, well-designed, and built to last (Means I care about me, in case
+                    you missed it).
                   </p>
                   <p style={pStyle}>
                     I&apos;m the CEO of{" "}
-                    <a href="https://cencori.com" style={linkStyle}>
-                      Cencori
-                    </a>
-                    , an AI infrastructure company — you can read more about it{" "}
-                    <Link href="/work/cencori" style={linkStyle}>here</Link>. Before that, I worked on
-                    aircraft systems and marine vessels — hands-on engineering that taught me how
-                    complex systems actually behave under pressure. I&apos;ve also worked on other
-                    projects, check out my{" "}
-                    <Link href="/work" style={linkStyle}>works</Link>.
+                    <a href="https://cencori.com" style={linkStyle}>Cencori</a>, an AI
+                    company — read more about it{" "}
+                    <Link href="/work/cencori" style={linkStyle}>here</Link>. Before Cencori, I
+                    spent time working on aircraft systems and marine vessels. See my other{" "}
+                    <Link href="/work" style={linkStyle}>works</Link> too.
                   </p>
                   <p style={pStyle}>
-                    I also designed the QuanTonic Reactor, a quantum thermal-to-electric energy
-                    system exploring an alternative to conventional solar technology. It&apos;s a
-                    long-term bet on energy abundance — the kind of problem I think about even when
-                    I&apos;m not actively working on it. I write about these ideas in my{" "}
-                    <Link href="/blog" style={linkStyle}>essays</Link> if you&apos;re curious to check them out.
+                    I designed the QuanTonic Reactor, a quantum
+                    thermal-to-electric system exploring an alternative to conventional solar technology.
+                    I write about ideas like this in my{" "}
+                    <Link href="/blog" style={linkStyle}>essays</Link>. Most of my time goes into AI, energy, robotics, and design — different angles on
+                    the same question: how do you build things that actually hold up?
                   </p>
                   <p style={pStyle}>
-                    I studied Mechanical Engineering and Computer
-                    Science through MIT OCW. The combination gave me a way of thinking that moves
-                    between hardware and software without friction. I keep track of what I&apos;m
-                    studying and reading in my{" "}
-                    <Link href="/library" style={linkStyle}>library</Link> though, properly curated for an external reader — including the{" "}
+                    I studied Mechanical Engineering and Computer Science through MIT OCW. The
+                    combination gave me a way of thinking that moves between hardware and software
+                    without friction. I keep track of what I&apos;m learning in my{" "}
+                    <Link href="/library" style={linkStyle}>library</Link> — including the{" "}
                     <Link href="/library/books" style={linkStyle}>books</Link> that shaped how I think.
                   </p>
                   <p style={pStyle}>
-                    Most of my time goes into AI, energy, robotics, and design — not as separate
-                    interests, but as different angles on the same question: how do you build things
-                    that actually last? If you&apos;re curious what I look like behind the work,
-                    there&apos;s a{" "}
-                    <Link href="/gallery" style={linkStyle}>gallery</Link>. I care about systems that
-                    are intelligent, well-designed, and built to hold up. That&apos;s the thread
-                    through everything I do.
+                    If you&apos;re curious what I look like behind the work, check out my{" "}
+                    <Link href="/gallery" style={linkStyle}>gallery</Link>.
                   </p>
                 </>
               );
             })()}
             <div style={{ clear: "both" }} />
           </div>
-        </RevealFx>
       </Column>
+      </RevealFx>
     </Column>
   );
 }
