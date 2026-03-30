@@ -93,6 +93,9 @@ export function ArchiveIndex({ entries }: ArchiveIndexProps) {
           white-space: nowrap;
         }
         @media (max-width: 640px) {
+          .archive-filters {
+            gap: 10px !important;
+          }
           .archive-entry-row {
             display: flex;
             flex-direction: column;
@@ -131,6 +134,7 @@ export function ArchiveIndex({ entries }: ArchiveIndexProps) {
 
       {/* Filters */}
       <div
+        className="archive-filters"
         style={{
           display: "flex",
           gap: "20px",
