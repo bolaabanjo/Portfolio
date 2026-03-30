@@ -191,7 +191,7 @@ const about: About = {
     institutions: [
       {
         name: "Olabisi Onabanjo University",
-        description: <>Studied Mechanical Engineering.</>,
+        description: <>BSc. Mechanical Engineering.</>,
       },
     ],
   },
