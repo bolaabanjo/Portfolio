@@ -29,6 +29,11 @@ export default async function sitemap() {
     }),
   }));
 
+  const bookEntries = getPosts(["src", "app", "library", "books", "entries"]).map((post) => ({
+    url: `${baseURL}/library/books/${post.slug}`,
+    lastModified: new Date().toISOString().split("T")[0],
+  }));
+
   const additionalPages = [
     {
       url: `${baseURL}/library/books`,
@@ -36,5 +41,5 @@ export default async function sitemap() {
     },
   ];
 
-  return [...routes, ...additionalPages, ...blogs, ...works, ...libraryEntries];
+  return [...routes, ...additionalPages, ...blogs, ...works, ...libraryEntries, ...bookEntries];
 }
