@@ -1,22 +1,15 @@
 import {
-  Avatar,
-  Button,
   Column,
   Heading,
-  Icon,
-  IconButton,
   Line,
-  Media,
-  Tag,
   Text,
   Meta,
   Schema,
   Row,
 } from "@once-ui-system/core";
-import { baseURL, about, person, social } from "@/resources";
+import { baseURL, about, person } from "@/resources";
 import TableOfContents from "@/components/about/TableOfContents";
 import styles from "@/components/about/about.module.scss";
-import React from "react";
 
 export async function generateMetadata() {
   return Meta.generate({
@@ -33,6 +26,11 @@ export default function About() {
     {
       title: about.intro.title,
       display: about.intro.display,
+      items: [],
+    },
+    {
+      title: "Press",
+      display: true,
       items: [],
     },
     {
@@ -79,120 +77,15 @@ export default function About() {
         </Column>
       )}
       <Row fillWidth s={{ direction: "column"}} horizontal="center">
-        {about.avatar.display && (
-          <Column
-            className={styles.avatar}
-            top="64"
-            fitHeight
-            position="sticky"
-            s={{ position: "relative", style: { top: "auto" } }}
-            xs={{ style: { top: "auto" } }}
-            minWidth="160"
-            paddingX="l"
-            paddingBottom="xl"
-            gap="m"
-            flex={3}
-            horizontal="center"
-          >
-            <Avatar src={person.avatar} size="xl" />
-            <Row gap="8" vertical="center">
-              <Icon onBackground="accent-weak" name="globe" />
-              {person.location}
-            </Row>
-            {person.languages && person.languages.length > 0 && (
-              <Row wrap gap="8">
-                {person.languages.map((language, index) => (
-                  <Tag key={index} size="l">
-                    {language}
-                  </Tag>
-                ))}
-              </Row>
-            )}
-          </Column>
-        )}
         <Column className={styles.blockAlign} flex={9} maxWidth={40}>
           <Column
             id={about.intro.title}
             fillWidth
-            minHeight="160"
-            vertical="center"
-            marginBottom="32"
+            marginBottom="m"
           >
-            {about.calendar.display && (
-              <Row
-                fitWidth
-                border="brand-alpha-medium"
-                background="brand-alpha-weak"
-                radius="full"
-                padding="4"
-                gap="8"
-                marginBottom="m"
-                vertical="center"
-                className={styles.blockAlign}
-                style={{
-                  backdropFilter: "blur(var(--static-space-1))",
-                }}
-              >
-                <Icon paddingLeft="12" name="calendar" onBackground="brand-weak" />
-                <Row paddingX="8">Schedule a call</Row>
-                <IconButton
-                  href={about.calendar.link}
-                  data-border="rounded"
-                  variant="secondary"
-                  icon="chevronRight"
-                />
-              </Row>
-            )}
-            <Heading className={styles.textAlign} variant="display-strong-m">
-              {person.name}
+            <Heading className={styles.textAlign} variant="heading-strong-l">
+              About Me
             </Heading>
-            <Text
-              className={styles.textAlign}
-              variant="body-default-l"
-              onBackground="neutral-weak"
-            >
-              {person.role}
-            </Text>
-            {social.length > 0 && (
-              <Row
-                className={styles.blockAlign}
-                paddingTop="20"
-                paddingBottom="8"
-                gap="8"
-                wrap
-                horizontal="center"
-                fitWidth
-                data-border="rounded"
-              >
-                {social.map(
-                  (item) =>
-                    item.link && (
-                      <React.Fragment key={item.name}>
-                        <Row s={{ hide: true }}>
-                          <Button
-                            key={item.name}
-                            href={item.link}
-                            prefixIcon={item.icon}
-                            label={item.name}
-                            size="s"
-                            weight="default"
-                            variant="secondary"
-                          />
-                        </Row>
-                        <Row hide s={{ hide: false }}>
-                          <IconButton
-                            size="l"
-                            key={`${item.name}-icon`}
-                            href={item.link}
-                            icon={item.icon}
-                            variant="secondary"
-                          />
-                        </Row>
-                      </React.Fragment>
-                    ),
-                )}
-              </Row>
-            )}
           </Column>
 
           {about.intro.display && (
@@ -223,6 +116,52 @@ export default function About() {
               </div>
             </Column>
           )}
+
+          {/* Press */}
+          <Line fillWidth background="neutral-alpha-medium" marginBottom="l" marginTop="m" />
+          <Heading as="h2" id="Press" variant="heading-strong-l" marginBottom="m">
+            Press
+          </Heading>
+          <Column fillWidth gap="l" marginBottom="40">
+            {[
+              {
+                publication: "TechCabal",
+                title: "Meet the Nigerian startup trying to secure the age of vibe coding",
+                href: "https://techcabal.com/2026/01/15/vibe-coding-and-nigerias-cencori/",
+                date: "Jan 2026",
+              },
+              {
+                publication: "Techloy",
+                title: "Vibe Coding Is Everywhere, But Experts Warn It\u2019s Leaving Security Holes in Apps",
+                href: "https://www.techloy.com/vibe-coding-is-everywhere-but-experts-warn-its-leaving-security-holes-in-apps/",
+                date: "Jan 2026",
+              },
+            ].map((item) => (
+              <Column key={item.href} fillWidth gap="4">
+                <Row fillWidth horizontal="between" vertical="center">
+                  <Text variant="heading-strong-m" onBackground="neutral-strong">
+                    {item.publication}
+                  </Text>
+                  <Text variant="body-default-s" onBackground="neutral-weak">
+                    {item.date}
+                  </Text>
+                </Row>
+                <a
+                  href={item.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  style={{
+                    color: "var(--neutral-on-background-weak)",
+                    fontSize: "var(--font-size-body-default-s)",
+                    textDecoration: "underline",
+                    textUnderlineOffset: "3px",
+                  }}
+                >
+                  {item.title}
+                </a>
+              </Column>
+            ))}
+          </Column>
 
           {about.work.display && (
             <>
