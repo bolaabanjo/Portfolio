@@ -84,27 +84,36 @@ export default function Home() {
                     <a href="https://cencori.com" style={linkStyle}>
                       Cencori
                     </a>
-                    , an AI infrastructure company. We sit between your application and your AI
-                    models, handling the hard parts so you can focus on building. Before Cencori, I
-                    spent time working on aircraft systems and marine vessels — hands-on engineering
-                    that taught me how complex systems actually behave under pressure.
+                    , an AI infrastructure company — you can read more about it{" "}
+                    <a href="/work/cencori" style={linkStyle}>here</a>. Before that, I worked on
+                    aircraft systems and marine vessels — hands-on engineering that taught me how
+                    complex systems actually behave under pressure. I&apos;ve also worked on other
+                    projects, check out my{" "}
+                    <a href="/work" style={linkStyle}>works</a>.
                   </p>
                   <p style={pStyle}>
                     I also designed the QuanTonic Reactor, a quantum thermal-to-electric energy
                     system exploring an alternative to conventional solar technology. It&apos;s a
                     long-term bet on energy abundance — the kind of problem I think about even when
-                    I&apos;m not actively working on it.
+                    I&apos;m not actively working on it. I write about these ideas in my{" "}
+                    <a href="/blog" style={linkStyle}>essays</a> if you're curious to check them out.
                   </p>
                   <p style={pStyle}>
                     I studied Mechanical Engineering and Computer
                     Science through MIT OCW. The combination gave me a way of thinking that moves
-                    between hardware and software without friction.
+                    between hardware and software without friction. I keep track of what I&apos;m
+                    studying and reading in my{" "}
+                    <a href="/library" style={linkStyle}>library</a> though, properly curated for an external reader — including the{" "}
+                    <a href="/library/books" style={linkStyle}>books</a> that shaped how I think.
                   </p>
                   <p style={pStyle}>
                     Most of my time goes into AI, energy, robotics, and design — not as separate
                     interests, but as different angles on the same question: how do you build things
-                    that actually last? I care about systems that are intelligent, well-designed, and
-                    built to hold up. That&apos;s the thread through everything I do.
+                    that actually last? If you&apos;re curious what I look like behind the work,
+                    there&apos;s a{" "}
+                    <a href="/gallery" style={linkStyle}>gallery</a>. I care about systems that
+                    are intelligent, well-designed, and built to hold up. That&apos;s the thread
+                    through everything I do.
                   </p>
                 </>
               );
