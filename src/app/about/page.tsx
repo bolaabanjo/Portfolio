@@ -242,24 +242,48 @@ export default function About() {
                 {[
                   {
                     category: "Engineering",
-                    items: "Mechanical Engineering, Aerospace, Marine Engineering, Robotics, Hardware & Prototyping, Energy Systems, 3D Design",
+                    skills: [
+                      "Mechanical Engineering", "Aerospace", "Marine Engineering",
+                      "Robotics", "Hardware & Prototyping", "Energy Systems", "3D Design",
+                      "CAD & Simulation", "Fluid Dynamics", "Thermodynamics",
+                    ],
                   },
                   {
                     category: "Software & AI",
-                    items: "Software Engineering, Next.js, Backend Architecture, AI Engineering, LLMs & Multi-modal AI, Prompt Engineering, Git & GitHub",
+                    skills: [
+                      "Software Engineering", "Next.js", "Backend Architecture",
+                      "AI Engineering", "LLMs & Multi-modal AI", "Prompt Engineering",
+                      "Git & GitHub", "TypeScript", "Python", "APIs & Microservices",
+                    ],
                   },
                   {
                     category: "Design",
-                    items: "UI/UX Design, Product & System Design, Figma, Design Engineering",
+                    skills: [
+                      "UI/UX Design", "Product & System Design", "Figma",
+                      "Design Engineering", "Prototyping", "Design Systems",
+                    ],
                   },
                 ].map((group) => (
-                  <Column key={group.category} fillWidth gap="4">
+                  <Column key={group.category} fillWidth gap="8">
                     <Text variant="heading-strong-m" onBackground="neutral-strong">
                       {group.category}
                     </Text>
-                    <Text variant="body-default-s" onBackground="neutral-weak">
-                      {group.items}
-                    </Text>
+                    <Row gap="8" wrap>
+                      {group.skills.map((skill) => (
+                        <span
+                          key={skill}
+                          style={{
+                            padding: "4px 10px",
+                            border: "1px solid var(--neutral-alpha-medium)",
+                            color: "var(--neutral-on-background-weak)",
+                            fontSize: "11px",
+                            fontFamily: "var(--font-code)",
+                          }}
+                        >
+                          {skill}
+                        </span>
+                      ))}
+                    </Row>
                   </Column>
                 ))}
               </Column>
