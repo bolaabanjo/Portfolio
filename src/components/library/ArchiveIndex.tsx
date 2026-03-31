@@ -223,7 +223,7 @@ export function ArchiveIndex({ entries }: ArchiveIndexProps) {
               </div>
 
               {/* Title + summary */}
-              <div>
+              <div style={{ minWidth: 0 }}>
                 <div
                   style={{
                     fontSize: "16px",
@@ -240,6 +240,9 @@ export function ArchiveIndex({ entries }: ArchiveIndexProps) {
                     color: "var(--neutral-on-background-weak)",
                     lineHeight: 1.5,
                     opacity: 0.6,
+                    overflow: "hidden",
+                    textOverflow: "ellipsis",
+                    whiteSpace: "nowrap",
                   }}
                 >
                   {entry.summary}
