@@ -100,6 +100,7 @@ export function ArchiveIndex({ entries }: ArchiveIndexProps) {
             display: flex;
             flex-direction: column;
             gap: 6px;
+            overflow: hidden;
           }
           .archive-entry-top {
             display: flex;
@@ -109,6 +110,13 @@ export function ArchiveIndex({ entries }: ArchiveIndexProps) {
           .archive-meta-labels {
             gap: 8px;
             font-size: 10px;
+          }
+          .archive-summary {
+            white-space: normal !important;
+            -webkit-line-clamp: 2;
+            display: -webkit-box;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
           }
         }
       `}</style>
@@ -235,6 +243,7 @@ export function ArchiveIndex({ entries }: ArchiveIndexProps) {
                   {entry.title}
                 </div>
                 <div
+                  className="archive-summary"
                   style={{
                     fontSize: "13px",
                     color: "var(--neutral-on-background-weak)",
