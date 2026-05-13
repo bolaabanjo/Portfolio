@@ -371,8 +371,8 @@ const gallery: Gallery = {
       orientation: "vertical",
     },
     {
-      src: "/images/gallery/IMG_1199 2.jpg",
-      alt: "Bola Banjo — engineer, designer, and founder based in Lagos, Nigeria",
+      src: "/images/gallery/IMG_2520.JPG",
+      alt: "Bola Banjo — mechanical and software engineer",
       orientation: "vertical",
     },
   ],
