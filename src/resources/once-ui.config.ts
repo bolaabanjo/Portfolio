@@ -23,6 +23,7 @@ const routes: RoutesConfig = {
   "/blog": true,
   "/gallery": true,
   "/library": true,
+  "/music": true,
 };
 
 const display: DisplayConfig = {

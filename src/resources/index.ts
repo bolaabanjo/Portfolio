@@ -9,6 +9,7 @@ export {
   work,
   gallery,
   library,
+  music,
 } from "./content";
 
 export {

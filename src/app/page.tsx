@@ -46,7 +46,7 @@ export default function Home() {
 
           <div>
             <img
-              src="/images/gallery/IMG_1596 3.JPG"
+              src="/images/IMG_2520.JPG"
               alt={person.name}
               style={{
                 float: "right",
@@ -73,14 +73,14 @@ export default function Home() {
               };
               return (
                 <>
-                  <p style={pStyle}>
+                  <p style={pStyle} className="home-intro-text">
                     I&apos;m an engineer from Lagos, Nigeria. My friends call me Roy. I work across
                     mechanical engineering, software, and AI — not as separate disciplines, but as
                     different ways of solving the same kinds of problems. I care about systems that
                     are intelligent, well-designed, and built to last (Means I care about me, in case
                     you missed it).
                   </p>
-                  <p style={pStyle}>
+                  <p style={pStyle} className="home-intro-text">
                     I&apos;m the CEO of{" "}
                     <a href="https://cencori.com" style={linkStyle}>Cencori</a>, an AI
                     company — read more about it{" "}
@@ -88,21 +88,21 @@ export default function Home() {
                     spent time working on aircraft systems and marine vessels. See my other{" "}
                     <Link href="/work" style={linkStyle}>works</Link> too.
                   </p>
-                  <p style={pStyle}>
+                  <p style={pStyle} className="home-intro-text">
                     I designed the QuanTonic Reactor, a quantum
                     thermal-to-electric system exploring an alternative to conventional solar technology.
                     I write about ideas like this in my{" "}
                     <Link href="/blog" style={linkStyle}>essays</Link>. Most of my time goes into AI, energy, robotics, and design — different angles on
                     the same question: how do you build things that actually hold up?
                   </p>
-                  <p style={pStyle}>
+                  <p style={pStyle} className="home-intro-text">
                     I studied Mechanical Engineering and Computer Science through MIT OCW. The
                     combination gave me a way of thinking that moves between hardware and software
                     without friction. I keep track of what I&apos;m learning in my{" "}
                     <Link href="/library" style={linkStyle}>library</Link> — including the{" "}
                     <Link href="/library/books" style={linkStyle}>books</Link> that shaped how I think.
                   </p>
-                  <p style={pStyle}>
+                  <p style={pStyle} className="home-intro-text">
                     If you&apos;re curious what I look like behind the work, check out my{" "}
                     <Link href="/gallery" style={linkStyle}>gallery</Link>.
                   </p>

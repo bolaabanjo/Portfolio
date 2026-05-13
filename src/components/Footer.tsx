@@ -1,6 +1,7 @@
-import { Row, IconButton, SmartLink, Text } from "@once-ui-system/core";
+import { Row, IconButton, Text } from "@once-ui-system/core";
 import { person, social } from "@/resources";
 import styles from "./Footer.module.scss";
+import { FooterNowPlaying } from "./spotify/FooterNowPlaying";
 
 export const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -12,19 +13,23 @@ export const Footer = () => {
         maxWidth="m"
         paddingY="8"
         paddingX="16"
-        gap="16"
-        horizontal="between"
+        gap="32"
+        horizontal="center"
         vertical="center"
         s={{
           direction: "column",
           horizontal: "center",
           align: "center",
+          gap: "16",
         }}
       >
-        <Text variant="body-default-s" onBackground="neutral-strong">
-          <Text onBackground="neutral-weak">© {currentYear} /</Text>
-          <Text paddingX="4">{person.name}</Text>
-        </Text>
+        <Row vertical="center" gap="16" s={{ direction: "column", align: "center", gap: "8" }}>
+          <Text variant="body-default-s" onBackground="neutral-strong">
+            <Text onBackground="neutral-weak">© {currentYear} /</Text>
+            <Text paddingX="4">{person.name}</Text>
+          </Text>
+          <FooterNowPlaying />
+        </Row>
         <Row gap="16">
           {social.map(
             (item) =>

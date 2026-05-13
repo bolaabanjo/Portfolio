@@ -68,3 +68,8 @@ html::-webkit-scrollbar-thumb {
   --scheme-neutral-600-50: rgba(137,152,159,0.5);
   /*
 }*/
+@media (max-width: 768px) {
+  .home-intro-text {
+    font-size: 0.9rem !important;
+  }
+}

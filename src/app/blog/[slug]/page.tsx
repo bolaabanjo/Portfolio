@@ -108,6 +108,7 @@ export default async function Blog({ params }: { params: Promise<{ slug: string 
       {/* Header */}
       <Column fillWidth paddingX="l" gap="8">
         <h1
+          className="blog-header-title"
           style={{
             fontSize: "26px",
             fontWeight: 600,
@@ -123,6 +124,7 @@ export default async function Blog({ params }: { params: Promise<{ slug: string 
 
         {post.metadata.summary && (
           <p
+            className="blog-header-summary"
             style={{
               fontSize: "15px",
               color: "var(--neutral-on-background-weak)",
@@ -260,6 +262,30 @@ export default async function Blog({ params }: { params: Promise<{ slug: string 
           }
           .essay-entry pre {
             background: var(--surface-background) !important;
+          }
+          @media (max-width: 768px) {
+            .blog-header-title {
+              font-size: 22px !important;
+            }
+            .blog-header-summary {
+              font-size: 14px !important;
+            }
+            .essay-entry p,
+            .essay-entry ul,
+            .essay-entry ol,
+            .essay-entry blockquote,
+            .essay-entry li {
+              font-size: 14px !important;
+            }
+            .essay-entry h2 {
+              font-size: 16px !important;
+            }
+            .essay-entry h3 {
+              font-size: 14px !important;
+            }
+            .essay-entry pre {
+              font-size: 12px !important;
+            }
           }
         `}</style>
         <div className="essay-entry">

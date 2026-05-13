@@ -137,6 +137,7 @@ export default async function LibraryEntry({
         </Row>
 
         <h1
+          className="library-header-title"
           style={{
             fontSize: "26px",
             fontWeight: 600,
@@ -152,6 +153,7 @@ export default async function LibraryEntry({
 
         {post.metadata.summary && (
           <p
+            className="library-header-summary"
             style={{
               fontSize: "15px",
               color: "var(--neutral-on-background-weak)",
@@ -288,6 +290,30 @@ export default async function LibraryEntry({
             color: var(--neutral-on-background-strong);
             text-decoration: underline;
             text-underline-offset: 3px;
+          }
+          @media (max-width: 768px) {
+            .library-header-title {
+              font-size: 22px !important;
+            }
+            .library-header-summary {
+              font-size: 14px !important;
+            }
+            .archive-entry p,
+            .archive-entry ul,
+            .archive-entry ol,
+            .archive-entry blockquote,
+            .archive-entry li {
+              font-size: 14px !important;
+            }
+            .archive-entry h2 {
+              font-size: 16px !important;
+            }
+            .archive-entry h3 {
+              font-size: 14px !important;
+            }
+            .archive-entry pre {
+              font-size: 12px !important;
+            }
           }
         `}</style>
         <div className="archive-entry">

@@ -421,4 +421,11 @@ const library: Library = {
   ],
 };
 
-export { person, social, newsletter, home, about, blog, work, gallery, library };
+const music = {
+  path: "/music",
+  label: "Music",
+  title: `Music – ${person.name}`,
+  description: `Music and podcasts I'm listening to`,
+};
+
+export { person, social, newsletter, home, about, blog, work, gallery, library, music };
