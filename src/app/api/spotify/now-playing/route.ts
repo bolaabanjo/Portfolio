@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { getCurrentlyPlaying, getRecentlyPlayed } from "@/lib/spotify";
+import { getCurrentlyPlaying, getRecentlyPlayed, getAudioFeatures } from "@/lib/spotify";
 
 export const runtime = 'edge';
 export const revalidate = 0; // Disable cache
@@ -49,6 +49,19 @@ export async function GET() {
     const songUrl = song.item.external_urls.spotify;
     const progressMs = song.progress_ms;
     const durationMs = song.item.duration_ms;
+    const trackId = song.item.id;
+
+    // Fetch tempo (BPM)
+    let tempo = 120; // Default fallback
+    try {
+      const featuresResponse = await getAudioFeatures(trackId);
+      if (featuresResponse.ok) {
+        const features = await featuresResponse.json();
+        tempo = features.tempo;
+      }
+    } catch (e) {
+      console.warn("Failed to fetch audio features", e);
+    }
 
     return NextResponse.json({
       albumImageUrl,
@@ -58,6 +71,7 @@ export async function GET() {
       title,
       progressMs,
       durationMs,
+      tempo
     });
   } catch (error) {
     console.error("Spotify API Error:", error);

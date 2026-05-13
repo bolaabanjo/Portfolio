@@ -45,3 +45,14 @@ export const getRecentlyPlayed = async () => {
     cache: "no-store",
   });
 };
+
+export const getAudioFeatures = async (id: string) => {
+  const { access_token } = await getAccessToken();
+
+  return fetch(`https://api.spotify.com/v1/audio-features/${id}`, {
+    headers: {
+      Authorization: `Bearer ${access_token}`,
+    },
+    cache: "no-store",
+  });
+};

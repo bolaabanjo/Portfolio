@@ -86,6 +86,12 @@ export const NowPlaying = () => {
   }
 
   const progressPercent = data.durationMs ? Math.min((progress / data.durationMs) * 100, 100) : 0;
+  
+  // Calculate animation speed based on tempo (BPM)
+  // Default to 120bpm if not provided
+  // 60 / BPM = seconds per beat
+  const tempo = data.tempo || 120;
+  const bounceDuration = 60 / tempo;
 
   return (
     <Link href={data.songUrl} target="_blank" rel="noopener noreferrer" style={{ textDecoration: "none", width: "100%" }}>
@@ -138,9 +144,9 @@ export const NowPlaying = () => {
                     padding: "4px 8px"
                   }}
                 >
-                  <div className="bar" style={{ height: "40%", width: "3px", backgroundColor: "var(--neutral-on-background-strong)", borderRadius: "1px" }} />
-                  <div className="bar" style={{ height: "80%", width: "3px", backgroundColor: "var(--neutral-on-background-strong)", borderRadius: "1px" }} />
-                  <div className="bar" style={{ height: "50%", width: "3px", backgroundColor: "var(--neutral-on-background-strong)", borderRadius: "1px" }} />
+                  <div className="bar" style={{ height: "40%", width: "3px", backgroundColor: "var(--neutral-on-background-strong)", borderRadius: "1px", animationDuration: `${bounceDuration}s` }} />
+                  <div className="bar" style={{ height: "80%", width: "3px", backgroundColor: "var(--neutral-on-background-strong)", borderRadius: "1px", animationDuration: `${bounceDuration * 0.8}s` }} />
+                  <div className="bar" style={{ height: "50%", width: "3px", backgroundColor: "var(--neutral-on-background-strong)", borderRadius: "1px", animationDuration: `${bounceDuration * 1.2}s` }} />
                 </Row>
               )}
             </Row>
@@ -166,13 +172,7 @@ export const NowPlaying = () => {
 
         <style jsx>{`
           .bar {
-            animation: bounce 1s infinite alternate;
-          }
-          .bar:nth-child(2) {
-            animation-delay: 0.2s;
-          }
-          .bar:nth-child(3) {
-            animation-delay: 0.4s;
+            animation: bounce 0s infinite alternate ease-in-out;
           }
           @keyframes bounce {
             from { height: 30%; }
