@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { getCurrentlyPlaying, getRecentlyPlayed, getAudioFeatures } from "@/lib/spotify";
+import Vibrant from "node-vibrant";
 
-export const runtime = 'edge';
 export const revalidate = 0; // Disable cache
 
 export async function GET() {
@@ -27,12 +27,22 @@ export async function GET() {
       const albumImageUrl = track.album.images[0]?.url;
       const songUrl = track.external_urls.spotify;
 
+      // Extract color for recently played too
+      let color = "#1DB954"; // Spotify Green fallback
+      try {
+        const palette = await Vibrant.from(albumImageUrl).getPalette();
+        color = palette.Vibrant?.hex || color;
+      } catch (e) {
+        console.warn("Failed to extract color", e);
+      }
+
       return NextResponse.json({
         albumImageUrl,
         artist,
         isPlaying: false,
         songUrl,
         title,
+        color
       });
     }
 
@@ -50,6 +60,15 @@ export async function GET() {
     const progressMs = song.progress_ms;
     const durationMs = song.item.duration_ms;
     const trackId = song.item.id;
+
+    // Extract color
+    let color = "#1DB954"; // Spotify Green fallback
+    try {
+      const palette = await Vibrant.from(albumImageUrl).getPalette();
+      color = palette.Vibrant?.hex || color;
+    } catch (e) {
+      console.warn("Failed to extract color", e);
+    }
 
     // Fetch tempo (BPM)
     let tempo = 120; // Default fallback
@@ -71,7 +90,8 @@ export async function GET() {
       title,
       progressMs,
       durationMs,
-      tempo
+      tempo,
+      color
     });
   } catch (error) {
     console.error("Spotify API Error:", error);

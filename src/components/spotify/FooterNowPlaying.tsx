@@ -10,6 +10,7 @@ type NowPlayingData = {
   songUrl: string;
   title: string;
   tempo?: number;
+  color?: string;
 };
 
 export const FooterNowPlaying = () => {
