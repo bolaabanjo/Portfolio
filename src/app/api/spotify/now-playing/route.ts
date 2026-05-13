@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { getCurrentlyPlaying, getRecentlyPlayed, getAudioFeatures } from "@/lib/spotify";
-import Vibrant from "node-vibrant/node";
+import { Vibrant } from "node-vibrant/node";
 
 export const revalidate = 0; // Disable cache
 
