@@ -62,7 +62,7 @@ export const NowPlaying = () => {
   if (loading) {
     return (
       <Row vertical="center" gap="16" padding="16" radius="l" border="neutral-alpha-weak" background="surface">
-        <Column justify="center" align="center" style={{ width: 64, height: 64, backgroundColor: "var(--neutral-alpha-medium)", borderRadius: "var(--radius-m)" }}>
+        <Column vertical="center" horizontal="center" style={{ width: 64, height: 64, backgroundColor: "var(--neutral-alpha-medium)", borderRadius: "var(--radius-m)" }}>
           <Icon name="music" size="m" onBackground="neutral-weak" />
         </Column>
         <Column gap="4">
@@ -75,7 +75,7 @@ export const NowPlaying = () => {
   if (!data || !data.title) {
     return (
       <Row vertical="center" gap="16" padding="16" radius="l" border="neutral-alpha-weak" background="surface">
-        <Column justify="center" align="center" style={{ width: 64, height: 64, backgroundColor: "var(--neutral-alpha-medium)", borderRadius: "var(--radius-m)" }}>
+        <Column vertical="center" horizontal="center" style={{ width: 64, height: 64, backgroundColor: "var(--neutral-alpha-medium)", borderRadius: "var(--radius-m)" }}>
           <Icon name="music" size="m" onBackground="neutral-weak" />
         </Column>
         <Column gap="4">
