@@ -125,6 +125,24 @@ export const NowPlaying = () => {
                   {data.artist}
                 </Text>
               </Column>
+              {data.isPlaying && (
+                <Row 
+                  vertical="center" 
+                  horizontal="center" 
+                  gap="2" 
+                  style={{ 
+                    height: "20px", 
+                    width: "32px", 
+                    backgroundColor: "var(--neutral-alpha-weak)", 
+                    borderRadius: "12px",
+                    padding: "4px 8px"
+                  }}
+                >
+                  <div className="bar" style={{ height: "40%", width: "3px", backgroundColor: "var(--neutral-on-background-strong)", borderRadius: "1px" }} />
+                  <div className="bar" style={{ height: "80%", width: "3px", backgroundColor: "var(--neutral-on-background-strong)", borderRadius: "1px" }} />
+                  <div className="bar" style={{ height: "50%", width: "3px", backgroundColor: "var(--neutral-on-background-strong)", borderRadius: "1px" }} />
+                </Row>
+              )}
             </Row>
           </Column>
         </Row>
@@ -145,6 +163,22 @@ export const NowPlaying = () => {
             }} />
           </div>
         )}
+
+        <style jsx>{`
+          .bar {
+            animation: bounce 1s infinite alternate;
+          }
+          .bar:nth-child(2) {
+            animation-delay: 0.2s;
+          }
+          .bar:nth-child(3) {
+            animation-delay: 0.4s;
+          }
+          @keyframes bounce {
+            from { height: 30%; }
+            to { height: 100%; }
+          }
+        `}</style>
       </Column>
     </Link>
   );
