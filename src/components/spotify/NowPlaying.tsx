@@ -113,7 +113,7 @@ export const NowPlaying = () => {
             />
           </div>
           <Column gap="4" fillWidth>
-            <Row vertical="center" justify="between" fillWidth>
+            <Row vertical="center" horizontal="between" fillWidth>
               <Column gap="0">
                 <Text variant="label-default-s" onBackground="neutral-weak" style={{ textTransform: "uppercase", letterSpacing: "1px", fontSize: "10px", marginBottom: "4px" }}>
                   {data.isPlaying ? "currently playing" : "last played"}
