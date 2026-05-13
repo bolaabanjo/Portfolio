@@ -12,6 +12,7 @@ type NowPlayingData = {
   title: string;
   progressMs?: number;
   durationMs?: number;
+  tempo?: number;
 };
 
 export const NowPlaying = () => {

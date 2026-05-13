@@ -9,6 +9,7 @@ type NowPlayingData = {
   isPlaying: boolean;
   songUrl: string;
   title: string;
+  tempo?: number;
 };
 
 export const FooterNowPlaying = () => {
