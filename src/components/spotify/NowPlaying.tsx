@@ -139,7 +139,7 @@ export const NowPlaying = () => {
                   gap="2" 
                   style={{ 
                     height: "20px", 
-                    width: "32px", 
+                    width: "48px", 
                     backgroundColor: "var(--neutral-alpha-weak)", 
                     borderRadius: "12px",
                     padding: "4px 8px"
@@ -148,6 +148,9 @@ export const NowPlaying = () => {
                   <div className="bar" style={{ height: "40%", width: "3px", backgroundColor: "var(--neutral-on-background-strong)", borderRadius: "1px", animationDuration: `${bounceDuration}s` }} />
                   <div className="bar" style={{ height: "80%", width: "3px", backgroundColor: "var(--neutral-on-background-strong)", borderRadius: "1px", animationDuration: `${bounceDuration * 0.8}s` }} />
                   <div className="bar" style={{ height: "50%", width: "3px", backgroundColor: "var(--neutral-on-background-strong)", borderRadius: "1px", animationDuration: `${bounceDuration * 1.2}s` }} />
+                  <div className="bar" style={{ height: "70%", width: "3px", backgroundColor: "var(--neutral-on-background-strong)", borderRadius: "1px", animationDuration: `${bounceDuration * 0.9}s` }} />
+                  <div className="bar" style={{ height: "30%", width: "3px", backgroundColor: "var(--neutral-on-background-strong)", borderRadius: "1px", animationDuration: `${bounceDuration * 1.1}s` }} />
+                  <div className="bar" style={{ height: "60%", width: "3px", backgroundColor: "var(--neutral-on-background-strong)", borderRadius: "1px", animationDuration: `${bounceDuration * 0.7}s` }} />
                 </Row>
               )}
             </Row>
