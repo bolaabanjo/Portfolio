@@ -1,6 +1,8 @@
-import { Column, Text, Meta, Schema } from "@once-ui-system/core";
+import { Column, Row, Text, Meta, Schema } from "@once-ui-system/core";
 import { Posts } from "@/components/blog/Posts";
 import { baseURL, blog, person, about } from "@/resources";
+import { getPosts } from "@/utils/utils";
+import Link from "next/link";
 
 export async function generateMetadata() {
   return Meta.generate({
@@ -12,7 +14,25 @@ export async function generateMetadata() {
   });
 }
 
-export default function Blog() {
+const PER_PAGE = 6;
+
+export default async function Blog({
+  searchParams,
+}: {
+  searchParams?: Promise<{ page?: string }>;
+}) {
+  const resolvedParams = await searchParams;
+  const allBlogs = getPosts(["src", "app", "blog", "posts"]).sort((a, b) => {
+    return new Date(b.metadata.publishedAt).getTime() - new Date(a.metadata.publishedAt).getTime();
+  });
+
+  const totalPages = Math.max(1, Math.ceil(allBlogs.length / PER_PAGE));
+  const parsed = parseInt(resolvedParams?.page ?? "1", 10);
+  const page = Number.isNaN(parsed) ? 1 : Math.min(Math.max(parsed, 1), totalPages);
+
+  const start = (page - 1) * PER_PAGE + 1;
+  const end = page * PER_PAGE;
+
   return (
     <Column fillWidth style={{ maxWidth: 780 }} gap="l" paddingY="12" horizontal="center">
       <Schema
@@ -56,8 +76,71 @@ export default function Blog() {
       </Column>
 
       <Column fillWidth paddingX="l">
-        <Posts />
+        <Posts range={[start, end]} />
       </Column>
+
+      {totalPages > 1 && (
+        <Row fillWidth horizontal="between" vertical="center" paddingX="l">
+          {page > 1 ? (
+            <Link
+              href={`/blog?page=${page - 1}`}
+              style={{
+                fontFamily: "var(--font-code)",
+                fontSize: "11px",
+                color: "var(--neutral-on-background-strong)",
+                textDecoration: "none",
+              }}
+            >
+              ← Prev
+            </Link>
+          ) : (
+            <span
+              style={{
+                fontFamily: "var(--font-code)",
+                fontSize: "11px",
+                color: "var(--neutral-on-background-weak)",
+                opacity: 0.3,
+              }}
+            >
+              ← Prev
+            </span>
+          )}
+          <span
+            style={{
+              fontFamily: "var(--font-code)",
+              fontSize: "11px",
+              color: "var(--neutral-on-background-weak)",
+              opacity: 0.5,
+            }}
+          >
+            {page} / {totalPages}
+          </span>
+          {page < totalPages ? (
+            <Link
+              href={`/blog?page=${page + 1}`}
+              style={{
+                fontFamily: "var(--font-code)",
+                fontSize: "11px",
+                color: "var(--neutral-on-background-strong)",
+                textDecoration: "none",
+              }}
+            >
+              Next →
+            </Link>
+          ) : (
+            <span
+              style={{
+                fontFamily: "var(--font-code)",
+                fontSize: "11px",
+                color: "var(--neutral-on-background-weak)",
+                opacity: 0.3,
+              }}
+            >
+              Next →
+            </span>
+          )}
+        </Row>
+      )}
     </Column>
   );
 }
