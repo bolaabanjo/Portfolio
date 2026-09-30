@@ -10,6 +10,12 @@ import {
 } from "@once-ui-system/core";
 import { home, about, person, baseURL } from "@/resources";
 import Link from "next/link";
+import localFont from "next/font/local";
+
+const highnessa = localFont({
+  src: "../assets/fonts/HighnessaDemo.otf",
+  display: "swap",
+});
 
 export async function generateMetadata() {
   return Meta.generate({
@@ -40,7 +46,17 @@ export default function Home() {
 
       <RevealFx translateY="8" delay={0.2}>
       <Column fillWidth gap="l" paddingX="l">
-          <Heading as="h1" variant="display-strong-l">
+          <Heading
+            as="h1"
+            variant="display-strong-l"
+            style={{
+              fontFamily: highnessa.style.fontFamily,
+              fontWeight: 400,
+              fontSize: "clamp(4rem, 9vw, 5rem)",
+              lineHeight: 1.1,
+              letterSpacing: 0,
+            }}
+          >
             {person.name}
           </Heading>
 
