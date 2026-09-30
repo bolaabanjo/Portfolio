@@ -81,13 +81,6 @@ export default function Home() {
               return (
                 <>
                   <p style={pStyle} className="home-intro-text">
-                    I&apos;m an engineer from Lagos, Nigeria. My friends call me Roy. I work across
-                    mechanical engineering, software, and AI — not as separate disciplines, but as
-                    different ways of solving the same kinds of problems. I care about systems that
-                    are intelligent, well-designed, and built to last (Means I care about me, in case
-                    you missed it).
-                  </p>
-                  <p style={pStyle} className="home-intro-text">
                     I&apos;m the CEO of{" "}
                     <a href="https://cencori.com" style={linkStyle}>Cencori</a>, an AI
                     company — read more about it{" "}
