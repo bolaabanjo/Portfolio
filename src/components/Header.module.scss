@@ -1,5 +1,9 @@
 @use "./breakpoints.scss" as breakpoints;
 
+:global([data-theme="light"]) .navigation {
+    box-shadow: none;
+}
+
 .mask {
     pointer-events: none;
     backdrop-filter: blur(0.5rem);

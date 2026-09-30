@@ -44,7 +44,11 @@ export default function Home() {
         }}
       />
 
-      <RevealFx translateY="8" delay={0.2}>
+      <RevealFx
+        translateY="8"
+        delay={0.2}
+        style={{ paddingTop: 24, marginTop: -24 }}
+      >
       <Column fillWidth gap="l" paddingX="l">
           <Heading
             as="h1"

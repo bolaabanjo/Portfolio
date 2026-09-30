@@ -42,6 +42,8 @@ const TimeDisplay: React.FC<TimeDisplayProps> = ({ timeZone, locale = "en-GB" })
 
 export default TimeDisplay;
 
+const hiddenHeaderRoutes = new Set(["/about", "/work"]);
+
 export const Header = () => {
   const pathname = usePathname() ?? "";
 
@@ -77,6 +79,7 @@ export const Header = () => {
         </Row>
         <Row fillWidth horizontal="center">
           <Row
+            className={styles.navigation}
             background="page"
             border="neutral-alpha-weak"
             radius="m-4"
@@ -90,7 +93,7 @@ export const Header = () => {
                 <ToggleButton prefixIcon="home" href="/" selected={pathname === "/"} />
               )}
               <Line background="neutral-alpha-medium" vert maxHeight="24" />
-              {routes["/about"] && (
+              {routes["/about"] && !hiddenHeaderRoutes.has("/about") && (
                 <>
                   <Row s={{ hide: true }}>
                     <ToggleButton
@@ -109,7 +112,7 @@ export const Header = () => {
                   </Row>
                 </>
               )}
-              {routes["/work"] && (
+              {routes["/work"] && !hiddenHeaderRoutes.has("/work") && (
                 <>
                   <Row s={{ hide: true }}>
                     <ToggleButton
