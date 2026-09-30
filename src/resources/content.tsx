@@ -45,7 +45,7 @@ const social: Social = [
 
 const home: Home = {
   path: "/",
-  image: "/api/og/generate?v=white",
+  image: "/api/og/generate?v=2",
   label: "Home",
   title: `${person.name}`,
   description: "Bola Banjo is CEO of Cencori Inc, a deep technology company dedicated to building infrastructure the world builds AI on.",
