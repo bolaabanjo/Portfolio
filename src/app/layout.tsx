@@ -68,12 +68,12 @@ export default async function RootLayout({
                 "alternateName": "Bola Roy Banjo",
                 "url": "https://bolabanjo.com",
                 "image": "https://bolabanjo.com/images/square.png",
-                "description": "Engineer, systems designer, and founder of FohnAI. Focus areas: AI, Engineering, product design, and robotics.",
-                "jobTitle": "Founder · Engineer · Systems Designer",
+                "description": "Bola Banjo is the Co-Founder and CEO of Cencori Inc, a deep technology company dedicated to building infrastructure the world builds AI on.",
+                "jobTitle": "Co-Founder and CEO",
                 "worksFor": {
                   "@type": "Organization",
-                  "name": "FohnAI",
-                  "url": "https://fohnai.com"
+                  "name": "Cencori Inc",
+                  "url": "https://cencori.com"
                 },
                 "birthDate": "2003-12-17",
                 "sameAs": [

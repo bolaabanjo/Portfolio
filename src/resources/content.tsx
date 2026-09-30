@@ -48,7 +48,7 @@ const home: Home = {
   image: "/api/og/generate?v=white",
   label: "Home",
   title: `${person.name}`,
-  description: `Personal website showcasing my work as a ${person.role}`,
+  description: "Bola Banjo is the Co-Founder and CEO of Cencori Inc, a deep technology company dedicated to building infrastructure the world builds AI on.",
   headline: <>Welcome To My Personal Archive.</>,
   featured: {
     display: true,
