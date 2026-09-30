@@ -11,6 +11,7 @@ import {
 import { home, about, person, baseURL } from "@/resources";
 import Link from "next/link";
 import localFont from "next/font/local";
+import styles from "./Home.module.scss";
 
 const highnessa = localFont({
   src: "../assets/fonts/HighnessaDemo.otf",
@@ -29,7 +30,7 @@ export async function generateMetadata() {
 
 export default function Home() {
   return (
-    <Column style={{ maxWidth: 680 }} gap="xl" paddingY="12" horizontal="center">
+    <Column id="home-page" className={styles.home} style={{ maxWidth: 680 }} horizontal="center">
       <Schema
         as="webPage"
         baseURL={baseURL}
@@ -49,14 +50,15 @@ export default function Home() {
         delay={0.2}
         style={{ paddingTop: 24, marginTop: -24 }}
       >
-      <Column fillWidth gap="l" paddingX="l">
+      <Column fillWidth className={styles.content} paddingX="l">
           <Heading
             as="h1"
             variant="display-strong-l"
+            className={styles.heading}
             style={{
               fontFamily: highnessa.style.fontFamily,
               fontWeight: 400,
-              fontSize: "clamp(4rem, 9vw, 5rem)",
+              fontSize: "clamp(2.5rem, min(14vw, 11dvh), 5rem)",
               lineHeight: 1.1,
               letterSpacing: 0,
             }}
@@ -80,10 +82,11 @@ export default function Home() {
               };
               return (
                 <>
+                  <div className={styles.desktopBio}>
                   <p style={pStyle} className="home-intro-text">
                     I&apos;m the CEO of{" "}
                     <a href="https://cencori.com" style={linkStyle}>Cencori</a>, an AI
-                    company — read more about it{" "}
+                    infra company — read more about it{" "}
                     <Link href="/work/cencori" style={linkStyle}>here</Link>. Before Cencori, I
                     spent time working on aircraft systems and marine vessels. See my other{" "}
                     <Link href="/work" style={linkStyle}>works</Link> too.
@@ -106,6 +109,20 @@ export default function Home() {
                     If you&apos;re curious what I look like behind the work, check out my{" "}
                     <Link href="/gallery" style={linkStyle}>gallery</Link>.
                   </p>
+                  </div>
+                  <div className={styles.mobileBio}>
+                    <p>
+                      Co-founder and CEO of <a href="https://cencori.com" style={linkStyle}>Cencori</a>,
+                      building AI infrastructure across software and mechanical engineering.
+                    </p>
+                    <p>
+                      I designed the QuanTonic Reactor. Explore my{" "}
+                      <Link href="/work" style={linkStyle}>work</Link>,{" "}
+                      <Link href="/essay" style={linkStyle}>essays</Link>,{" "}
+                      <Link href="/library" style={linkStyle}>library</Link>, and{" "}
+                      <Link href="/gallery" style={linkStyle}>gallery</Link>.
+                    </p>
+                  </div>
                 </>
               );
             })()}

@@ -72,4 +72,65 @@ html::-webkit-scrollbar-thumb {
   .home-intro-text {
     font-size: 0.9rem !important;
   }
+
+  body:has(#home-page) {
+    box-sizing: border-box;
+  }
+
+  /* --- Home on mobile: lock to exactly one screen, never scroll --- */
+  html:has(#home-page),
+  body:has(#home-page) {
+    height: 100dvh !important;
+    max-height: 100dvh !important;
+    overflow: hidden !important;
+    overscroll-behavior: none !important;
+  }
+
+  body:has(#home-page) {
+    position: fixed !important;
+    inset: 0 !important;
+    width: 100% !important;
+  }
+
+  body:has(#home-page) > main.layout-main {
+    height: 100dvh !important;
+    min-height: 0 !important;
+    max-height: 100dvh !important;
+    overflow: hidden !important;
+  }
+
+  /* content lane: shrinkable, vertically centered */
+  body:has(#home-page) .layout-content {
+    flex: 1 1 auto !important;
+    min-height: 0 !important;
+    max-height: 100% !important;
+    overflow: hidden !important;
+    padding-block: var(--static-space-8) !important;
+  }
+
+  body:has(#home-page) .layout-content > *,
+  body:has(#home-page) .layout-content > * > * {
+    height: 100%;
+    max-height: 100%;
+    min-height: 0;
+  }
+
+  /* hide now-playing line to save vertical space */
+  body:has(#home-page) footer a[href^="https://open.spotify"] {
+    display: none !important;
+  }
+
+  body:has(#home-page) footer {
+    padding-block: 0 !important;
+    flex-shrink: 0;
+  }
+
+  body:has(#home-page) footer > div:first-child {
+    padding-block: 4px !important;
+    row-gap: 8px !important;
+  }
+
+  body:has(#home-page) footer > div:last-child {
+    height: 72px !important;
+  }
 }
