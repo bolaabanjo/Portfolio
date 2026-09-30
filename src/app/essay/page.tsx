@@ -22,7 +22,7 @@ export default async function Blog({
   searchParams?: Promise<{ page?: string }>;
 }) {
   const resolvedParams = await searchParams;
-  const allBlogs = getPosts(["src", "app", "blog", "posts"]).sort((a, b) => {
+  const allBlogs = getPosts(["src", "app", "essay", "posts"]).sort((a, b) => {
     return new Date(b.metadata.publishedAt).getTime() - new Date(a.metadata.publishedAt).getTime();
   });
 
@@ -83,7 +83,7 @@ export default async function Blog({
         <Row fillWidth horizontal="between" vertical="center" paddingX="l">
           {page > 1 ? (
             <Link
-              href={`/blog?page=${page - 1}`}
+              href={`/essay?page=${page - 1}`}
               style={{
                 fontFamily: "var(--font-code)",
                 fontSize: "11px",
@@ -117,7 +117,7 @@ export default async function Blog({
           </span>
           {page < totalPages ? (
             <Link
-              href={`/blog?page=${page + 1}`}
+              href={`/essay?page=${page + 1}`}
               style={{
                 fontFamily: "var(--font-code)",
                 fontSize: "11px",

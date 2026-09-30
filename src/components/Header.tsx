@@ -131,21 +131,21 @@ export const Header = () => {
                   </Row>
                 </>
               )}
-              {routes["/blog"] && (
+              {routes["/essay"] && (
                 <>
                   <Row s={{ hide: true }}>
                     <ToggleButton
                       prefixIcon="book"
-                      href="/blog"
+                      href="/essay"
                       label={blog.label}
-                      selected={pathname.startsWith("/blog")}
+                      selected={pathname.startsWith("/essay")}
                     />
                   </Row>
                   <Row hide s={{ hide: false }}>
                     <ToggleButton
                       prefixIcon="book"
-                      href="/blog"
-                      selected={pathname.startsWith("/blog")}
+                      href="/essay"
+                      selected={pathname.startsWith("/essay")}
                     />
                   </Row>
                 </>

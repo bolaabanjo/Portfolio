@@ -108,7 +108,7 @@ export async function GET(request: Request) {
 
 ## Step 2: Use the OG Image in Metadata
 
-In your page (e.g., `src/app/blog/[slug]/page.tsx`):
+In your page (e.g., `src/app/essay/[slug]/page.tsx`):
 
 ```tsx
 import { Metadata } from "next";

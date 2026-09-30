@@ -92,7 +92,7 @@ export default function Home() {
                     I designed the QuanTonic Reactor, a quantum
                     thermal-to-electric system exploring an alternative to conventional solar technology.
                     I write about ideas like this in my{" "}
-                    <Link href="/blog" style={linkStyle}>essays</Link>. Most of my time goes into AI, energy, robotics, and design — different angles on
+                    <Link href="/essay" style={linkStyle}>essays</Link>. Most of my time goes into AI, energy, robotics, and design — different angles on
                     the same question: how do you build things that actually hold up?
                   </p>
                   <p style={pStyle} className="home-intro-text">

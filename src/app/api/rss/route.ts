@@ -3,7 +3,7 @@ import { baseURL, blog, person } from "@/resources";
 import { NextResponse } from "next/server";
 
 export async function GET() {
-  const posts = getPosts(["src", "app", "blog", "posts"]);
+  const posts = getPosts(["src", "app", "essay", "posts"]);
 
   // Sort posts by date (newest first)
   const sortedPosts = posts.sort((a, b) => {
@@ -15,7 +15,7 @@ export async function GET() {
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>${blog.title}</title>
-    <link>${baseURL}/blog</link>
+    <link>${baseURL}${blog.path}</link>
     <description>${blog.description}</description>
     <language>en</language>
     <lastBuildDate>${new Date().toUTCString()}</lastBuildDate>
@@ -25,15 +25,15 @@ export async function GET() {
     <image>
       <url>${baseURL}${person.avatar || "/images/avatar.jpg"}</url>
       <title>${blog.title}</title>
-      <link>${baseURL}/blog</link>
+      <link>${baseURL}${blog.path}</link>
     </image>
     ${sortedPosts
       .map(
         (post) => `
     <item>
       <title>${post.metadata.title}</title>
-      <link>${baseURL}/blog/${post.slug}</link>
-      <guid>${baseURL}/blog/${post.slug}</guid>
+      <link>${baseURL}${blog.path}/${post.slug}</link>
+      <guid>${baseURL}${blog.path}/${post.slug}</guid>
       <pubDate>${new Date(post.metadata.publishedAt).toUTCString()}</pubDate>
       <description><![CDATA[${post.metadata.summary}]]></description>
       ${post.metadata.image ? `<enclosure url="${baseURL}${post.metadata.image}" type="image/jpeg" />` : ""}

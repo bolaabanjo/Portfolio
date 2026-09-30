@@ -280,12 +280,12 @@ const about: About = {
 };
 
 const blog: Blog = {
-  path: "/blog",
+  path: "/essay",
   label: "Essays",
   title: "Writing about Engineering, Design, AI, Business and Tech...",
   description: `Read what ${person.name} is thinking lately`,
-  // Create new blog posts by adding a new .mdx file to app/blog/posts
-  // All posts will be listed on the /blog route
+  // Create new essays by adding a new .mdx file to app/essay/posts
+  // All essays will be listed on the /essay route
 };
 
 const work: Work = {
@@ -293,7 +293,7 @@ const work: Work = {
   label: "Work",
   title: `Projects – ${person.name}`,
   description: `Design and dev projects by ${person.name}`,
-  // Create new project pages by adding a new .mdx file to app/blog/posts
+  // Create new project pages by adding a new .mdx file to app/work/projects
   // All projects will be listed on the /home and /work routes
 };
 

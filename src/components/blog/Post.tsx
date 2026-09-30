@@ -17,7 +17,7 @@ interface PostProps {
 
 export default function Post({ post }: PostProps) {
   return (
-    <Link href={`/blog/${post.slug}`} style={{ textDecoration: "none", display: "block" }}>
+    <Link href={`/essay/${post.slug}`} style={{ textDecoration: "none", display: "block" }}>
       <div
         style={{
           display: "flex",

@@ -35,7 +35,7 @@ src/resources/content.js
 
 **6. Create blog posts / projects**
 ```
-Add a new .mdx file to src/app/blog/posts or src/app/work/projects
+Add a new .mdx file to src/app/essay/posts or src/app/work/projects
 ```
 
 Magic Portfolio was built with [Once UI](https://once-ui.com) for [Next.js](https://nextjs.org). It requires Node.js v18.17+.
