@@ -30,7 +30,7 @@ export default function Home() {
         path={home.path}
         title={home.title}
         description={home.description}
-        image={`/api/og/generate?title=${encodeURIComponent(home.title)}`}
+        image={home.image}
         author={{
           name: person.name,
           url: `${baseURL}${about.path}`,
@@ -45,19 +45,6 @@ export default function Home() {
           </Heading>
 
           <div>
-            <img
-              src="/images/IMG_2520.JPG"
-              alt={person.name}
-              style={{
-                float: "right",
-                width: 140,
-                height: 140,
-                borderRadius: "50%",
-                marginLeft: 24,
-                marginBottom: 16,
-                objectFit: "cover",
-              }}
-            />
             {(() => {
               const linkStyle = {
                 color: "var(--neutral-on-background-strong)",
@@ -109,7 +96,6 @@ export default function Home() {
                 </>
               );
             })()}
-            <div style={{ clear: "both" }} />
           </div>
       </Column>
       </RevealFx>
