@@ -115,13 +115,9 @@ html::-webkit-scrollbar-thumb {
     min-height: 0;
   }
 
-  /* hide now-playing line to save vertical space */
-  body:has(#home-page) footer a[href^="https://open.spotify"] {
-    display: none !important;
-  }
-
   body:has(#home-page) footer {
     padding-block: 0 !important;
+    padding-bottom: 88px !important;
     flex-shrink: 0;
   }
 
@@ -130,7 +126,8 @@ html::-webkit-scrollbar-thumb {
     row-gap: 8px !important;
   }
 
+  /* spacer redundant: bottom padding already clears the fixed tab bar */
   body:has(#home-page) footer > div:last-child {
-    height: 72px !important;
+    display: none !important;
   }
 }
