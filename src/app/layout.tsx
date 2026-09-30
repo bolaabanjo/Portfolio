@@ -66,8 +66,8 @@ export default async function RootLayout({
                 "@type": "Person",
                 "name": "Bola Banjo",
                 "alternateName": "Bola Roy Banjo",
-                "url": "https://bolabanjo.xyz",
-                "image": "https://bolabanjo.xyz/images/square.png",
+                "url": "https://bolabanjo.com",
+                "image": "https://bolabanjo.com/images/square.png",
                 "description": "Engineer, systems designer, and founder of FohnAI. Focus areas: AI, Engineering, product design, and robotics.",
                 "jobTitle": "Founder · Engineer · Systems Designer",
                 "worksFor": {
@@ -91,7 +91,7 @@ export default async function RootLayout({
                 ],
                 "mainEntityOfPage": {
                   "@type": "WebPage",
-                  "@id": "https://bolabanjo.xyz"
+                  "@id": "https://bolabanjo.com"
                 },
                 "contactPoint": {
                   "@type": "ContactPoint",
