@@ -131,3 +131,32 @@ html::-webkit-scrollbar-thumb {
     display: none !important;
   }
 }
+
+/* In-app browsers (X/Twitter, Instagram, WhatsApp, etc.): the host app owns
+   the bottom of the screen, so dock the nav pill to the top and size against
+   the small viewport to survive half-sheet webviews. */
+@media (max-width: 768px) {
+  html[data-inapp="true"]:has(#home-page),
+  html[data-inapp="true"]:has(#home-page) body {
+    height: 100svh !important;
+    max-height: 100svh !important;
+  }
+
+  html[data-inapp="true"] body:has(#home-page) > main.layout-main {
+    height: 100svh !important;
+    max-height: 100svh !important;
+  }
+
+  html[data-inapp="true"] body:has(#home-page) header {
+    top: 8px !important;
+    bottom: auto !important;
+  }
+
+  html[data-inapp="true"] body:has(#home-page) #home-page {
+    padding-top: 76px !important;
+  }
+
+  html[data-inapp="true"] body:has(#home-page) footer {
+    padding-bottom: var(--static-space-8) !important;
+  }
+}

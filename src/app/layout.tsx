@@ -58,6 +58,12 @@ export default async function RootLayout({
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
         <script
+          id="inapp-detect"
+          dangerouslySetInnerHTML={{
+            __html: `(function(){try{var ua=navigator.userAgent||'';var app=/Twitter|FBAN|FBAV|FB_IAB|Instagram|WhatsApp|LinkedInApp|Snapchat|TikTok|Pinterest|Slack|Discord|Telegram|Line\\/|WeChat|MicroMessenger|KAKAOTALK|Naver/i.test(ua);var webview=/iPhone|iPad|iPod|Android/i.test(ua)&&!/Safari|Chrome|Chromium|CriOS|FxiOS|Edg|OPR|SamsungBrowser/i.test(ua);if(app||webview){document.documentElement.dataset.inapp='true';}}catch(e){}})();`,
+          }}
+        />
+        <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
             __html: `
