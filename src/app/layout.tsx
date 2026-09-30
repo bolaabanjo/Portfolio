@@ -109,7 +109,7 @@ export default async function RootLayout({
               (function() {
                 try {
                   const root = document.documentElement;
-                  const defaultTheme = 'system';
+                  const defaultTheme = ${JSON.stringify(style.theme)};
                   const config = ${JSON.stringify({
                     brand: style.brand,
                     accent: style.accent,
@@ -135,7 +135,10 @@ export default async function RootLayout({
                   };
 
                   const savedTheme = localStorage.getItem('data-theme');
-                  const resolvedTheme = resolveTheme(savedTheme);
+                  if (!savedTheme && defaultTheme !== 'system') {
+                    localStorage.setItem('data-theme', defaultTheme);
+                  }
+                  const resolvedTheme = resolveTheme(savedTheme || defaultTheme);
                   root.setAttribute('data-theme', resolvedTheme);
 
                   const styleKeys = Object.keys(config);
@@ -147,7 +150,7 @@ export default async function RootLayout({
                   });
                 } catch (e) {
                   console.error('Failed to initialize theme:', e);
-                  document.documentElement.setAttribute('data-theme', 'dark');
+                  document.documentElement.setAttribute('data-theme', 'light');
                 }
               })();
             `,

@@ -45,7 +45,7 @@ const social: Social = [
 
 const home: Home = {
   path: "/",
-  image: "/api/og/generate",
+  image: "/api/og/generate?v=white",
   label: "Home",
   title: `${person.name}`,
   description: `Personal website showcasing my work as a ${person.role}`,
