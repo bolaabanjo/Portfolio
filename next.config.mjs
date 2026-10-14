@@ -9,6 +9,10 @@ const withMDX = mdx({
 const nextConfig = {
   pageExtensions: ["ts", "tsx", "md", "mdx"],
   transpilePackages: ["next-mdx-remote"],
+  // Content is read with fs at request time; bundle it into serverless functions.
+  outputFileTracingIncludes: {
+    "/*": ["./src/app/**/*.mdx"],
+  },
   images: {
     remotePatterns: [
       {
