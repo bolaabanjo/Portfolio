@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { Button, Column, Input, PasswordInput, Row, Text } from "@once-ui-system/core";
+import { Button, Column, PasswordInput, Row, Text } from "@once-ui-system/core";
 import { addDays, formatRange } from "@/lib/booking/time";
 import styles from "./Booking.module.scss";
 
@@ -79,9 +79,6 @@ export function AdminPanel({
   const router = useRouter();
   const [pending, setPending] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
-  const [blockFrom, setBlockFrom] = useState("");
-  const [blockTo, setBlockTo] = useState("");
-  const [note, setNote] = useState("");
 
   async function run(key: string, fn: () => Promise<unknown>) {
     setPending(key);
@@ -153,49 +150,32 @@ export function AdminPanel({
         </Column>
       </Column>
 
-      <Column gap="8" fillWidth>
-        <Text variant="heading-strong-m">Blocked days</Text>
-        <Column className={styles.panel} padding="l" gap="12" fillWidth>
-          <Row gap="8" wrap vertical="end">
-            <Input id="from" type="date" label="From" value={blockFrom} onChange={(e) => setBlockFrom(e.target.value)} />
-            <Input id="to" type="date" label="To (optional)" value={blockTo} onChange={(e) => setBlockTo(e.target.value)} />
-            <Input id="note" label="Note (optional)" value={note} onChange={(e) => setNote(e.target.value)} />
-          </Row>
-          <Row>
-            <Button
-              size="s"
-              disabled={!blockFrom}
-              loading={pending === "block"}
-              onClick={() =>
-                run("block", async () => {
-                  await call("/api/book/admin/block", "POST", { from: blockFrom, to: blockTo || blockFrom, note });
-                  setBlockFrom("");
-                  setBlockTo("");
-                  setNote("");
-                })
-              }
-            >
-              Block
-            </Button>
-          </Row>
-          {blocks.map((bl) => (
-            <Row key={bl.id} className={styles.row} horizontal="between" vertical="center">
-              <Text variant="body-default-s">
-                {bl.from}
-                {addDays(bl.to, -1) !== bl.from ? ` → ${addDays(bl.to, -1)}` : ""} · {bl.summary}
-              </Text>
-              <Button
-                size="s"
-                variant="tertiary"
-                loading={pending === bl.id}
-                onClick={() => run(bl.id, () => call(`/api/book/admin/block?id=${encodeURIComponent(bl.id)}`, "DELETE"))}
-              >
-                Remove
-              </Button>
-            </Row>
-          ))}
+      {blocks.length > 0 && (
+        <Column gap="8" fillWidth>
+          <Text variant="heading-strong-m">Blocked days</Text>
+          <Text variant="body-default-s" onBackground="neutral-weak">
+            Older blocks. Use date overrides in Working hours for new ones.
+          </Text>
+          <Column className={styles.panel} paddingX="l" paddingY="8" fillWidth>
+            {blocks.map((bl) => (
+              <Row key={bl.id} className={styles.row} horizontal="between" vertical="center">
+                <Text variant="body-default-s">
+                  {bl.from}
+                  {addDays(bl.to, -1) !== bl.from ? ` → ${addDays(bl.to, -1)}` : ""} · {bl.summary}
+                </Text>
+                <Button
+                  size="s"
+                  variant="tertiary"
+                  loading={pending === bl.id}
+                  onClick={() => run(bl.id, () => call(`/api/book/admin/block?id=${encodeURIComponent(bl.id)}`, "DELETE"))}
+                >
+                  Remove
+                </Button>
+              </Row>
+            ))}
+          </Column>
         </Column>
-      </Column>
+      )}
 
       <Row>
         <Button

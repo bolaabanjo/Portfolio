@@ -1,4 +1,5 @@
 import { Resend } from "resend";
+import { getAvailability } from "./availability";
 import { bookingConfig } from "./config";
 import { formatRange } from "./time";
 
@@ -40,7 +41,7 @@ const ownerInbox = () => process.env.BOOKING_NOTIFY_EMAIL || bookingConfig.owner
 
 export async function sendBooked(b: Booking, kind: "booked" | "rescheduled") {
   const when = formatRange(b.start, b.end, b.guestTz);
-  const ownerWhen = formatRange(b.start, b.end, bookingConfig.timezone);
+  const ownerWhen = formatRange(b.start, b.end, (await getAvailability()).timezone);
   const verb = kind === "booked" ? "confirmed" : "rescheduled";
   const meet = b.meetLink ? `<p><a href="${b.meetLink}">Join Google Meet</a></p>` : "";
   const answers = (b.answers ?? [])
@@ -74,6 +75,7 @@ export async function sendBooked(b: Booking, kind: "booked" | "rescheduled") {
 }
 
 export async function sendCancelled(b: Omit<Booking, "manageUrl" | "meetLink" | "answers">, by: "guest" | "owner", reason?: string) {
+  const ownerTz = (await getAvailability()).timezone;
   const r = reason ? `<p>Reason: ${esc(reason)}</p>` : "";
   await Promise.all([
     send(
@@ -89,7 +91,7 @@ export async function sendCancelled(b: Omit<Booking, "manageUrl" | "meetLink" | 
       ? send(
           ownerInbox(),
           `Cancelled: ${b.title} with ${b.guestName}`,
-          layout(`<p>${esc(b.guestName)} cancelled ${formatRange(b.start, b.end, bookingConfig.timezone)}.</p>${r}`),
+          layout(`<p>${esc(b.guestName)} cancelled ${formatRange(b.start, b.end, ownerTz)}.</p>${r}`),
           b.guestEmail,
         )
       : Promise.resolve(),

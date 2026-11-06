@@ -11,6 +11,9 @@ type Props = {
   disabled?: boolean;
   icon?: ReactNode;
   chevron?: ReactNode;
+  /** "inline": text link style (booking page). "field": boxed form field (admin). */
+  variant?: "inline" | "field";
+  id?: string;
 };
 
 const pretty = (s: string) => s.replace(/_/g, " ");
@@ -38,7 +41,7 @@ function buildZones(current: string): Zone[] {
   });
 }
 
-export function TimezoneSelect({ value, onChange, disabled, icon, chevron }: Props) {
+export function TimezoneSelect({ value, onChange, disabled, icon, chevron, variant = "inline", id }: Props) {
   const [open, setOpen] = useState(false);
   const [query, setQuery] = useState("");
   const [active, setActive] = useState(0);
@@ -149,11 +152,12 @@ export function TimezoneSelect({ value, onChange, disabled, icon, chevron }: Pro
   }
 
   return (
-    <div className={styles.tzRoot} ref={rootRef}>
+    <div className={`${styles.tzRoot} ${variant === "field" ? styles.tzRootField : ""}`} ref={rootRef}>
       <button
         ref={triggerRef}
+        id={id}
         type="button"
-        className={`${styles.meta} ${styles.tzTrigger}`}
+        className={variant === "field" ? styles.tzField : `${styles.meta} ${styles.tzTrigger}`}
         aria-haspopup="listbox"
         aria-expanded={open}
         aria-label={`Timezone: ${pretty(value)}`}
@@ -162,11 +166,17 @@ export function TimezoneSelect({ value, onChange, disabled, icon, chevron }: Pro
       >
         {icon}
         <span>{pretty(value)}</span>
-        {chevron}
+        {variant === "field" ? (
+          <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+            <path d="M8 9l4-4 4 4M8 15l4 4 4-4" />
+          </svg>
+        ) : (
+          chevron
+        )}
       </button>
 
       {open && (
-        <div className={styles.tzPopover}>
+        <div className={`${styles.tzPopover} ${variant === "field" ? styles.tzPopoverField : ""}`}>
           <div className={styles.tzSearch}>
             <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
               <circle cx="11" cy="11" r="7" />
