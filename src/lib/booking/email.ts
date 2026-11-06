@@ -1,10 +1,11 @@
-import { Resend } from "resend";
 import { bookingConfig } from "./config";
 import { formatRange } from "./time";
 
 // Google Calendar already sends the guest a calendar invite. These emails add
-// the cancel/reschedule link and notify the owner. Without RESEND_API_KEY they
-// are skipped.
+// the cancel/reschedule link and notify the owner. Sent through Sendbyte
+// (https://docs.sendbyte.africa). Without SENDBYTE_API_KEY they are skipped.
+
+const SENDBYTE_URL = "https://api.sendbyte.africa/v1/emails";
 
 type Booking = {
   title: string;
@@ -26,14 +27,49 @@ function layout(body: string) {
 }
 
 async function send(to: string, subject: string, html: string, replyTo?: string) {
-  const key = process.env.RESEND_API_KEY;
+  const key = process.env.SENDBYTE_API_KEY;
   const from = process.env.BOOKING_FROM_EMAIL;
   if (!key || !from) return;
   try {
-    await new Resend(key).emails.send({ from, to, subject, html, replyTo });
+    const res = await fetch(SENDBYTE_URL, {
+      method: "POST",
+      headers: { Authorization: `Bearer ${key}`, "Content-Type": "application/json" },
+      body: JSON.stringify({
+        from,
+        to,
+        subject,
+        html,
+        text: htmlToText(html),
+        ...(replyTo ? { reply_to: replyTo } : {}),
+        tags: ["scheduler"],
+      }),
+      cache: "no-store",
+    });
+    if (!res.ok) {
+      const body = await res.json().catch(() => ({}));
+      console.error("[booking] Sendbyte error", res.status, body?.error?.code, body?.error?.message, res.headers.get("x-request-id"));
+    }
   } catch (err) {
     console.error("[booking] email failed", err);
   }
+}
+
+/** Plain-text alternative for clients that don't render HTML. */
+function htmlToText(html: string) {
+  return html
+    .replace(/<a [^>]*href="([^"]+)"[^>]*>([^<]*)<\/a>/g, "$2 ($1)")
+    .replace(/<br\s*\/?>/g, "\n")
+    .replace(/<\/p>/g, "\n\n")
+    .replace(/<[^>]+>/g, "")
+    .replace(/&amp;/g, "&")
+    .replace(/&lt;/g, "<")
+    .replace(/&gt;/g, ">")
+    .replace(/&quot;/g, '"')
+    .replace(/&#39;/g, "'")
+    .replace(/[ \t]+\n/g, "\n")
+    .replace(/\n[ \t]+/g, "\n")
+    .replace(/\n{3,}/g, "\n\n")
+    .trim();
 }
 
 const ownerInbox = () => process.env.BOOKING_NOTIFY_EMAIL || bookingConfig.ownerEmail;

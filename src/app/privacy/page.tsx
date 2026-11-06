@@ -15,7 +15,7 @@ const sections: [string, string][] = [
   ],
   [
     "Where it's stored",
-    "Bookings are stored as events in my own Google Calendar, which also sends you the calendar invite and Google Meet link. Confirmation emails are sent through Resend. Nothing is sold or shared with anyone else.",
+    "Bookings are stored as events in my own Google Calendar, which also sends you the calendar invite and Google Meet link. Confirmation emails are sent through Sendbyte. Nothing is sold or shared with anyone else.",
   ],
   [
     "Google data",
