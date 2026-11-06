@@ -5,9 +5,9 @@ import { bookingConfig, defaultEventType } from "@/lib/booking/config";
 import { BookingFlow } from "@/components/book/BookingFlow";
 
 export const metadata: Metadata = {
-  title: `Book a call – ${person.name}`,
+  title: `Chat – ${person.name}`,
   description: `Pick a time for a ${defaultEventType.duration}-minute call with ${person.name}.`,
-  openGraph: { url: `${baseURL}/book` },
+  openGraph: { url: `${baseURL}/chat` },
 };
 
 export default function Book() {

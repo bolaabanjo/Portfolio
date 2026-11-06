@@ -38,7 +38,7 @@ const weeklyHours: WeeklyHours = {
 const eventTypes: EventType[] = [
   {
     slug: "chat",
-    title: "30-min call",
+    title: "Chat",
     duration: 30,
     description: "Talk through an idea, a project or a collaboration.",
     questions: [
@@ -48,7 +48,7 @@ const eventTypes: EventType[] = [
   },
 ];
 
-/** The event type /book shows. */
+/** The event type /chat shows. */
 export const defaultEventType = eventTypes[0];
 
 export const bookingConfig = {

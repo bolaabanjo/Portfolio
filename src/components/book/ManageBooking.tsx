@@ -123,7 +123,7 @@ export function ManageBooking(p: Props) {
       {view === "cancelled" && (
         <Text onBackground="neutral-weak">
           The calendar invite has been removed. You can{" "}
-          <Link href="/book">book another time</Link> whenever you like.
+          <Link href="/chat">book another time</Link> whenever you like.
         </Text>
       )}
     </Column>

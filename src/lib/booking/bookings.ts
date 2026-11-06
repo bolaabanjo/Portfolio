@@ -29,7 +29,7 @@ export function baseUrl(origin: string) {
 }
 
 export const manageUrl = (origin: string, id: string) =>
-  `${baseUrl(origin)}/book/manage?t=${encodeURIComponent(manageToken(id))}`;
+  `${baseUrl(origin)}/chat/manage?t=${encodeURIComponent(manageToken(id))}`;
 
 export function toBooking(e: CalEvent): Booking | null {
   const p = e.extendedProperties?.private;

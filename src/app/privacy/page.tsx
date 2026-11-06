@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 const sections: [string, string][] = [
   [
     "Booking a call",
-    "When you book a call at /book, I collect your name, email address, timezone and your answers to the booking questions. This is used only to schedule and run the meeting.",
+    "When you book a call at /chat, I collect your name, email address, timezone and your answers to the booking questions. This is used only to schedule and run the meeting.",
   ],
   [
     "Where it's stored",

@@ -24,7 +24,7 @@ const routes: RoutesConfig = {
   "/gallery": true,
   "/library": true,
   "/music": true,
-  "/book": true,
+  "/chat": true,
   "/privacy": true,
 };
 
