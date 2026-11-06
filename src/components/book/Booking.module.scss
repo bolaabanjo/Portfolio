@@ -112,22 +112,148 @@ $card-bg: color-mix(in srgb, var(--neutral-on-background-strong) 5%, var(--page-
   color: var(--neutral-on-background-weak);
 }
 
-.tzPicker {
+// ---- Timezone picker ---------------------------------------------------------
+
+.tzRoot {
   position: relative;
   width: fit-content;
-  cursor: pointer;
+  max-width: 100%;
+}
 
-  select {
-    position: absolute;
-    inset: 0;
-    opacity: 0;
-    cursor: pointer;
+.tzTrigger {
+  padding: 0;
+  border: none;
+  background: none;
+  font: inherit;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--neutral-on-background-strong);
+  cursor: pointer;
+  text-align: left;
+
+  span {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
 
-  &:hover span {
+  &:hover:not(:disabled) span {
     text-decoration: underline;
     text-underline-offset: 3px;
   }
+
+  &:disabled {
+    cursor: default;
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--neutral-on-background-strong);
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+}
+
+.tzPopover {
+  position: absolute;
+  top: calc(100% + 8px);
+  left: -8px;
+  z-index: 30;
+  width: 300px;
+  max-width: calc(100vw - 32px);
+  border: 1px solid var(--neutral-alpha-medium);
+  border-radius: 10px;
+  background: color-mix(in srgb, var(--neutral-on-background-strong) 6%, var(--page-background));
+  box-shadow: 0 16px 40px -12px rgb(0 0 0 / 0.6), 0 2px 6px rgb(0 0 0 / 0.3);
+  overflow: hidden;
+  animation: tzIn 0.12s ease-out;
+}
+
+@keyframes tzIn {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+}
+
+.tzSearch {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 12px;
+  border-bottom: 1px solid var(--neutral-alpha-medium);
+  color: var(--neutral-on-background-weak);
+
+  input {
+    flex: 1;
+    min-width: 0;
+    border: none;
+    outline: none;
+    background: transparent;
+    font: inherit;
+    font-size: 14px;
+    color: var(--neutral-on-background-strong);
+
+    &::placeholder {
+      color: var(--neutral-on-background-weak);
+    }
+  }
+}
+
+.tzList {
+  position: relative; // offsetParent for scroll math
+  scroll-behavior: auto; // the site sets smooth scrolling globally; jumps here must be instant
+  max-height: 288px;
+  margin: 0;
+  padding: 4px;
+  overflow-y: auto;
+  list-style: none;
+  overscroll-behavior: contain;
+}
+
+.tzOption {
+  display: grid;
+  grid-template-columns: 16px minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 8px;
+  border-radius: 6px;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.tzActive {
+  background: var(--neutral-alpha-medium);
+}
+
+.tzCheck {
+  display: grid;
+  place-items: center;
+}
+
+.tzName {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-weight: 500;
+}
+
+.tzRegion {
+  margin-left: 6px;
+  font-weight: 400;
+  color: var(--neutral-on-background-weak);
+}
+
+.tzOffset {
+  font-size: 12px;
+  font-variant-numeric: tabular-nums;
+  color: var(--neutral-on-background-weak);
+}
+
+.tzEmpty {
+  padding: 16px 8px;
+  text-align: center;
+  font-size: 13px;
+  color: var(--neutral-on-background-weak);
 }
 
 .description {

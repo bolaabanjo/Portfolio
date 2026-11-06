@@ -6,6 +6,7 @@ import { Button, Input, Spinner, Textarea } from "@once-ui-system/core";
 import type { EventType } from "@/lib/booking/config";
 import { addDays, dateKey, formatInTz, formatRange, weekdayOf, zonedToUtc } from "@/lib/booking/time";
 import styles from "./Booking.module.scss";
+import { TimezoneSelect } from "./TimezoneSelect";
 
 type Mode = { kind: "book" } | { kind: "reschedule"; token: string; currentStart: string; currentEnd: string };
 
@@ -21,11 +22,6 @@ type Confirmed = { start: string; end: string; meetLink?: string; manageUrl?: st
 
 const WEEKDAY_LABELS = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"];
 const pad = (n: number) => String(n).padStart(2, "0");
-
-function timeZones(current: string) {
-  const list = typeof Intl.supportedValuesOf === "function" ? Intl.supportedValuesOf("timeZone") : [];
-  return list.includes(current) ? list : [current, ...list];
-}
 
 const Icon = {
   clock: (
@@ -273,18 +269,13 @@ export function BookingFlow({ eventType, ownerName, ownerAvatar, maxDaysAhead, m
         <Image src="/images/google-meet.svg" alt="" width={16} height={13} unoptimized className={styles.brandIcon} />
         <span>Google Meet</span>
       </p>
-      <label className={`${styles.meta} ${styles.tzPicker}`}>
-        {Icon.globe}
-        <span>{tz.replace(/_/g, " ")}</span>
-        {Icon.chevron("down")}
-        <select value={tz} onChange={(e) => setTz(e.target.value)} aria-label="Timezone" disabled={step === "details"}>
-          {timeZones(tz).map((z) => (
-            <option key={z} value={z}>
-              {z.replace(/_/g, " ")}
-            </option>
-          ))}
-        </select>
-      </label>
+      <TimezoneSelect
+        value={tz}
+        onChange={setTz}
+        disabled={step === "details"}
+        icon={Icon.globe}
+        chevron={Icon.chevron("down")}
+      />
       {eventType.description && step === "pick" && <p className={styles.description}>{eventType.description}</p>}
     </aside>
   );
