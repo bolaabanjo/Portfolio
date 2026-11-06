@@ -107,6 +107,12 @@ $border: 1px solid var(--neutral-alpha-medium);
   }
 }
 
+.brandIcon {
+  flex-shrink: 0;
+  width: 16px;
+  height: auto;
+}
+
 .strike span {
   text-decoration: line-through;
   color: var(--neutral-on-background-weak);

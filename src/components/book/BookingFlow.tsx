@@ -34,12 +34,6 @@ const Icon = {
       <path d="M12 7v5l3 2" />
     </svg>
   ),
-  video: (
-    <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinejoin="round">
-      <rect x="3" y="6" width="13" height="12" rx="2" />
-      <path d="M16 10l5-3v10l-5-3z" />
-    </svg>
-  ),
   globe: (
     <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="1.8">
       <circle cx="12" cy="12" r="9" />
@@ -276,7 +270,7 @@ export function BookingFlow({ eventType, ownerName, ownerAvatar, maxDaysAhead, m
         <span>{eventType.duration}m</span>
       </p>
       <p className={styles.meta}>
-        {Icon.video}
+        <Image src="/images/google-meet.svg" alt="" width={16} height={13} unoptimized className={styles.brandIcon} />
         <span>Google Meet</span>
       </p>
       <label className={`${styles.meta} ${styles.tzPicker}`}>
