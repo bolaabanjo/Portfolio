@@ -1,8 +1,8 @@
-import { Flex } from "@once-ui-system/core";
 import type { Metadata } from "next";
 import { baseURL, person } from "@/resources";
 import { bookingConfig, defaultEventType } from "@/lib/booking/config";
 import { BookingFlow } from "@/components/book/BookingFlow";
+import styles from "@/components/book/Booking.module.scss";
 
 export const metadata: Metadata = {
   title: `Chat – ${person.name}`,
@@ -12,13 +12,13 @@ export const metadata: Metadata = {
 
 export default function Book() {
   return (
-    <Flex fillWidth paddingX="l" paddingY="64" horizontal="center" style={{ minHeight: "70svh" }} vertical="center">
+    <div className={styles.page}>
       <BookingFlow
         eventType={defaultEventType}
         ownerName={bookingConfig.ownerName}
         ownerAvatar={bookingConfig.ownerAvatar}
         maxDaysAhead={bookingConfig.rules.maxDaysAhead}
       />
-    </Flex>
+    </div>
   );
 }

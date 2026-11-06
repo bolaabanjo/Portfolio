@@ -6,6 +6,25 @@ $border: 1px solid var(--neutral-alpha-medium);
 // so it reads as raised in both dark and light themes.
 $card-bg: color-mix(in srgb, var(--neutral-on-background-strong) 5%, var(--page-background));
 
+// Page wrapper: centered on desktop; full-width and top-aligned on phones.
+.page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  min-height: 70svh;
+  padding: 64px 24px;
+
+  @media (max-width: 640px) {
+    align-items: flex-start;
+    min-height: 0;
+    // Cancel the layout's page padding so the booking UI uses the full width.
+    width: calc(100% + 2 * var(--responsive-space-l));
+    margin: calc(-1 * var(--responsive-space-l)) calc(-1 * var(--responsive-space-l)) 0;
+    padding: 0 0 112px; // bottom room for the floating nav
+  }
+}
+
 .card {
   position: relative;
   display: grid;
@@ -27,6 +46,17 @@ $card-bg: color-mix(in srgb, var(--neutral-on-background-strong) 5%, var(--page-
 
   @media (max-width: 640px) {
     grid-template-columns: 1fr;
+
+    .info,
+    .calendar,
+    .times,
+    .details {
+      padding: 16px;
+    }
+
+    .info {
+      padding-top: 12px;
+    }
   }
 }
 
