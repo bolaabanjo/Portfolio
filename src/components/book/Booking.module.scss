@@ -330,26 +330,34 @@ $card-bg: color-mix(in srgb, var(--neutral-on-background-strong) 5%, var(--page-
 }
 
 .time {
-  padding: 9px 8px;
+  // Solid, soft off-white chip (inverts to dark in the light theme).
+  padding: 10px 8px;
   white-space: nowrap;
-  border: $border;
-  border-radius: 6px;
-  background: transparent;
+  border: none;
+  border-radius: 10px;
+  background: color-mix(in srgb, var(--neutral-on-background-strong) 94%, var(--page-background));
   font: inherit;
   font-size: 14px;
   font-weight: 500;
-  color: var(--neutral-on-background-strong);
+  color: var(--page-background);
   cursor: pointer;
-  transition: border-color 0.12s ease, background 0.12s ease;
+  transition: background 0.12s ease, box-shadow 0.12s ease, transform 0.08s ease;
 
   &:hover {
-    border-color: var(--neutral-on-background-strong);
+    background: color-mix(in srgb, var(--neutral-on-background-strong) 80%, var(--page-background));
+  }
+
+  &:active {
+    transform: scale(0.98);
+  }
+
+  &:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 2px $card-bg, 0 0 0 4px var(--neutral-on-background-strong);
   }
 
   &.selected {
-    background: var(--neutral-on-background-strong);
-    border-color: var(--neutral-on-background-strong);
-    color: var(--page-background);
+    box-shadow: 0 0 0 2px $card-bg, 0 0 0 4px var(--neutral-on-background-strong);
   }
 }
 
