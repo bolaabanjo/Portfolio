@@ -24,6 +24,8 @@ const routes: RoutesConfig = {
   "/gallery": true,
   "/library": true,
   "/music": true,
+  "/book": true,
+  "/privacy": true,
 };
 
 const display: DisplayConfig = {
