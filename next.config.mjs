@@ -30,6 +30,7 @@ const nextConfig = {
     return [
       { source: "/blog", destination: "/essay", permanent: true },
       { source: "/blog/:slug*", destination: "/essay/:slug*", permanent: true },
+      { source: "/book/:type(intro|chat|deep-dive)", destination: "/book", permanent: false },
     ];
   },
 };

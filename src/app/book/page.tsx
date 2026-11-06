@@ -1,49 +1,34 @@
-import { Column, Heading, Row, Text, RevealFx } from "@once-ui-system/core";
-import Link from "next/link";
+import { Column, Heading, Text, RevealFx } from "@once-ui-system/core";
 import type { Metadata } from "next";
 import { baseURL, person } from "@/resources";
-import { bookingConfig } from "@/lib/booking/config";
-import styles from "@/components/book/Booking.module.scss";
+import { bookingConfig, defaultEventType } from "@/lib/booking/config";
+import { BookingFlow } from "@/components/book/BookingFlow";
 
 export const metadata: Metadata = {
   title: `Book a call – ${person.name}`,
-  description: `Pick a time to talk with ${person.name}.`,
+  description: `Pick a time for a ${defaultEventType.duration}-minute call with ${person.name}.`,
   openGraph: { url: `${baseURL}/book` },
 };
 
-export default function BookIndex() {
+export default function Book() {
+  const type = defaultEventType;
   return (
-    <Column fillWidth style={{ maxWidth: 780 }} gap="l" paddingY="12" horizontal="center">
+    <Column fillWidth style={{ maxWidth: 900 }} gap="l" paddingY="12" paddingX="l">
       <RevealFx translateY="12" delay={0.2}>
-        <Column fillWidth gap="8" paddingX="l">
+        <Column fillWidth gap="8">
           <Heading as="h1" variant="display-strong-xs">
             Book a call
           </Heading>
           <Text variant="body-default-m" onBackground="neutral-weak">
-            Pick a meeting length, then choose a time that works for you.
+            {type.description} · {type.duration} min · Google Meet
           </Text>
         </Column>
       </RevealFx>
-
-      <RevealFx translateY="16" delay={0.4}>
-        <Column fillWidth gap="12" paddingX="l">
-          {bookingConfig.eventTypes.map((t) => (
-            <Link key={t.slug} href={`/book/${t.slug}`} style={{ textDecoration: "none" }}>
-              <Column className={styles.panel} padding="l" gap="4" fillWidth>
-                <Row horizontal="between" vertical="center">
-                  <Text variant="heading-strong-m">{t.title}</Text>
-                  <Text variant="label-default-s" onBackground="neutral-weak">
-                    {t.duration} min →
-                  </Text>
-                </Row>
-                <Text variant="body-default-s" onBackground="neutral-weak">
-                  {t.description}
-                </Text>
-              </Column>
-            </Link>
-          ))}
-        </Column>
-      </RevealFx>
+      <BookingFlow
+        eventType={type}
+        ownerName={bookingConfig.ownerName}
+        maxDaysAhead={bookingConfig.rules.maxDaysAhead}
+      />
     </Column>
   );
 }

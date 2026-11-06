@@ -37,17 +37,8 @@ const weeklyHours: WeeklyHours = {
 
 const eventTypes: EventType[] = [
   {
-    slug: "intro",
-    title: "15-min intro",
-    duration: 15,
-    description: "A quick hello. Good for first conversations.",
-    questions: [
-      { id: "topic", label: "What would you like to talk about?", type: "textarea", required: true },
-    ],
-  },
-  {
     slug: "chat",
-    title: "30-min chat",
+    title: "30-min call",
     duration: 30,
     description: "Talk through an idea, a project or a collaboration.",
     questions: [
@@ -55,17 +46,10 @@ const eventTypes: EventType[] = [
       { id: "company", label: "Company or project (optional)", type: "text" },
     ],
   },
-  {
-    slug: "deep-dive",
-    title: "60-min deep dive",
-    duration: 60,
-    description: "A longer working session.",
-    questions: [
-      { id: "topic", label: "What should we cover?", type: "textarea", required: true },
-      { id: "links", label: "Any links to review beforehand? (optional)", type: "text" },
-    ],
-  },
 ];
+
+/** The event type /book shows. */
+export const defaultEventType = eventTypes[0];
 
 export const bookingConfig = {
   ownerName: person.name,
