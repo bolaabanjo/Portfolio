@@ -314,8 +314,9 @@ $card-bg: color-mix(in srgb, var(--neutral-on-background-strong) 5%, var(--page-
 }
 
 .timeList {
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  align-content: start;
   gap: 8px;
   max-height: 424px;
   overflow-y: auto;
@@ -329,8 +330,8 @@ $card-bg: color-mix(in srgb, var(--neutral-on-background-strong) 5%, var(--page-
 }
 
 .time {
-  flex-shrink: 0;
-  padding: 9px 12px;
+  padding: 9px 8px;
+  white-space: nowrap;
   border: $border;
   border-radius: 6px;
   background: transparent;
