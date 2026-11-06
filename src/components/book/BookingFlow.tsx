@@ -250,7 +250,7 @@ export function BookingFlow({ eventType, ownerName, ownerAvatar, maxDaysAhead, m
   // ---- Left info panel ----------------------------------------------------
   const info = (
     <aside className={styles.info}>
-      {ownerAvatar && <Image className={styles.avatar} src={ownerAvatar} alt="" width={28} height={28} />}
+      {ownerAvatar && <Image className={styles.avatar} src={ownerAvatar} alt="" width={28} height={28} unoptimized />}
       <p className={styles.owner}>{ownerName}</p>
       <h1 className={styles.eventTitle}>{mode.kind === "reschedule" ? `Reschedule: ${eventType.title}` : eventType.title}</h1>
       {mode.kind === "reschedule" && (

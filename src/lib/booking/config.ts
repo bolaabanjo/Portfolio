@@ -54,7 +54,7 @@ export const defaultEventType = eventTypes[0];
 export const bookingConfig = {
   ownerName: person.name,
   ownerEmail: person.email,
-  ownerAvatar: "/images/book-avatar.jpg",
+  ownerAvatar: "/images/book-avatar-2.jpg",
   timezone: person.location, // IANA, e.g. "Africa/Lagos"
   weeklyHours,
   /** Google calendars checked for conflicts. Bookings are written to "primary". */
