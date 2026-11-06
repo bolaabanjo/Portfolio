@@ -2,6 +2,10 @@
 
 $border: 1px solid var(--neutral-alpha-medium);
 
+// Card surface: the page background lifted slightly toward the text color,
+// so it reads as raised in both dark and light themes.
+$card-bg: color-mix(in srgb, var(--neutral-on-background-strong) 5%, var(--page-background));
+
 .card {
   position: relative;
   display: grid;
@@ -11,9 +15,10 @@ $border: 1px solid var(--neutral-alpha-medium);
   margin: 0 auto;
   border: $border;
   border-radius: 12px;
-  background: var(--surface-background);
+  background: $card-bg;
   color: var(--neutral-on-background-strong);
   overflow: hidden;
+  box-shadow: 0 1px 2px rgb(0 0 0 / 0.2), 0 12px 32px -12px rgb(0 0 0 / 0.35);
 
   @media (max-width: 960px) {
     grid-template-columns: 240px minmax(0, 1fr);
@@ -257,7 +262,7 @@ $border: 1px solid var(--neutral-alpha-medium);
   inset: 70px 0 0;
   display: grid;
   place-items: center;
-  background: color-mix(in srgb, var(--surface-background) 60%, transparent);
+  background: color-mix(in srgb, #{$card-bg} 60%, transparent);
 }
 
 .empty {
@@ -460,7 +465,7 @@ $border: 1px solid var(--neutral-alpha-medium);
 .panel {
   border: $border;
   border-radius: 12px;
-  background: var(--surface-background);
+  background: $card-bg;
 }
 
 .row {
