@@ -72,7 +72,11 @@ type CreateInput = {
   email: string;
   timezone: string;
   answers?: Record<string, string>;
+  /** Extra people to invite (added to the calendar event). */
+  guests?: string[];
 };
+
+const MAX_GUESTS = 5;
 
 export async function createBooking(input: CreateInput, origin: string) {
   const type = getEventType(String(input.type));
@@ -83,6 +87,14 @@ export async function createBooking(input: CreateInput, origin: string) {
   const tz = isValidTimeZone(String(input.timezone)) ? String(input.timezone) : bookingConfig.timezone;
   if (!name) throw new BookingError(400, "Name is required");
   if (!EMAIL_RE.test(email)) throw new BookingError(400, "A valid email is required");
+
+  const rawGuests = Array.isArray(input.guests) ? input.guests : [];
+  const guests = [...new Set(rawGuests.map((g) => String(g ?? "").trim().toLowerCase()).filter(Boolean))].filter(
+    (g) => g !== email && g !== bookingConfig.ownerEmail.toLowerCase(),
+  );
+  if (guests.length > MAX_GUESTS) throw new BookingError(400, `You can add up to ${MAX_GUESTS} guests`);
+  const badGuest = guests.find((g) => !EMAIL_RE.test(g) || g.length > 200);
+  if (badGuest) throw new BookingError(400, `"${badGuest.slice(0, 60)}" isn't a valid email`);
 
   const answers = (type.questions ?? []).map((q) => {
     const value = String(input.answers?.[q.id] ?? "").trim().slice(0, 2000);
@@ -113,7 +125,7 @@ export async function createBooking(input: CreateInput, origin: string) {
     description,
     start: { dateTime: start, timeZone: bookingConfig.timezone },
     end: { dateTime: end, timeZone: bookingConfig.timezone },
-    attendees: [{ email, displayName: name }],
+    attendees: [{ email, displayName: name }, ...guests.map((g) => ({ email: g }))],
     conferenceData: {
       createRequest: { requestId: id, conferenceSolutionKey: { type: "hangoutsMeet" } },
     },
@@ -151,7 +163,17 @@ export async function rescheduleBooking(id: string, newStart: string, origin: st
   const booking = toBooking(event)!;
   const link = manageUrl(origin, id);
   await sendBooked(
-    { title: current.type.title, start, end, guestName: current.guestName, guestEmail: current.guestEmail, guestTz: current.guestTz, meetLink: booking.meetLink, manageUrl: link },
+    {
+      title: current.type.title,
+      start,
+      end,
+      guestName: current.guestName,
+      guestEmail: current.guestEmail,
+      guestTz: current.guestTz,
+      meetLink: booking.meetLink,
+      manageUrl: link,
+      previous: { start: current.start, end: current.end },
+    },
     "rescheduled",
   );
   return { ...booking, manageUrl: link };

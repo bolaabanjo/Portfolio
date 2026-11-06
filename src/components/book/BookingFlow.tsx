@@ -2,7 +2,7 @@
 
 import { useCallback, useEffect, useMemo, useState } from "react";
 import Image from "next/image";
-import { Button, Input, Spinner, Textarea } from "@once-ui-system/core";
+import { Spinner } from "@once-ui-system/core";
 import type { EventType } from "@/lib/booking/config";
 import { addDays, dateKey, formatInTz, formatRange, weekdayOf, zonedToUtc } from "@/lib/booking/time";
 import styles from "./Booking.module.scss";
@@ -75,6 +75,7 @@ export function BookingFlow({ eventType, ownerName, ownerAvatar, maxDaysAhead, m
   const [selectedSlot, setSelectedSlot] = useState<string | null>(null);
   const [step, setStep] = useState<"pick" | "details">("pick");
   const [form, setForm] = useState<Record<string, string>>({ name: "", email: "", website: "" });
+  const [guests, setGuests] = useState<string[]>([]);
   const [submitting, setSubmitting] = useState(false);
   const [confirmed, setConfirmed] = useState<Confirmed | null>(null);
 
@@ -183,6 +184,7 @@ export function BookingFlow({ eventType, ownerName, ownerAvatar, maxDaysAhead, m
                 email: form.email,
                 website: form.website,
                 timezone: tz,
+                guests: guests.map((g) => g.trim()).filter(Boolean),
                 answers: Object.fromEntries((eventType.questions ?? []).map((q) => [q.id, form[`q_${q.id}`] ?? ""])),
               }),
             });
@@ -250,15 +252,23 @@ export function BookingFlow({ eventType, ownerName, ownerAvatar, maxDaysAhead, m
       <p className={styles.owner}>{ownerName}</p>
       <h1 className={styles.eventTitle}>{mode.kind === "reschedule" ? `Reschedule: ${eventType.title}` : eventType.title}</h1>
       {mode.kind === "reschedule" && (
-        <p className={`${styles.meta} ${styles.strike}`}>
+        <p className={`${styles.meta} ${styles.metaTop} ${styles.strike}`}>
           {Icon.calendar}
-          <span>{formatRange(mode.currentStart, mode.currentEnd, tz)}</span>
+          <span>
+            {formatInTz(mode.currentStart, tz, { weekday: "long", month: "long", day: "numeric", year: "numeric" })}
+            <br />
+            {fmtTime(mode.currentStart)} – {fmtTime(mode.currentEnd)}
+          </span>
         </p>
       )}
       {step === "details" && selectedSlot && (
-        <p className={styles.meta}>
+        <p className={`${styles.meta} ${styles.metaTop}`}>
           {Icon.calendar}
-          <span>{formatRange(selectedSlot, endOf(selectedSlot), tz)}</span>
+          <span>
+            {formatInTz(selectedSlot, tz, { weekday: "long", month: "long", day: "numeric", year: "numeric" })}
+            <br />
+            {fmtTime(selectedSlot)} – {fmtTime(endOf(selectedSlot))}
+          </span>
         </p>
       )}
       <p className={styles.meta}>
@@ -282,10 +292,17 @@ export function BookingFlow({ eventType, ownerName, ownerAvatar, maxDaysAhead, m
 
   // ---- Details form -------------------------------------------------------
   if (step === "details" && selectedSlot) {
+    const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const filledGuests = guests.map((g) => g.trim()).filter(Boolean);
+    const badGuest = filledGuests.find((g) => !EMAIL_RE.test(g));
     const requiredMissing =
       !form.name.trim() ||
-      !form.email.trim() ||
+      !EMAIL_RE.test(form.email.trim()) ||
+      !!badGuest ||
       (eventType.questions ?? []).some((q) => q.required && !form[`q_${q.id}`]?.trim());
+    const set = (key: string) => (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) =>
+      setForm({ ...form, [key]: e.target.value });
+
     return (
       <div className={`${styles.card} ${styles.cardDetails}`}>
         {info}
@@ -293,46 +310,90 @@ export function BookingFlow({ eventType, ownerName, ownerAvatar, maxDaysAhead, m
           className={styles.details}
           onSubmit={(e) => {
             e.preventDefault();
-            if (!requiredMissing) submit();
+            if (!requiredMissing && !submitting) submit();
           }}
         >
-          <Input
-            id="name"
-            label="Your name"
-            value={form.name}
-            onChange={(e) => setForm({ ...form, name: e.target.value })}
-            autoComplete="name"
-          />
-          <Input
-            id="email"
-            label="Email address"
-            type="email"
-            value={form.email}
-            onChange={(e) => setForm({ ...form, email: e.target.value })}
-            autoComplete="email"
-          />
-          {(eventType.questions ?? []).map((q) =>
-            q.type === "textarea" ? (
-              <Textarea
-                key={q.id}
-                id={`q_${q.id}`}
-                label={q.label}
-                placeholder={q.placeholder}
-                lines={4}
-                value={form[`q_${q.id}`] ?? ""}
-                onChange={(e) => setForm({ ...form, [`q_${q.id}`]: e.target.value })}
-              />
-            ) : (
-              <Input
-                key={q.id}
-                id={`q_${q.id}`}
-                label={q.label}
-                placeholder={q.placeholder}
-                value={form[`q_${q.id}`] ?? ""}
-                onChange={(e) => setForm({ ...form, [`q_${q.id}`]: e.target.value })}
-              />
-            ),
+          <label className={styles.field}>
+            <span className={styles.fieldLabel}>
+              Your name <span aria-hidden>*</span>
+            </span>
+            <input className={styles.input} value={form.name} onChange={set("name")} autoComplete="name" required autoFocus />
+          </label>
+
+          <label className={styles.field}>
+            <span className={styles.fieldLabel}>
+              Email address <span aria-hidden>*</span>
+            </span>
+            <input className={styles.input} type="email" value={form.email} onChange={set("email")} autoComplete="email" required />
+          </label>
+
+          {(eventType.questions ?? []).map((q) => (
+            <label key={q.id} className={styles.field}>
+              <span className={styles.fieldLabel}>
+                {q.label.replace(/\s*\(optional\)$/i, "")}
+                {q.required && <span aria-hidden> *</span>}
+              </span>
+              {q.type === "textarea" ? (
+                <textarea
+                  className={`${styles.input} ${styles.textarea}`}
+                  rows={3}
+                  placeholder={q.placeholder ?? "Please share anything that will help prepare for our meeting."}
+                  value={form[`q_${q.id}`] ?? ""}
+                  onChange={set(`q_${q.id}`)}
+                  required={q.required}
+                />
+              ) : (
+                <input
+                  className={styles.input}
+                  placeholder={q.placeholder}
+                  value={form[`q_${q.id}`] ?? ""}
+                  onChange={set(`q_${q.id}`)}
+                  required={q.required}
+                />
+              )}
+            </label>
+          ))}
+
+          {guests.length > 0 && (
+            <div className={styles.field}>
+              <span className={styles.fieldLabel}>Guests</span>
+              {guests.map((g, i) => (
+                <div key={i} className={styles.guestRow}>
+                  <input
+                    className={styles.input}
+                    type="email"
+                    placeholder="guest@example.com"
+                    value={g}
+                    aria-label={`Guest ${i + 1} email`}
+                    autoFocus={i === guests.length - 1 && !g}
+                    onChange={(e) => setGuests(guests.map((x, j) => (j === i ? e.target.value : x)))}
+                  />
+                  <button
+                    type="button"
+                    className={styles.iconButton}
+                    aria-label={`Remove guest ${i + 1}`}
+                    onClick={() => setGuests(guests.filter((_, j) => j !== i))}
+                  >
+                    <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
+                      <path d="M6 6l12 12M18 6L6 18" />
+                    </svg>
+                  </button>
+                </div>
+              ))}
+              {badGuest && <p className={styles.fieldError}>&ldquo;{badGuest}&rdquo; isn&apos;t a valid email.</p>}
+            </div>
           )}
+
+          {guests.length < 5 && (
+            <button type="button" className={styles.addGuests} onClick={() => setGuests([...guests, ""])}>
+              <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+                <circle cx="9" cy="8" r="3.5" />
+                <path d="M2.5 19c.8-3.2 3.4-5 6.5-5s5.7 1.8 6.5 5M18 8v6M15 11h6" />
+              </svg>
+              {guests.length ? "Add another guest" : "Add guests"}
+            </button>
+          )}
+
           {/* Honeypot: hidden from people, filled in by naive bots. */}
           <input
             className={styles.hp}
@@ -340,23 +401,33 @@ export function BookingFlow({ eventType, ownerName, ownerAvatar, maxDaysAhead, m
             autoComplete="off"
             aria-hidden="true"
             value={form.website}
-            onChange={(e) => setForm({ ...form, website: e.target.value })}
+            onChange={set("website")}
           />
-          {error && <p className={styles.error}>{error}</p>}
+
+          <p className={styles.disclaimer}>
+            Your details are only used to schedule this call and send you the invite. See the{" "}
+            <a href="/privacy" target="_blank">
+              privacy policy
+            </a>
+            .
+          </p>
+
+          {error && <p className={styles.fieldError}>{error}</p>}
+
           <div className={styles.formActions}>
-            <Button
+            <button
               type="button"
-              variant="tertiary"
+              className={styles.backButton}
               onClick={() => {
                 setStep("pick");
                 setError(null);
               }}
             >
               Back
-            </Button>
-            <Button type="submit" loading={submitting} disabled={submitting || requiredMissing}>
-              Confirm
-            </Button>
+            </button>
+            <button type="submit" className={styles.confirmButton} disabled={submitting || requiredMissing}>
+              {submitting ? "Booking…" : "Confirm"}
+            </button>
           </div>
         </form>
       </div>
@@ -475,9 +546,9 @@ export function BookingFlow({ eventType, ownerName, ownerAvatar, maxDaysAhead, m
         {mode.kind === "reschedule" && selectedSlot && (
           <div className={styles.rescheduleConfirm}>
             {error && <p className={styles.error}>{error}</p>}
-            <Button fillWidth onClick={submit} loading={submitting} disabled={submitting}>
-              Move to {fmtTime(selectedSlot)}
-            </Button>
+            <button type="button" className={`${styles.confirmButton} ${styles.confirmFull}`} onClick={submit} disabled={submitting}>
+              {submitting ? "Moving…" : `Move to ${fmtTime(selectedSlot)}`}
+            </button>
           </div>
         )}
       </section>

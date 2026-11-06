@@ -42,7 +42,7 @@ const eventTypes: EventType[] = [
     duration: 30,
     description: "Talk through an idea, a project or a collaboration.",
     questions: [
-      { id: "topic", label: "What would you like to talk about?", type: "textarea", required: true },
+      { id: "topic", label: "What would you like to talk about?", type: "textarea" },
       { id: "company", label: "Company or project (optional)", type: "text" },
     ],
   },
