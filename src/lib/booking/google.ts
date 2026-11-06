@@ -85,7 +85,7 @@ export async function getBusy(calendars: string[], from: Date, to: Date): Promis
   );
 }
 
-export async function listTagged(tag: "booking" | "block", from: Date, to: Date): Promise<CalEvent[]> {
+export async function listTagged(tag: "booking", from: Date, to: Date): Promise<CalEvent[]> {
   const items: CalEvent[] = [];
   let pageToken: string | undefined;
   do {

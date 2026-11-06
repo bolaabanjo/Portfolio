@@ -41,12 +41,3 @@ export function readManageToken(token: string | undefined | null) {
   const data = verify<{ k: string; e: string }>(token);
   return data?.k === "manage" ? data.e : null;
 }
-
-export const ADMIN_COOKIE = "book_admin";
-export const ADMIN_TTL_MS = 7 * 24 * 60 * 60 * 1000;
-
-export const adminSession = () => sign({ k: "admin", exp: Date.now() + ADMIN_TTL_MS });
-
-export function isAdminSession(token: string | undefined | null) {
-  return verify<{ k: string }>(token)?.k === "admin";
-}

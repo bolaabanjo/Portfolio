@@ -617,18 +617,9 @@ $card-bg: color-mix(in srgb, var(--neutral-on-background-strong) 5%, var(--page-
   }
 }
 
-// ---- Shared (manage + admin pages) ------------------------------------------
+// ---- Manage page --------------------------------------------------------------
 
 .panel {
   border-radius: 12px;
   background: $card-bg;
-}
-
-.row {
-  border-bottom: 1px solid var(--neutral-alpha-weak);
-  padding: 12px 0;
-
-  &:last-child {
-    border-bottom: none;
-  }
 }
