@@ -16,7 +16,7 @@ export default function Book() {
       <BookingFlow
         eventType={defaultEventType}
         ownerName={bookingConfig.ownerName}
-        ownerAvatar={person.avatar}
+        ownerAvatar={bookingConfig.ownerAvatar}
         maxDaysAhead={bookingConfig.rules.maxDaysAhead}
       />
     </Flex>
