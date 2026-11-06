@@ -157,7 +157,11 @@ $card-bg: color-mix(in srgb, var(--neutral-on-background-strong) 5%, var(--page-
   h2 {
     margin: 0;
     font-size: 16px;
-    font-weight: 600;
+    font-weight: 500;
+
+    strong {
+      font-weight: 500;
+    }
   }
 }
 
