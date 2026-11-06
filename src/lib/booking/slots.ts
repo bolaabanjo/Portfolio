@@ -1,4 +1,3 @@
-import { getAvailability, windowsFor } from "./availability";
 import { bookingConfig, type EventType } from "./config";
 import { getBusy, listTagged, type Interval } from "./google";
 import { addDays, dateKey, weekdayOf, zonedToUtc } from "./time";
@@ -26,7 +25,7 @@ export async function getAvailableSlots(
   to: Date,
   opts: Options = {},
 ): Promise<string[]> {
-  const { busyCalendars, rules } = bookingConfig;
+  const { timezone, weeklyHours, busyCalendars, rules } = bookingConfig;
   const { earliest, latest } = bookingWindow();
 
   const start = Math.max(from.getTime(), earliest);
@@ -37,12 +36,10 @@ export async function getAvailableSlots(
   const qFrom = new Date(start - 36 * 60 * MIN);
   const qTo = new Date(end + 36 * 60 * MIN);
 
-  const [busyRaw, bookings, availability] = await Promise.all([
+  const [busyRaw, bookings] = await Promise.all([
     getBusy(busyCalendars, qFrom, qTo),
     listTagged("booking", qFrom, qTo),
-    getAvailability(),
   ]);
-  const { timezone } = availability;
 
   const busy = opts.ignore
     ? busyRaw.filter((b) => !(b.start === opts.ignore!.start && b.end === opts.ignore!.end))
@@ -64,7 +61,7 @@ export async function getAvailableSlots(
   for (let day = dateKey(new Date(start), timezone); day <= lastDay; day = addDays(day, 1)) {
     if ((perDay.get(day) ?? 0) >= rules.maxPerDay) continue;
 
-    for (const w of windowsFor(availability, day, weekdayOf(day))) {
+    for (const w of weeklyHours[weekdayOf(day)]) {
       const wStart = zonedToUtc(day, w.start, timezone).getTime();
       const wEnd = zonedToUtc(day, w.end, timezone).getTime();
 

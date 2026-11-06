@@ -1,5 +1,4 @@
 import { randomBytes } from "node:crypto";
-import { getAvailability } from "./availability";
 import { bookingConfig, getEventType, type EventType } from "./config";
 import { sendBooked, sendCancelled } from "./email";
 import { createEvent, deleteEvent, getEvent, GoogleError, patchEvent, type CalEvent } from "./google";
@@ -81,8 +80,7 @@ export async function createBooking(input: CreateInput, origin: string) {
 
   const name = String(input.name ?? "").trim().slice(0, 100);
   const email = String(input.email ?? "").trim().toLowerCase().slice(0, 200);
-  const ownerTz = (await getAvailability()).timezone;
-  const tz = isValidTimeZone(String(input.timezone)) ? String(input.timezone) : ownerTz;
+  const tz = isValidTimeZone(String(input.timezone)) ? String(input.timezone) : bookingConfig.timezone;
   if (!name) throw new BookingError(400, "Name is required");
   if (!EMAIL_RE.test(email)) throw new BookingError(400, "A valid email is required");
 
@@ -113,8 +111,8 @@ export async function createBooking(input: CreateInput, origin: string) {
     id,
     summary: `${type.title}: ${name} & ${bookingConfig.ownerName}`,
     description,
-    start: { dateTime: start, timeZone: ownerTz },
-    end: { dateTime: end, timeZone: ownerTz },
+    start: { dateTime: start, timeZone: bookingConfig.timezone },
+    end: { dateTime: end, timeZone: bookingConfig.timezone },
     attendees: [{ email, displayName: name }],
     conferenceData: {
       createRequest: { requestId: id, conferenceSolutionKey: { type: "hangoutsMeet" } },
@@ -146,10 +144,9 @@ export async function rescheduleBooking(id: string, newStart: string, origin: st
     throw new BookingError(409, "That time was just taken. Please pick another.");
   }
 
-  const ownerTz = (await getAvailability()).timezone;
   const event = await patchEvent(id, {
-    start: { dateTime: start, timeZone: ownerTz },
-    end: { dateTime: end, timeZone: ownerTz },
+    start: { dateTime: start, timeZone: bookingConfig.timezone },
+    end: { dateTime: end, timeZone: bookingConfig.timezone },
   });
   const booking = toBooking(event)!;
   const link = manageUrl(origin, id);
