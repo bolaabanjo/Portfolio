@@ -14,10 +14,8 @@ $card-bg: color-mix(in srgb, var(--neutral-on-background-strong) 5%, var(--page-
   max-width: 1010px;
   margin: 0 auto;
   border-radius: 12px;
-  background: $card-bg;
+  background: transparent;
   color: var(--neutral-on-background-strong);
-  overflow: hidden;
-  box-shadow: 0 1px 2px rgb(0 0 0 / 0.2), 0 12px 32px -12px rgb(0 0 0 / 0.35);
 
   @media (max-width: 960px) {
     grid-template-columns: 240px minmax(0, 1fr);
@@ -256,7 +254,7 @@ $card-bg: color-mix(in srgb, var(--neutral-on-background-strong) 5%, var(--page-
   inset: 70px 0 0;
   display: grid;
   place-items: center;
-  background: color-mix(in srgb, #{$card-bg} 60%, transparent);
+  background: color-mix(in srgb, var(--page-background) 60%, transparent);
 }
 
 .empty {
@@ -359,11 +357,11 @@ $card-bg: color-mix(in srgb, var(--neutral-on-background-strong) 5%, var(--page-
 
   &:focus-visible {
     outline: none;
-    box-shadow: 0 0 0 2px $card-bg, 0 0 0 4px var(--neutral-on-background-strong);
+    box-shadow: 0 0 0 2px var(--page-background), 0 0 0 4px var(--neutral-on-background-strong);
   }
 
   &.selected {
-    box-shadow: 0 0 0 2px $card-bg, 0 0 0 4px var(--neutral-on-background-strong);
+    box-shadow: 0 0 0 2px var(--page-background), 0 0 0 4px var(--neutral-on-background-strong);
   }
 }
 
