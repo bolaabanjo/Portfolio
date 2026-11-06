@@ -44,12 +44,15 @@ export default TimeDisplay;
 
 const hiddenHeaderRoutes = new Set(["/about", "/work"]);
 
+// The fades stay as a soft gradient into the page, without the frosted blur.
+const NO_BLUR: React.CSSProperties = { backdropFilter: "none", WebkitBackdropFilter: "none" };
+
 export const Header = () => {
   const pathname = usePathname() ?? "";
 
   return (
     <>
-      <Fade s={{ hide: true }} fillWidth position="fixed" height="80" zIndex={9} />
+      <Fade s={{ hide: true }} fillWidth position="fixed" height="80" zIndex={9} style={NO_BLUR} />
       <Fade
         hide
         s={{ hide: false }}
@@ -59,6 +62,7 @@ export const Header = () => {
         to="top"
         height="80"
         zIndex={9}
+        style={NO_BLUR}
       />
       <Row
         fitHeight
