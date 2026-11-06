@@ -132,18 +132,21 @@ html::-webkit-scrollbar-thumb {
   }
 }
 
-/* In-app browsers (X/Twitter, Instagram, WhatsApp, etc.): size against the
-   small viewport to survive half-sheet webviews. The nav stays at the bottom. */
+/* In-app browsers (X/Twitter, Instagram, WhatsApp, etc.): their viewport
+   units don't match what's visible (X, for one, lays its toolbar and tweet
+   sheet over the page, and 100svh comes out taller than the visible area),
+   which pushed the footer below the bottom-docked nav. The body is already
+   pinned to the real viewport (position: fixed; inset: 0), so size the page
+   to that box instead of to any vh unit. The nav stays at the bottom. */
 @media (max-width: 768px) {
   html[data-inapp="true"]:has(#home-page),
   html[data-inapp="true"]:has(#home-page) body {
-    height: 100svh !important;
-    max-height: 100svh !important;
+    height: 100% !important;
+    max-height: 100% !important;
   }
 
   html[data-inapp="true"] body:has(#home-page) > main.layout-main {
-    height: 100svh !important;
-    max-height: 100svh !important;
+    height: 100% !important;
+    max-height: 100% !important;
   }
-
 }
