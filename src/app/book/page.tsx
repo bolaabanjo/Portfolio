@@ -1,4 +1,4 @@
-import { Column, Heading, Text, RevealFx } from "@once-ui-system/core";
+import { Flex } from "@once-ui-system/core";
 import type { Metadata } from "next";
 import { baseURL, person } from "@/resources";
 import { bookingConfig, defaultEventType } from "@/lib/booking/config";
@@ -11,24 +11,14 @@ export const metadata: Metadata = {
 };
 
 export default function Book() {
-  const type = defaultEventType;
   return (
-    <Column fillWidth style={{ maxWidth: 900 }} gap="l" paddingY="12" paddingX="l">
-      <RevealFx translateY="12" delay={0.2}>
-        <Column fillWidth gap="8">
-          <Heading as="h1" variant="display-strong-xs">
-            Book a call
-          </Heading>
-          <Text variant="body-default-m" onBackground="neutral-weak">
-            {type.description} · {type.duration} min · Google Meet
-          </Text>
-        </Column>
-      </RevealFx>
+    <Flex fillWidth paddingX="l" paddingY="64" horizontal="center" style={{ minHeight: "70svh" }} vertical="center">
       <BookingFlow
-        eventType={type}
+        eventType={defaultEventType}
         ownerName={bookingConfig.ownerName}
+        ownerAvatar={person.avatar}
         maxDaysAhead={bookingConfig.rules.maxDaysAhead}
       />
-    </Column>
+    </Flex>
   );
 }

@@ -1,7 +1,8 @@
 "use client";
 
 import { useCallback, useEffect, useMemo, useState } from "react";
-import { Button, Column, Heading, Input, Row, Spinner, Text, Textarea } from "@once-ui-system/core";
+import Image from "next/image";
+import { Button, Input, Spinner, Textarea } from "@once-ui-system/core";
 import type { EventType } from "@/lib/booking/config";
 import { addDays, dateKey, formatInTz, formatRange, weekdayOf, zonedToUtc } from "@/lib/booking/time";
 import styles from "./Booking.module.scss";
@@ -11,37 +12,87 @@ type Mode = { kind: "book" } | { kind: "reschedule"; token: string; currentStart
 type Props = {
   eventType: EventType;
   ownerName: string;
+  ownerAvatar?: string;
   maxDaysAhead: number;
   mode?: Mode;
 };
 
 type Confirmed = { start: string; end: string; meetLink?: string; manageUrl?: string };
 
-const WEEKDAY_LABELS = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+const WEEKDAY_LABELS = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"];
 const pad = (n: number) => String(n).padStart(2, "0");
 
 function timeZones(current: string) {
-  const list =
-    typeof Intl.supportedValuesOf === "function" ? Intl.supportedValuesOf("timeZone") : [];
+  const list = typeof Intl.supportedValuesOf === "function" ? Intl.supportedValuesOf("timeZone") : [];
   return list.includes(current) ? list : [current, ...list];
 }
 
-export function BookingFlow({ eventType, ownerName, maxDaysAhead, mode = { kind: "book" } }: Props) {
+const Icon = {
+  clock: (
+    <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round">
+      <circle cx="12" cy="12" r="9" />
+      <path d="M12 7v5l3 2" />
+    </svg>
+  ),
+  video: (
+    <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinejoin="round">
+      <rect x="3" y="6" width="13" height="12" rx="2" />
+      <path d="M16 10l5-3v10l-5-3z" />
+    </svg>
+  ),
+  globe: (
+    <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="1.8">
+      <circle cx="12" cy="12" r="9" />
+      <path d="M3 12h18M12 3c2.5 2.6 3.8 5.6 3.8 9s-1.3 6.4-3.8 9c-2.5-2.6-3.8-5.6-3.8-9S9.5 5.6 12 3z" />
+    </svg>
+  ),
+  calendar: (
+    <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round">
+      <rect x="3" y="5" width="18" height="16" rx="2" />
+      <path d="M3 10h18M8 3v4M16 3v4" />
+    </svg>
+  ),
+  chevron: (dir: "left" | "right" | "down") => (
+    <svg
+      viewBox="0 0 24 24"
+      width="16"
+      height="16"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      style={{ transform: dir === "left" ? "rotate(180deg)" : dir === "down" ? "rotate(90deg)" : undefined }}
+    >
+      <path d="M9 6l6 6-6 6" />
+    </svg>
+  ),
+  check: (
+    <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M5 12.5l4.5 4.5L19 7.5" />
+    </svg>
+  ),
+};
+
+export function BookingFlow({ eventType, ownerName, ownerAvatar, maxDaysAhead, mode = { kind: "book" } }: Props) {
   const [tz, setTz] = useState<string | null>(null);
+  const [hour12, setHour12] = useState(true);
   const [month, setMonth] = useState<{ y: number; m: number } | null>(null);
   const [slots, setSlots] = useState<string[]>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [selectedDay, setSelectedDay] = useState<string | null>(null);
   const [selectedSlot, setSelectedSlot] = useState<string | null>(null);
+  const [step, setStep] = useState<"pick" | "details">("pick");
   const [form, setForm] = useState<Record<string, string>>({ name: "", email: "", website: "" });
   const [submitting, setSubmitting] = useState(false);
   const [confirmed, setConfirmed] = useState<Confirmed | null>(null);
 
-  // Timezone and "today" depend on the browser, so set them after mount.
+  // Timezone, clock format and "today" depend on the browser, so set them after mount.
   useEffect(() => {
     const browserTz = Intl.DateTimeFormat().resolvedOptions().timeZone || "UTC";
     setTz(browserTz);
+    setHour12(new Intl.DateTimeFormat(undefined, { hour: "numeric" }).resolvedOptions().hour12 ?? true);
     const [y, m] = dateKey(new Date(), browserTz).split("-").map(Number);
     setMonth({ y, m });
   }, []);
@@ -56,10 +107,9 @@ export function BookingFlow({ eventType, ownerName, maxDaysAhead, mode = { kind:
     if (!tz || !month) return;
     setLoading(true);
     setError(null);
-    const nextMonth = addDays(monthStart, daysInMonth);
     const qs = new URLSearchParams({
       from: zonedToUtc(monthStart, "00:00", tz).toISOString(),
-      to: zonedToUtc(nextMonth, "00:00", tz).toISOString(),
+      to: zonedToUtc(addDays(monthStart, daysInMonth), "00:00", tz).toISOString(),
     });
     if (rescheduleToken) qs.set("t", rescheduleToken);
     else qs.set("type", eventType.slug);
@@ -95,28 +145,31 @@ export function BookingFlow({ eventType, ownerName, maxDaysAhead, mode = { kind:
     if (loading) return;
     if (selectedDay && byDay.has(selectedDay)) return;
     setSelectedDay(byDay.keys().next().value ?? null);
-    setSelectedSlot(null);
   }, [byDay, loading, selectedDay]);
 
   if (!tz || !month) {
     return (
-      <Row fillWidth horizontal="center" paddingY="64">
-        <Spinner />
-      </Row>
+      <div className={styles.card}>
+        <div className={styles.loadingCard}>
+          <Spinner />
+        </div>
+      </div>
     );
   }
 
-  const canGoBack = monthStart > today.slice(0, 8) + "01";
+  const canGoBack = monthStart > `${today.slice(0, 8)}01`;
   const canGoForward = addDays(monthStart, daysInMonth) <= lastBookable;
   const shiftMonth = (delta: number) => {
     const d = new Date(Date.UTC(month.y, month.m - 1 + delta, 1));
     setMonth({ y: d.getUTCFullYear(), m: d.getUTCMonth() + 1 });
     setSelectedDay(null);
-    setSelectedSlot(null);
   };
 
-  const fmtTime = (iso: string) => formatInTz(iso, tz, { hour: "numeric", minute: "2-digit" });
+  const fmtTime = (iso: string) =>
+    formatInTz(iso, tz, { hour: "numeric", minute: "2-digit", hour12 }).replace(" AM", "am").replace(" PM", "pm");
   const endOf = (iso: string) => new Date(Date.parse(iso) + eventType.duration * 60000).toISOString();
+  const dayLabel = (key: string, opts: Intl.DateTimeFormatOptions) =>
+    formatInTz(zonedToUtc(key, "12:00", "UTC"), "UTC", opts);
 
   async function submit() {
     if (!selectedSlot) return;
@@ -140,15 +193,14 @@ export function BookingFlow({ eventType, ownerName, maxDaysAhead, mode = { kind:
                 email: form.email,
                 website: form.website,
                 timezone: tz,
-                answers: Object.fromEntries(
-                  (eventType.questions ?? []).map((q) => [q.id, form[`q_${q.id}`] ?? ""]),
-                ),
+                answers: Object.fromEntries((eventType.questions ?? []).map((q) => [q.id, form[`q_${q.id}`] ?? ""])),
               }),
             });
       const json = await res.json();
       if (!res.ok) {
         if (res.status === 409) {
           setSelectedSlot(null);
+          setStep("pick");
           loadSlots();
         }
         throw new Error(json.error);
@@ -161,224 +213,289 @@ export function BookingFlow({ eventType, ownerName, maxDaysAhead, mode = { kind:
     }
   }
 
+  function pickSlot(s: string) {
+    setSelectedSlot(s);
+    setError(null);
+    if (mode.kind === "book") setStep("details");
+  }
+
+  // ---- Confirmation -------------------------------------------------------
   if (confirmed) {
     return (
-      <Column className={styles.panel} gap="16" padding="l" fillWidth>
-        <Heading as="h2" variant="heading-strong-l">
-          {mode.kind === "reschedule" ? "Rescheduled" : "You're booked"}
-        </Heading>
-        <Text onBackground="neutral-weak">
-          {eventType.title} with {ownerName}
-          <br />
-          {formatRange(confirmed.start, confirmed.end, tz)} ({tz})
-        </Text>
-        <Text variant="body-default-s" onBackground="neutral-weak">
-          A calendar invite has been sent to your email.
-        </Text>
-        <Row gap="8" wrap>
-          {confirmed.meetLink && (
-            <Button href={confirmed.meetLink} prefixIcon="calendar" size="s">
-              Google Meet link
-            </Button>
-          )}
+      <div className={`${styles.card} ${styles.cardNarrow}`}>
+        <div className={styles.confirm}>
+          <span className={styles.checkBadge}>{Icon.check}</span>
+          <h2 className={styles.confirmTitle}>
+            {mode.kind === "reschedule" ? "Your call was rescheduled" : "This call is scheduled"}
+          </h2>
+          <p className={styles.muted}>A calendar invite with the Google Meet link has been sent to your email.</p>
+          <dl className={styles.summary}>
+            <dt>What</dt>
+            <dd>
+              {eventType.title} with {ownerName}
+            </dd>
+            <dt>When</dt>
+            <dd>
+              {formatRange(confirmed.start, confirmed.end, tz)}
+              <br />
+              <span className={styles.muted}>{tz.replace(/_/g, " ")}</span>
+            </dd>
+            <dt>Where</dt>
+            <dd>{confirmed.meetLink ? <a href={confirmed.meetLink}>Google Meet</a> : "Google Meet"}</dd>
+          </dl>
           {confirmed.manageUrl && (
-            <Button href={confirmed.manageUrl} variant="secondary" size="s">
-              Reschedule or cancel
-            </Button>
+            <p className={styles.muted}>
+              Need to make a change? <a href={confirmed.manageUrl}>Reschedule or cancel</a>
+            </p>
           )}
-        </Row>
-      </Column>
+        </div>
+      </div>
     );
   }
 
+  // ---- Left info panel ----------------------------------------------------
+  const info = (
+    <aside className={styles.info}>
+      {ownerAvatar && <Image className={styles.avatar} src={ownerAvatar} alt="" width={28} height={28} />}
+      <p className={styles.owner}>{ownerName}</p>
+      <h1 className={styles.eventTitle}>{mode.kind === "reschedule" ? `Reschedule: ${eventType.title}` : eventType.title}</h1>
+      {mode.kind === "reschedule" && (
+        <p className={`${styles.meta} ${styles.strike}`}>
+          {Icon.calendar}
+          <span>{formatRange(mode.currentStart, mode.currentEnd, tz)}</span>
+        </p>
+      )}
+      {step === "details" && selectedSlot && (
+        <p className={styles.meta}>
+          {Icon.calendar}
+          <span>{formatRange(selectedSlot, endOf(selectedSlot), tz)}</span>
+        </p>
+      )}
+      <p className={styles.meta}>
+        {Icon.clock}
+        <span>{eventType.duration}m</span>
+      </p>
+      <p className={styles.meta}>
+        {Icon.video}
+        <span>Google Meet</span>
+      </p>
+      <label className={`${styles.meta} ${styles.tzPicker}`}>
+        {Icon.globe}
+        <span>{tz.replace(/_/g, " ")}</span>
+        {Icon.chevron("down")}
+        <select value={tz} onChange={(e) => setTz(e.target.value)} aria-label="Timezone" disabled={step === "details"}>
+          {timeZones(tz).map((z) => (
+            <option key={z} value={z}>
+              {z.replace(/_/g, " ")}
+            </option>
+          ))}
+        </select>
+      </label>
+      {eventType.description && step === "pick" && <p className={styles.description}>{eventType.description}</p>}
+    </aside>
+  );
+
+  // ---- Details form -------------------------------------------------------
+  if (step === "details" && selectedSlot) {
+    const requiredMissing =
+      !form.name.trim() ||
+      !form.email.trim() ||
+      (eventType.questions ?? []).some((q) => q.required && !form[`q_${q.id}`]?.trim());
+    return (
+      <div className={`${styles.card} ${styles.cardDetails}`}>
+        {info}
+        <form
+          className={styles.details}
+          onSubmit={(e) => {
+            e.preventDefault();
+            if (!requiredMissing) submit();
+          }}
+        >
+          <Input
+            id="name"
+            label="Your name"
+            value={form.name}
+            onChange={(e) => setForm({ ...form, name: e.target.value })}
+            autoComplete="name"
+          />
+          <Input
+            id="email"
+            label="Email address"
+            type="email"
+            value={form.email}
+            onChange={(e) => setForm({ ...form, email: e.target.value })}
+            autoComplete="email"
+          />
+          {(eventType.questions ?? []).map((q) =>
+            q.type === "textarea" ? (
+              <Textarea
+                key={q.id}
+                id={`q_${q.id}`}
+                label={q.label}
+                placeholder={q.placeholder}
+                lines={4}
+                value={form[`q_${q.id}`] ?? ""}
+                onChange={(e) => setForm({ ...form, [`q_${q.id}`]: e.target.value })}
+              />
+            ) : (
+              <Input
+                key={q.id}
+                id={`q_${q.id}`}
+                label={q.label}
+                placeholder={q.placeholder}
+                value={form[`q_${q.id}`] ?? ""}
+                onChange={(e) => setForm({ ...form, [`q_${q.id}`]: e.target.value })}
+              />
+            ),
+          )}
+          {/* Honeypot: hidden from people, filled in by naive bots. */}
+          <input
+            className={styles.hp}
+            tabIndex={-1}
+            autoComplete="off"
+            aria-hidden="true"
+            value={form.website}
+            onChange={(e) => setForm({ ...form, website: e.target.value })}
+          />
+          {error && <p className={styles.error}>{error}</p>}
+          <div className={styles.formActions}>
+            <Button
+              type="button"
+              variant="tertiary"
+              onClick={() => {
+                setStep("pick");
+                setError(null);
+              }}
+            >
+              Back
+            </Button>
+            <Button type="submit" loading={submitting} disabled={submitting || requiredMissing}>
+              Confirm
+            </Button>
+          </div>
+        </form>
+      </div>
+    );
+  }
+
+  // ---- Calendar + times ---------------------------------------------------
   const leadingBlanks = weekdayOf(monthStart);
   const daySlots = selectedDay ? byDay.get(selectedDay) ?? [] : [];
-  const requiredMissing =
-    mode.kind === "book" &&
-    (!form.name.trim() ||
-      !form.email.trim() ||
-      (eventType.questions ?? []).some((q) => q.required && !form[`q_${q.id}`]?.trim()));
 
   return (
-    <Column gap="24" fillWidth>
-      {mode.kind === "reschedule" && (
-        <Text variant="body-default-s" onBackground="neutral-weak">
-          Currently: {formatRange(mode.currentStart, mode.currentEnd, tz)}
-        </Text>
-      )}
+    <div className={styles.card}>
+      {info}
 
-      <div className={styles.layout}>
-        <Column className={styles.panel} padding="m" gap="12">
-          <Row horizontal="between" vertical="center">
-            <Text variant="heading-strong-s">
-              {formatInTz(zonedToUtc(monthStart, "12:00", "UTC"), "UTC", { month: "long", year: "numeric" })}
-            </Text>
-            <Row gap="4">
-              <Button size="s" variant="tertiary" disabled={!canGoBack} onClick={() => shiftMonth(-1)} aria-label="Previous month">
-                ‹
-              </Button>
-              <Button size="s" variant="tertiary" disabled={!canGoForward} onClick={() => shiftMonth(1)} aria-label="Next month">
-                ›
-              </Button>
-            </Row>
-          </Row>
-
-          <div className={styles.grid}>
-            {WEEKDAY_LABELS.map((d) => (
-              <span key={d} className={styles.weekday}>
-                {d}
-              </span>
-            ))}
-            {Array.from({ length: leadingBlanks }, (_, i) => (
-              <span key={`b${i}`} />
-            ))}
-            {Array.from({ length: daysInMonth }, (_, i) => {
-              const key = addDays(monthStart, i);
-              const available = byDay.has(key);
-              return (
-                <button
-                  key={key}
-                  type="button"
-                  disabled={!available}
-                  className={`${styles.day} ${available ? styles.available : ""} ${
-                    key === selectedDay ? styles.selected : ""
-                  } ${key === today ? styles.today : ""}`}
-                  onClick={() => {
-                    setSelectedDay(key);
-                    setSelectedSlot(null);
-                  }}
-                >
-                  {i + 1}
-                </button>
-              );
-            })}
+      <section className={styles.calendar}>
+        <header className={styles.monthHeader}>
+          <h2>
+            <strong>{dayLabel(monthStart, { month: "long" })}</strong>{" "}
+            <span className={styles.muted}>{month.y}</span>
+          </h2>
+          <div className={styles.monthNav}>
+            <button type="button" disabled={!canGoBack} onClick={() => shiftMonth(-1)} aria-label="Previous month">
+              {Icon.chevron("left")}
+            </button>
+            <button type="button" disabled={!canGoForward} onClick={() => shiftMonth(1)} aria-label="Next month">
+              {Icon.chevron("right")}
+            </button>
           </div>
+        </header>
 
-          <label className={styles.tz}>
-            <Text variant="label-default-s" onBackground="neutral-weak">
-              Timezone
-            </Text>
-            <select value={tz} onChange={(e) => setTz(e.target.value)}>
-              {timeZones(tz).map((z) => (
-                <option key={z} value={z}>
-                  {z.replace(/_/g, " ")}
-                </option>
-              ))}
-            </select>
-          </label>
-        </Column>
+        <div className={styles.grid}>
+          {WEEKDAY_LABELS.map((d) => (
+            <span key={d} className={styles.weekday}>
+              {d}
+            </span>
+          ))}
+          {Array.from({ length: leadingBlanks }, (_, i) => (
+            <span key={`b${i}`} />
+          ))}
+          {Array.from({ length: daysInMonth }, (_, i) => {
+            const key = addDays(monthStart, i);
+            const available = byDay.has(key);
+            return (
+              <button
+                key={key}
+                type="button"
+                disabled={!available}
+                aria-pressed={key === selectedDay}
+                className={[
+                  styles.day,
+                  available && styles.available,
+                  key === selectedDay && styles.selected,
+                  key === today && styles.today,
+                ]
+                  .filter(Boolean)
+                  .join(" ")}
+                onClick={() => setSelectedDay(key)}
+              >
+                {i + 1}
+              </button>
+            );
+          })}
+        </div>
 
-        <Column className={styles.panel} padding="m" gap="12">
-          {loading ? (
-            <Row fillWidth horizontal="center" paddingY="32">
-              <Spinner />
-            </Row>
-          ) : !selectedDay ? (
-            <Text onBackground="neutral-weak" variant="body-default-s">
-              No open times this month.{canGoForward ? " Try the next one." : ""}
-            </Text>
-          ) : (
-            <>
-              <Text variant="heading-strong-s">
-                {formatInTz(zonedToUtc(selectedDay, "12:00", "UTC"), "UTC", {
-                  weekday: "long",
-                  month: "short",
-                  day: "numeric",
-                })}
-              </Text>
-              <div className={styles.times}>
-                {daySlots.map((s) => (
-                  <button
-                    key={s}
-                    type="button"
-                    className={`${styles.time} ${s === selectedSlot ? styles.selected : ""}`}
-                    onClick={() => setSelectedSlot(s)}
-                  >
-                    {fmtTime(s)}
-                  </button>
-                ))}
-              </div>
-            </>
-          )}
-        </Column>
-      </div>
+        {loading && (
+          <div className={styles.overlay}>
+            <Spinner />
+          </div>
+        )}
+        {!loading && error && <p className={styles.error}>{error}</p>}
+        {!loading && !error && byDay.size === 0 && (
+          <p className={styles.empty}>
+            No open times this month.
+            {canGoForward && (
+              <button type="button" className={styles.linkButton} onClick={() => shiftMonth(1)}>
+                View next month
+              </button>
+            )}
+          </p>
+        )}
+      </section>
 
-      {selectedSlot && (
-        <Column className={styles.panel} padding="l" gap="16" fillWidth>
-          <Text variant="heading-strong-s">
-            {formatRange(selectedSlot, endOf(selectedSlot), tz)}
-          </Text>
-
-          {mode.kind === "book" && (
-            <>
-              <Input
-                id="name"
-                label="Your name"
-                value={form.name}
-                onChange={(e) => setForm({ ...form, name: e.target.value })}
-                autoComplete="name"
-              />
-              <Input
-                id="email"
-                label="Email"
-                type="email"
-                value={form.email}
-                onChange={(e) => setForm({ ...form, email: e.target.value })}
-                autoComplete="email"
-              />
-              {(eventType.questions ?? []).map((q) =>
-                q.type === "textarea" ? (
-                  <Textarea
-                    key={q.id}
-                    id={`q_${q.id}`}
-                    label={q.label}
-                    placeholder={q.placeholder}
-                    lines={4}
-                    value={form[`q_${q.id}`] ?? ""}
-                    onChange={(e) => setForm({ ...form, [`q_${q.id}`]: e.target.value })}
-                  />
-                ) : (
-                  <Input
-                    key={q.id}
-                    id={`q_${q.id}`}
-                    label={q.label}
-                    placeholder={q.placeholder}
-                    value={form[`q_${q.id}`] ?? ""}
-                    onChange={(e) => setForm({ ...form, [`q_${q.id}`]: e.target.value })}
-                  />
-                ),
-              )}
-              {/* Honeypot: hidden from people, filled in by naive bots. */}
-              <input
-                className={styles.hp}
-                tabIndex={-1}
-                autoComplete="off"
-                aria-hidden="true"
-                value={form.website}
-                onChange={(e) => setForm({ ...form, website: e.target.value })}
-              />
-            </>
-          )}
-
-          {error && (
-            <Text variant="body-default-s" onBackground="danger-weak">
-              {error}
-            </Text>
-          )}
-
-          <Row>
-            <Button onClick={submit} loading={submitting} disabled={submitting || requiredMissing}>
-              {mode.kind === "reschedule" ? "Confirm new time" : "Confirm booking"}
+      <section className={styles.times}>
+        <header className={styles.timesHeader}>
+          <h2>
+            {selectedDay ? (
+              <>
+                <strong>{dayLabel(selectedDay, { weekday: "short" })}</strong>{" "}
+                <span className={styles.muted}>{dayLabel(selectedDay, { day: "numeric" })}</span>
+              </>
+            ) : (
+              <span className={styles.muted}>Pick a day</span>
+            )}
+          </h2>
+          <div className={styles.segmented} role="group" aria-label="Time format">
+            <button type="button" aria-pressed={hour12} onClick={() => setHour12(true)}>
+              12h
+            </button>
+            <button type="button" aria-pressed={!hour12} onClick={() => setHour12(false)}>
+              24h
+            </button>
+          </div>
+        </header>
+        <div className={styles.timeList}>
+          {daySlots.map((s) => (
+            <button
+              key={s}
+              type="button"
+              className={`${styles.time} ${s === selectedSlot ? styles.selected : ""}`}
+              onClick={() => pickSlot(s)}
+            >
+              {fmtTime(s)}
+            </button>
+          ))}
+        </div>
+        {mode.kind === "reschedule" && selectedSlot && (
+          <div className={styles.rescheduleConfirm}>
+            {error && <p className={styles.error}>{error}</p>}
+            <Button fillWidth onClick={submit} loading={submitting} disabled={submitting}>
+              Move to {fmtTime(selectedSlot)}
             </Button>
-          </Row>
-        </Column>
-      )}
-
-      {error && !selectedSlot && (
-        <Text variant="body-default-s" onBackground="danger-weak">
-          {error}
-        </Text>
-      )}
-    </Column>
+          </div>
+        )}
+      </section>
+    </div>
   );
 }
