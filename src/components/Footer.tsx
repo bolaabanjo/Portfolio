@@ -1,5 +1,5 @@
 import { Row, IconButton, Text } from "@once-ui-system/core";
-import { person, social } from "@/resources";
+import { person, routes, social } from "@/resources";
 import styles from "./Footer.module.scss";
 import { FooterNowPlaying } from "./spotify/FooterNowPlaying";
 
@@ -43,6 +43,9 @@ export const Footer = () => {
                   variant="ghost"
                 />
               ),
+          )}
+          {routes["/chat"] && (
+            <IconButton href="/chat" icon="calendar" tooltip="Book a chat" size="s" variant="ghost" />
           )}
         </Row>
       </Row>

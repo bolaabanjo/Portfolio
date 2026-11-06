@@ -207,12 +207,19 @@ export const Header = () => {
                   </Row>
                 </>
               )}
-              {display.themeSwitcher && (
-                <>
-                  <Line background="neutral-alpha-medium" vert maxHeight="24" />
-                  <ThemeToggle />
-                </>
+              {(routes["/chat"] || display.themeSwitcher) && (
+                <Line background="neutral-alpha-medium" vert maxHeight="24" />
               )}
+              {routes["/chat"] && (
+                <ToggleButton
+                  prefixIcon="calendar"
+                  href="/chat"
+                  aria-label="Book a chat"
+                  title="Book a chat"
+                  selected={pathname.startsWith("/chat")}
+                />
+              )}
+              {display.themeSwitcher && <ThemeToggle />}
             </Row>
           </Row>
         </Row>
